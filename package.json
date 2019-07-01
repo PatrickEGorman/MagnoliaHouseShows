@@ -1,0 +1,19 @@
+{
+  "name": "magnoliahouseshows",
+  "version": "1.0.0",
+  "description": "Venue/DIY Household",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PatrickEGorman/MagnoliaHouseShows.git"
+  },
+  "author": "Patrick Gorman",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PatrickEGorman/MagnoliaHouseShows/issues"
+  },
+  "homepage": "https://github.com/PatrickEGorman/MagnoliaHouseShows#readme"
+}
