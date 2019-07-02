@@ -18,5 +18,5 @@ class Photo(models.Model):
 class YoutubeVideo(models.Model):
     youtube_url = models.TextField()
     caption = models.TextField(default='')
-    bands = models.ManyToManyField(Band)
+    bands = models.ManyToManyField(Band, blank=True)
     show = models.ForeignKey(Show, null=True, blank=True, related_name="videos", on_delete=models.SET_NULL)

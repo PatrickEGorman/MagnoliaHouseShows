@@ -3,7 +3,7 @@ from django.db import models
 
 class Genre(models.Model):
     name = models.TextField(unique=True)
-    sub_genres = models.ManyToManyField('self')
+    sub_genres = models.ManyToManyField('self', blank=True)
 
 
 class Song(models.Model):
@@ -16,13 +16,13 @@ class Album(models.Model):
     cover_image = models.ImageField(blank=True)
     band_camp = models.URLField(default='')
     youtube = models.URLField(default='')
-    songs = models.ManyToManyField(Song)
-    genres = models.ManyToManyField(Genre)
+    songs = models.ManyToManyField(Song, blank=True)
+    genres = models.ManyToManyField(Genre, blank=True)
 
 
 class Band(models.Model):
     name = models.TextField()
-    albums = models.ManyToManyField(Album)
+    albums = models.ManyToManyField(Album, blank=True)
     home_town = models.TextField(default='')
     genres = models.ManyToManyField(Genre)
     band_camp = models.URLField(default='')
