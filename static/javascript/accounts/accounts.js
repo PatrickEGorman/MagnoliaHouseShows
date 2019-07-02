@@ -23,6 +23,5 @@ function postLogin() {
         //     }
         // });
         // $,post("/users/authenticate_facebook")
-      });
-    }
+      }})
 }
