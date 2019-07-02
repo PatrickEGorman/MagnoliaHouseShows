@@ -1,0 +1,8 @@
+.idea
+venv
+dist
+node_modules
+__pycache__
+migrations
+*.pyc
+db.sqlite3
