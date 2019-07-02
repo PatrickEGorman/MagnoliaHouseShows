@@ -25,7 +25,7 @@ SECRET_KEY = 'm4i+%y62t*kj-=7jsyx!$^z4t(#mp%nkx-wzb*&$ts1y-vlzt*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['magnoliahouseshows.herokuapp.com']
+ALLOWED_HOSTS = ['magnoliahouseshows.herokuapp.com', '127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'accounts',
     'home',
     'info',
     'media',
@@ -74,6 +75,8 @@ TEMPLATES = [
         },
     },
 ]
+
+AUTH_USER_MODEL = 'accounts.User'
 
 WSGI_APPLICATION = 'MagnoliaHouseShows.wsgi.application'
 

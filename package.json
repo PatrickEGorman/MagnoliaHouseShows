@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "build-prod": "webpack --mode production",
     "build-dev": "webpack --mode development --watch"
   },
   "repository": {
@@ -18,9 +19,11 @@
   },
   "homepage": "https://github.com/PatrickEGorman/MagnoliaHouseShows#readme",
   "dependencies": {
+    "bootstrap": "^3.4.1",
     "jquery": "^3.4.1",
     "popper.js": "^1.15.0",
-    "bootstrap": "^3.4.1"
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",

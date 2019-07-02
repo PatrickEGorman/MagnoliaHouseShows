@@ -4,7 +4,8 @@ const path = require('path')
 
 module.exports = {
     entry: {
-        base: './static/javascript/base.js'
+        base: './static/javascript/base.js',
+        accounts: './static/javascript/accounts/accounts.js'
     },
     output: {
         path: path.join(__dirname,'static', 'dist'),
@@ -22,17 +23,7 @@ module.exports = {
                 use: {
                     loader: "babel-loader"
                 }
-            },
-            {
-            test: require.resolve('jquery'),
-            use: [{
-                loader: 'expose-loader',
-                options: 'jQuery'
-            },{
-                loader: 'expose-loader',
-                options: '$'
-            }]
-          }
+            }
         ]
     }
 }
