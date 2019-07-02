@@ -3,5 +3,5 @@ from django.urls import path
 
 urlpatterns = [
     path('create_account', SignUp.as_view()),
-    path('authenticate_facebook', authenticate_facebook()),
+    path('authenticate_facebook', authenticate_facebook),
 ]
