@@ -21,6 +21,7 @@
   "homepage": "https://github.com/PatrickEGorman/MagnoliaHouseShows#readme",
   "dependencies": {
     "bootstrap": "^3.4.1",
+    "entrypoint": "^1.0.9",
     "jquery": "^3.4.1",
     "popper.js": "^1.15.0",
     "react": "^16.8.6",

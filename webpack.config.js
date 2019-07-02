@@ -10,7 +10,8 @@ module.exports = {
     output: {
         path: path.join(__dirname,'static', 'dist'),
         publicPath: '/',
-        filename: '[name].js'
+        filename: '[name].js',
+        library: 'scripts'
     },
     target: 'web',
 
