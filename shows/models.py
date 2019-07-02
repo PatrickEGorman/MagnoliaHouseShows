@@ -11,3 +11,9 @@ class Show(models.Model):
     suggested_donation = models.IntegerField(default=7)
 
     facebook = models.URLField(default='', blank=True)
+
+    def __str__(self):
+        display = self.date + " "
+        for band in self.bands:
+            display += band + " "
+        return display
