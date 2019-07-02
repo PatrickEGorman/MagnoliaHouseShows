@@ -1,3 +1,13 @@
 from django.shortcuts import render
 
-# Create your views here.
+
+def fliers(request):
+    return render(request, 'fliers.html', {})
+
+
+def photos(request):
+    return render(request, 'photos.html', {})
+
+
+def videos(request):
+    return render(request, 'videos.html', {})

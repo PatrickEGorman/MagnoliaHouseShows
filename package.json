@@ -4,7 +4,8 @@
   "description": "Venue/DIY Household",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-dev": "webpack --mode development --watch"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,25 @@
   "bugs": {
     "url": "https://github.com/PatrickEGorman/MagnoliaHouseShows/issues"
   },
-  "homepage": "https://github.com/PatrickEGorman/MagnoliaHouseShows#readme"
+  "homepage": "https://github.com/PatrickEGorman/MagnoliaHouseShows#readme",
+  "dependencies": {
+    "jquery": "^3.4.1",
+    "popper.js": "^1.15.0",
+    "bootstrap": "^3.4.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-react": "^7.0.0",
+    "autoprefixer": "^9.6.0",
+    "babel-loader": "^8.0.6",
+    "css-loader": "^3.0.0",
+    "expose-loader": "^0.7.5",
+    "node-sass": "^4.12.0",
+    "postcss-loader": "^3.0.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.35.2",
+    "webpack-cli": "^3.3.5"
+  }
 }
