@@ -13,7 +13,7 @@ class Show(models.Model):
     facebook = models.URLField(default='', blank=True)
 
     def __str__(self):
-        display = self.date + " "
-        for band in self.bands:
-            display += band + " "
+        display = self.date.__str__() + ":"
+        for band in self.bands.all():
+            display += band + "/"
         return display
