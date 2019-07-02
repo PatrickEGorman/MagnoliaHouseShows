@@ -2,8 +2,8 @@ from django.db import models
 
 
 class Genre(models.Model):
-    name = models.TextField(unique=True, primary_key=True)
-    sub_genres = models.ManyToManyField('self', blank=True, null=True)
+    name = models.TextField(unique=True)
+    sub_genres = models.ManyToManyField('self', blank=True)
 
 
 class Song(models.Model):
