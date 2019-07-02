@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Genre(models.Model):
-    name = models.TextField(unique=True)
+    name = models.TextField(unique=True, primary_key=True)
     sub_genres = models.ManyToManyField('self', blank=True)
 
 
