@@ -1,9 +1,11 @@
 import $ from 'jquery'
 
 
-$.on("facebookLoaded"){
+document.addEventListener("facebookLoaded", function(){
     verifyLogin();
-}
+});
+
+
 
 
 function verifyLogin() {
