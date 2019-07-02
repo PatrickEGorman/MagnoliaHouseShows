@@ -5,7 +5,9 @@ $(document).ready(function(){
     $("input").addClass("form-control");
     $("form > ul").addClass("list-group");
     $("ul.list-group > li").addClass("list-group-item");
-    $("div.fb-login-button").attr("onlogin", postLogin());
+    document.addEventListener("facebookLoaded", function(){
+        $("div.fb-login-button").attr("onlogin", postLogin());
+    });
 });
 
 function postLogin() {
