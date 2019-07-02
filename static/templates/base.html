@@ -38,7 +38,7 @@
               </div>
             </li>
         </ul>
-        <ul class="navbar-nav">
+        <ul class="navbar-nav mr-3">
             {% if not request.user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link" href="/accounts/login">Sign In</a>
@@ -47,6 +47,12 @@
                     <a class="nav-link" href="/users/create_account">Create Account</a>
                 </li>
             {% else %}
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">Hello, {{ request.user.username }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/accounts/logout">Logout</a>
+                </li>
             {% endif %}
         </ul>
         <form class="form-inline my-2 my-lg-0">
