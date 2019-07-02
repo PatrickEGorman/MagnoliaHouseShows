@@ -3,15 +3,15 @@ from .models import Flier, Photo, YoutubeVideo
 
 
 class FlierAdmin(admin.ModelAdmin):
-    list_display = ('show', 'image')
+    list_display = ('show', 'image', 'date')
 
 
 class PhotoAdmin(admin.ModelAdmin):
-    list_display = ('image', 'caption', 'band', 'show')
+    list_display = ('image', 'caption', 'band', 'show', 'date')
 
 
 class YoutubeAdmin(admin.ModelAdmin):
-    list_display = ('caption', 'youtube_url', 'show')
+    list_display = ('caption', 'youtube_url', 'show', 'date')
 
 
 admin.site.register(Flier, FlierAdmin)

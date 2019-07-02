@@ -3,7 +3,7 @@ from .models import Album, Band, Genre, Song
 
 
 class AlbumAdmin(admin.ModelAdmin):
-    list_display = ('name', 'bandcamp')
+    list_display = ('name', 'bandcamp', 'release_date')
 
 
 class BandAdmin(admin.ModelAdmin):

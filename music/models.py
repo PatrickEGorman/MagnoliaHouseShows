@@ -18,6 +18,7 @@ class Album(models.Model):
     youtube = models.URLField(default='', blank=True)
     songs = models.ManyToManyField(Song, blank=True)
     genres = models.ManyToManyField(Genre, blank=True)
+    release_date = models.DateField(blank=True, null=True, default=None)
 
 
 class Band(models.Model):
