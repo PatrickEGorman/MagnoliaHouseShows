@@ -25,5 +25,6 @@ urlpatterns = [
     path('info/', include('info.urls')),
     path('media/', include('media.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('users/', include('accounts.urls'))
+    path('users/', include('accounts.urls')),
+    path('social-auth/', include('social_django.urls', namespace="social")),
 ]

@@ -3,8 +3,8 @@
 {% block title %}Sign Up{% endblock %}
 
 {% block content %}
-    <div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with"
-         data-auto-logout-link="false" data-use-continue-as="true"></div>
+    <a class='btn btn-primary mb-3' href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a>
+
     <form method="post">
       {% csrf_token %}
       {{ form.as_p }}

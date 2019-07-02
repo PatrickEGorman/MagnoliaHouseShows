@@ -8,8 +8,3 @@ class User(AbstractUser):
     first_name = models.TextField(default='')
     last_name = models.TextField(default='')
     can_upload = models.BooleanField(default=False)
-
-
-class FacebookUser(User):
-    password = None
-    facebook_id = models.TextField(unique=True)
