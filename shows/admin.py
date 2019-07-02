@@ -3,7 +3,7 @@ from .models import Show
 
 
 class ShowAdmin(admin.ModelAdmin):
-    list_display = ('date', 'bands')
+    list_display = ('date', 'facebook')
 
 
 admin.site.register(Show, ShowAdmin)
