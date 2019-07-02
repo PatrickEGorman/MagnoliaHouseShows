@@ -7,7 +7,6 @@ document.addEventListener("facebookLoaded", function(){
 
 
 
-
 function verifyLogin() {
   FB.getLoginStatus(function(response) {
     console.log(response);
