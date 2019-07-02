@@ -3,7 +3,7 @@ from django.db import models
 
 class Genre(models.Model):
     name = models.TextField(unique=True, primary_key=True)
-    sub_genres = models.ManyToManyField('Genre', blank=True, null=True)
+    sub_genres = models.ManyToManyField('self', blank=True, null=True)
 
 
 class Song(models.Model):
