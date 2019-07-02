@@ -8,7 +8,7 @@ class Genre(models.Model):
 
 class Song(models.Model):
     name = models.TextField()
-    genres = models.ManyToManyField(Genre)
+    genres = models.ManyToManyField(Genre, blank=True)
 
 
 class Album(models.Model):
