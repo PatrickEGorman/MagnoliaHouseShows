@@ -1,3 +1,10 @@
 from django.db import models
 
-# Create your models here.
+
+class InfoPage(models.Model):
+    image = models.ImageField(blank=True, null=True)
+    text = models.TextField(default='')
+
+
+class Directions(InfoPage):
+    starting_point = models.TextField(default='')

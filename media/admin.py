@@ -1,3 +1,7 @@
 from django.contrib import admin
+from .models import Flier, Photo, YoutubeVideo
 
-# Register your models here.
+
+admin.site.register(Flier)
+admin.site.register(Photo)
+admin.site.register(YoutubeVideo)
