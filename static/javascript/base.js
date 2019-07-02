@@ -1,5 +1,3 @@
-import $ from 'jquery'
-
 
 document.addEventListener("facebookLoaded", function(){
     verifyLogin();
