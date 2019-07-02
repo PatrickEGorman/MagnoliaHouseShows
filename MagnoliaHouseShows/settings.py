@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import django_heroku
+
+django_heroku.settings(locals())
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -81,7 +84,10 @@ TEMPLATES = [
 ]
 
 SOCIAL_AUTH_FACEBOOK_KEY = '319824315573183'
-SOCIAL_AUTH_FACEBOOK_SECRET = os.environ["FACEBOOK_SECRET"]
+try:
+    SOCIAL_AUTH_FACEBOOK_SECRET = os.environ["FACEBOOK_SECRET"]
+except KeyError:
+    print("No facebook secret key given")
 
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.facebook.FacebookOAuth2',
