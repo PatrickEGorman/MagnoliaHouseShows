@@ -20,6 +20,9 @@ from home.views import home
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home),
+    path('shows/', include('shows.urls')),
+    path('music/', include('music.urls')),
     path('info/', include('info.urls')),
     path('media/', include('media.urls')),
+
 ]

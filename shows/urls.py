@@ -1,9 +1,7 @@
 from django.urls import path
-from .views import about, directions, event_calendar, history
+from .views import shows, view_show
 
 urlpatterns = [
-    path('about', about),
-    path('directions', directions),
-    path('event_calendar', event_calendar),
-    path('history', history),
+    path('', shows),
+    path('view_show', view_show),
 ]

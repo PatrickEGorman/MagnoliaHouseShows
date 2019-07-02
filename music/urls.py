@@ -1,9 +1,8 @@
 from django.urls import path
-from .views import about, directions, event_calendar, history
+from .views import music, view_album, view_band
 
 urlpatterns = [
-    path('about', about),
-    path('directions', directions),
-    path('event_calendar', event_calendar),
-    path('history', history),
+    path('', music),
+    path('view_album', view_album),
+    path('view_band', view_band),
 ]
