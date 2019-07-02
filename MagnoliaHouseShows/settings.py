@@ -88,7 +88,7 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
-AUTH_USER_MODEL = 'accounts.User'
+# AUTH_USER_MODEL = 'accounts.User'
 
 WSGI_APPLICATION = 'MagnoliaHouseShows.wsgi.application'
 
