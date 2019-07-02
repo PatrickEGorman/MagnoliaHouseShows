@@ -14,16 +14,18 @@ function postLogin() {
   FB.getLoginStatus(function(response) {
       if(response.status==="connected"){
           FB.api('/me', function(response){
+              const name = response.name;
+              const id = response.id;
               console.log(response);
+              var csrftoken = Cookies.get('csrftoken');
+              $.ajaxSetup({
+                beforeSend: function(xhr, settings) {
+                    if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                    }
+                }
+              });
+              $.post("/users/authenticate_facebook", {'name':name, "id":id})
           })
-        // var csrftoken = Cookies.get('csrftoken');
-        // $.ajaxSetup({
-        //     beforeSend: function(xhr, settings) {
-        //         if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-        //             xhr.setRequestHeader("X-CSRFToken", csrftoken);
-        //         }
-        //     }
-        // });
-        // $,post("/users/authenticate_facebook")
       }})
 }

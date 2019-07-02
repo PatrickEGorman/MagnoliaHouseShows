@@ -4,7 +4,7 @@
 
 {% block content %}
     <div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with"
-         data-auto-logout-link="false" data-use-continue-as="true" onlogin="verifyLogin();"></div>
+         data-auto-logout-link="true" data-use-continue-as="true" onlogin="verifyLogin();"></div>
     <form method="post">
       {% csrf_token %}
       {{ form.as_p }}
@@ -13,6 +13,7 @@
     <br>
     <br>
     <a href="/signup">New Account</a>
+    <a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a>
 
     {% load staticfiles %}
     <script src={% static '/dist/accounts.js' %}></script>
