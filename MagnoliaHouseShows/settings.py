@@ -81,14 +81,14 @@ TEMPLATES = [
 ]
 
 SOCIAL_AUTH_FACEBOOK_KEY = '319824315573183'
-SOCIAL_AUTH_FACEBOOK_SECRET = '5fe0fd50eb366a6cee2526d48ce42f30'
+SOCIAL_AUTH_FACEBOOK_SECRET = os.environ["FACEBOOK_SECRET"]
 
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.facebook.FacebookOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 )
 
-# AUTH_USER_MODEL = 'accounts.User'
+AUTH_USER_MODEL = 'accounts.User'
 
 WSGI_APPLICATION = 'MagnoliaHouseShows.wsgi.application'
 
