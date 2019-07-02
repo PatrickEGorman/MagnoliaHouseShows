@@ -13,7 +13,7 @@ $(document).ready(function(){
 function postLogin() {
   FB.getLoginStatus(function(response) {
       if(response.status==="connected"){
-          fb.api('/me', function(response){
+          FB.api('/me', function(response){
               console.log(response);
           })
         // var csrftoken = Cookies.get('csrftoken');
