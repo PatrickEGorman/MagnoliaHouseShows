@@ -10,4 +10,4 @@ class Show(models.Model):
     time = models.TimeField(default="08:00")
     suggested_donation = models.IntegerField(default=7)
 
-    facebook = models.TextField(default='')
+    facebook = models.TextField(default='', blank=True)

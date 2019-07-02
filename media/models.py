@@ -10,13 +10,13 @@ class Flier(models.Model):
 
 class Photo(models.Model):
     image = models.ImageField()
-    caption = models.TextField(default='')
+    caption = models.TextField(default='', blank=True)
     band = models.ForeignKey(Band, null=True, blank=True, related_name="photos", on_delete=models.SET_NULL)
     show = models.ForeignKey(Show, null=True, blank=True, related_name="photos", on_delete=models.SET_NULL)
 
 
 class YoutubeVideo(models.Model):
     youtube_url = models.TextField()
-    caption = models.TextField(default='')
+    caption = models.TextField(default='', blank=True)
     bands = models.ManyToManyField(Band, blank=True)
     show = models.ForeignKey(Show, null=True, blank=True, related_name="videos", on_delete=models.SET_NULL)

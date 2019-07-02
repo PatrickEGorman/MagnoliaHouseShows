@@ -7,4 +7,4 @@ class InfoPage(models.Model):
 
 
 class Directions(InfoPage):
-    starting_point = models.TextField(default='')
+    starting_point = models.TextField(default='', blank=True)
