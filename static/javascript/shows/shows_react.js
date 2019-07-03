@@ -21,7 +21,11 @@ class Show extends React.Component{
             link=<a href={this.props.data.facebook} className={'btn bg-dark text-light'}>Facebook Event</a>;
         }
         if(this.props.data.fliers[0]){
-            flier = <div><img src={this.props.data.fliers[0].image} style={"width:100%;"}/> <br/> {this.props.data.fliers[0].caption} </div>;
+            flier = <div>
+                        <img src={this.props.data.fliers[0].image} alt={this.props.data.fliers[0].caption} style={"width:100%;"}/>
+                        <br/>
+                        {this.props.data.fliers[0].caption}
+                    </div>;
         }
         return (
             <div className={'row mb-3'}>
