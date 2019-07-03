@@ -22,7 +22,7 @@ class Show extends React.Component{
         }
         if(this.props.data.fliers[0]){
             flier = <div>
-                        <img src={this.props.data.fliers[0].image} alt={this.props.data.fliers[0].caption} style={"width:100%;"}/>
+                        <img src={this.props.data.fliers[0].image} alt={this.props.data.fliers[0].caption} style={{width:100%}}/>
                         <br/>
                         {this.props.data.fliers[0].caption}
                     </div>;
