@@ -5,7 +5,8 @@ const path = require('path')
 module.exports = {
     entry: {
         base: './static/javascript/base.js',
-        accounts: './static/javascript/accounts/accounts.js'
+        accounts: './static/javascript/accounts/accounts.js',
+        home: './static/javascript/home/home.js'
     },
     output: {
         path: path.join(__dirname,'static', 'dist'),
