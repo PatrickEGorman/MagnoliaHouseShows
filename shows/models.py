@@ -12,6 +12,8 @@ class Show(models.Model):
 
     facebook = models.URLField(default='', blank=True)
 
+    description = models.TextField(default='', blank=True)
+
     def __str__(self):
         display = self.date.__str__() + ":"
         for artist in self.artists.all():

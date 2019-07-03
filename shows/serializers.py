@@ -10,6 +10,7 @@ class ShowSerializer(serializers.ModelSerializer):
     time = serializers.TimeField()
     suggested_donation = serializers.IntegerField()
     facebook = serializers.URLField()
+    description = serializers.CharField()
     artists = ArtistSerializer(many=True)
     genres = GenreSerializer(many=True)
 
@@ -19,6 +20,7 @@ class ShowSerializer(serializers.ModelSerializer):
                   'date',
                   'time',
                   'suggested_donation',
+                  'description',
                   'facebook',
                   'artists',
                   'genres')

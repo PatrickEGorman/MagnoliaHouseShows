@@ -17,17 +17,18 @@ class Show extends React.Component{
 
         let link;
         if(this.props.data.facebook){
-            link=<a href={this.props.data.facebook}>Facebook Event</a>;
+            link=<a href={this.props.data.facebook} className={'btn bg-dark text-light'}>Facebook Event</a>;
         }
         return (
             <div className={'row'}>
-                <div className={'col-xs-12 col-sm-6 col-lg-4'}>
+                <div className={'col-xs-12 col-sm-7'}>
                     <h3>{month} {day}    {hour}:{minute}PM</h3>
                     <ArtistList artistData={this.props.data.artists}/>
                 </div>
-                <div className={'col-xs-12 col-sm-6 col-lg-4'}>
+                <div className={'col-xs-12 col-sm-5'}>
                     <h3>${this.props.data.suggested_donation} Suggested Donation</h3>
                     {link}
+                    {this.props.data.description}
                 </div>
             </div>
         )

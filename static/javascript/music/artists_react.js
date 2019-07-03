@@ -16,7 +16,8 @@ class Artist extends React.Component{
         }
         return (
             <div>
-                {this.props.data.name}~{this.props.data.hometown}~{link}
+                {this.props.data.name}~{this.props.data.hometown}~{link}~{this.props.data.description}
+                <hr/>
             </div>
         )
     }

@@ -22,6 +22,7 @@ class ArtistSerializer(serializers.ModelSerializer):
     facebook = serializers.URLField()
     soundcloud = serializers.URLField()
     youtube = serializers.URLField()
+    description = serializers.CharField()
 
     class Meta:
         model = Artist
@@ -32,7 +33,8 @@ class ArtistSerializer(serializers.ModelSerializer):
                   'bandcamp',
                   'facebook',
                   'soundcloud',
-                  'youtube')
+                  'youtube',
+                  'description')
 
 
 class AlbumSerializer(serializers.ModelSerializer):
@@ -44,6 +46,7 @@ class AlbumSerializer(serializers.ModelSerializer):
     youtube = serializers.URLField()
     artist = ArtistSerializer()
     cover_image = serializers.ImageField()
+    description = serializers.CharField()
 
     class Meta:
         model = Album
@@ -54,7 +57,8 @@ class AlbumSerializer(serializers.ModelSerializer):
                   'bandcamp',
                   'youtube',
                   'artist',
-                  'cover_image')
+                  'cover_image',
+                  'description')
 
 
 class SongSerializer(serializers.ModelSerializer):
@@ -62,10 +66,12 @@ class SongSerializer(serializers.ModelSerializer):
     name = serializers.CharField()
     genres = GenreSerializer(many=True)
     album = AlbumSerializer()
+    description = serializers.CharField()
 
     class Meta:
         model = Song
         fields = ('id',
                   'name',
                   'genres',
-                  'album')
+                  'album',
+                  'description')
