@@ -9,6 +9,7 @@ class FlierSerializer(serializers.ModelSerializer):
     image = serializers.ImageField()
     date = serializers.DateField()
     caption = serializers.CharField()
+    show = serializers.StringRelatedField(many=False)
 
     class Meta:
         model = Flier
@@ -25,6 +26,7 @@ class PhotoSerializer(serializers.ModelSerializer):
     date = serializers.DateField()
     caption = serializers.CharField()
     artist = ArtistSerializer()
+    show = serializers.StringRelatedField(many=False)
 
     class Meta:
         model = Photo
@@ -42,6 +44,7 @@ class YoutubeSerializer(serializers.ModelSerializer):
     youtube_url = serializers.URLField()
     caption = serializers.CharField()
     artist = ArtistSerializer()
+    show = serializers.StringRelatedField(many=False)
 
     class Meta:
         model = YoutubeVideo

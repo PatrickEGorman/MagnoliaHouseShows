@@ -25,6 +25,7 @@ class ShowSerializer(serializers.ModelSerializer):
                   'description',
                   'facebook',
                   'artists',
-                  'genres')
+                  'genres',
+                  'fliers')
 
 
