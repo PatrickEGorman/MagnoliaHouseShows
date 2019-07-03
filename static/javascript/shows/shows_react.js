@@ -49,7 +49,6 @@ class Show extends React.Component{
                         <h3>{month} {day} {hour}:{minute}PM</h3>
                         <ArtistList artistData={this.props.data.artists}/>
                     </div>
-                    {flier}
                     <div className={'col-xs-12 col-sm-4'}>
                         <h3>${this.props.data.suggested_donation} Suggested Donation</h3>
                         {link}
