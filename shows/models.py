@@ -1,9 +1,9 @@
 from django.db import models
-from music.models import Band, Genre
+from music.models import Artist, Genre
 
 
 class Show(models.Model):
-    bands = models.ManyToManyField(Band)
+    artists = models.ManyToManyField(Artist)
     genres = models.ManyToManyField(Genre, blank=True)
 
     date = models.DateField()

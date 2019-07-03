@@ -1,7 +1,7 @@
-from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
 from .models import Show
+from music.serializers import ArtistSerializer, GenreSerializer
 
 
 class ShowSerializer(serializers.ModelSerializer):
@@ -10,6 +10,8 @@ class ShowSerializer(serializers.ModelSerializer):
     time = serializers.TimeField()
     suggested_donation = serializers.IntegerField()
     facebook = serializers.URLField()
+    artists = ArtistSerializer()
+    genres = GenreSerializer()
 
     class Meta:
         model = Show
@@ -17,6 +19,8 @@ class ShowSerializer(serializers.ModelSerializer):
                   'date',
                   'time',
                   'suggested_donation',
-                  'facebook')
+                  'facebook',
+                  'artists',
+                  'genres')
 
 

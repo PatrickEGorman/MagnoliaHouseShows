@@ -7,11 +7,11 @@ class FlierAdmin(admin.ModelAdmin):
 
 
 class PhotoAdmin(admin.ModelAdmin):
-    list_display = ('image', 'caption', 'band', 'show', 'date')
+    list_display = ('image', 'caption', 'artist', 'show', 'date')
 
 
 class YoutubeAdmin(admin.ModelAdmin):
-    list_display = ('caption', 'youtube_url', 'show', 'date')
+    list_display = ('caption', 'youtube_url', 'artist', 'show', 'date')
 
 
 admin.site.register(Flier, FlierAdmin)

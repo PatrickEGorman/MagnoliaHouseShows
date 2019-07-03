@@ -1,5 +1,5 @@
 from django.db import models
-from music.models import Band
+from music.models import Artist
 from shows.models import Show
 
 
@@ -11,46 +11,46 @@ class Flier(models.Model):
 
     def __str__(self):
         if self.show:
-            return "Flier for "+self.show
-        elif "Flier from "+self.date:
-            return self.date
-        elif "Flier caption "+self.caption:
-            return self.caption
+            return "Flier for: "+self.show.__str__()
+        elif self.date:
+            return "Flier from: "+self.date.__str__()
+        elif self.caption:
+            return "Flier caption: "+self.caption
         else:
-            return "Database id for flier "+self.id
+            return "Database id for flier: "+str(self.id)
 
 
 class Photo(models.Model):
     image = models.ImageField()
     date = models.DateField(blank=True, null=True, default=None)
     caption = models.TextField(default='', blank=True)
-    band = models.ForeignKey(Band, null=True, blank=True, related_name="photos", on_delete=models.SET_NULL)
+    artist = models.ForeignKey(Artist, null=True, blank=True, related_name="photos", on_delete=models.SET_NULL)
     show = models.ForeignKey(Show, null=True, blank=True, related_name="photos", on_delete=models.SET_NULL)
 
     def __str__(self):
-        if self.band:
-            return "Image of the band: "+self.band.__str__()
+        if self.artist:
+            return "Image of the band: "+self.artist.__str__()
         elif self.show:
-            return "Image from "+self.show.__str__()
+            return "Image from: "+self.show.__str__()
         elif self.caption:
-            return "Image caption "+self.caption
+            return "Image caption: "+self.caption
         else:
-            return "Image database id "+str(self.id)
+            return "Image database id: "+str(self.id)
 
 
 class YoutubeVideo(models.Model):
     youtube_url = models.URLField()
     date = models.DateField(blank=True, null=True, default=None)
     caption = models.TextField(default='', blank=True)
-    bands = models.ManyToManyField(Band, blank=True)
+    artist = models.ForeignKey(Artist, null=True, related_name='videos', on_delete=models.SET_NULL, blank=True)
     show = models.ForeignKey(Show, null=True, blank=True, related_name="videos", on_delete=models.SET_NULL)
 
     def __str__(self):
-        if len(self.bands) == 1:
-            return "Video of the band: "+self.bands[0].__str__()
+        if self.artist:
+            return "Video of the band: "+self.artist.__str__()
         elif self.show:
-            return "Image from "+self.show.__str__()
+            return "Image from: "+self.show.__str__()
         elif self.caption:
-            return "Image caption "+self.caption
+            return "Image caption: "+self.caption
         else:
-            return "Image database id "+str(self.id)
+            return "Image database id: "+str(self.id)
