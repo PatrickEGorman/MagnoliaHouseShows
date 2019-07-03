@@ -19,7 +19,7 @@ class Artist(models.Model):
     soundcloud = models.URLField(default='', blank=True)
 
     def __str__(self):
-        return "Band "+self.name
+        return self.name
 
 
 class Album(models.Model):
@@ -32,7 +32,7 @@ class Album(models.Model):
     release_date = models.DateField(blank=True, null=True, default=None)
 
     def __str__(self):
-        return "Album "+self.name
+        return self.name
 
 class Song(models.Model):
     name = models.TextField()
@@ -40,4 +40,4 @@ class Song(models.Model):
     album = models.ForeignKey(Album, null=True, blank=True, related_name='songs', on_delete=models.SET_NULL)
 
     def __str__(self):
-        return "Song " + self.name
+        return self.name
