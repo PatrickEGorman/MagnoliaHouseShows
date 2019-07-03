@@ -7,7 +7,7 @@
     <h1>This the home page</h1>
     <div class="mt-3" id="react_container"></div>
 
-{% endblock %}
+    {% load staticfiles %}
+    <script src={% static '/dist/home.js' %}></script>
 
-{% load staticfiles %}
-<script src={% static '/dist/home.js' %}></script>
+{% endblock %}

@@ -4,6 +4,8 @@ import ReactDOM from 'react-dom'
 import $ from 'jquery'
 
 
-let JsonShowData = $.get('/shows/list_shows');
+$.get('/shows/list_shows', function(data){
+    console.log(data);
+    ReactDOM.render(<ShowList showData={data}/>, document.getElementById('react_container'));
+});
 
-ReactDOM.render(<ShowList showData={JsonShowData}/>, document.getElementById('react_container'))
