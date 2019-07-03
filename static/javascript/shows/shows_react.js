@@ -28,6 +28,8 @@ class Show extends React.Component{
                 <div className={'col-xs-12 col-sm-5'}>
                     <h3>${this.props.data.suggested_donation} Suggested Donation</h3>
                     {link}
+                    <hr/>
+                    <br/>
                     {this.props.data.description}
                     <hr/>
                 </div>
