@@ -4,8 +4,12 @@ import ReactDOM from 'react-dom'
 
 class Artist extends React.Component{
     render() {
+        let embed;
         let link;
-        if(this.props.data.bandcamp){
+        if(this.props.data.bandcampEmbedCode){
+            embed = this.props.data.bandcampEmbedCode;
+        }
+        else if(this.props.data.bandcamp){
             link=<a href={this.props.data.bandcamp} className={'btn bg-dark text-light'}>Bandcamp</a>;
         }
         else if(this.props.data.soundcloud){
@@ -31,6 +35,8 @@ class Artist extends React.Component{
                 </div>
                 <div className={'col-md-12'}>
                     {this.props.data.description}
+                    <br/>
+                    {embed}
                     <hr/>
                 </div>
             </div>

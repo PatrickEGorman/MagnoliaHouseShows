@@ -6,7 +6,7 @@ import {ArtistList} from '../music/artists_react'
 class Show extends React.Component{
     render() {
         let split_date = this.props.data.date.split('-');
-        const months = {'1':"January", 2: "February", 3:"March", 4: "April", 5:"May", 6: "June", 7:"July", 8: "August",
+        const months = {1:"January", 2: "February", 3:"March", 4: "April", 5:"May", 6: "June", 7:"July", 8: "August",
             9:"September", 10: "October", 11:"November", 12: "December"};
         const month = months[parseInt(split_date[1])];
         const day = split_date[2];

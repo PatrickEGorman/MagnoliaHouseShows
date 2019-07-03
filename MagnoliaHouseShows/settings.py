@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'social_django',
+    'storages',
     'accounts',
     'home',
     'info',
@@ -87,6 +88,24 @@ try:
     SOCIAL_AUTH_FACEBOOK_SECRET = os.environ["FACEBOOK_SECRET"]
 except KeyError:
     print("No facebook secret key given")
+
+AWS_ACCESS_KEY_ID = 'AKIAT3LD6P6NVDHRBWW5'
+try:
+    AWS_SECRET_ACCESS_KEY = os.environ["AWS_SECRET"]
+except KeyError:
+    print("No AWS secret key given")
+AWS_STORAGE_BUCKET_NAME = 'magnolia-house-shows'
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
+AWS_LOCATION = 'static'
+DEFAULT_FILE_STORAGE = 'MagnoliaHouseSHows.storage_backends.MediaStorage'
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'mysite/static'),
+# ]
+# STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.facebook.FacebookOAuth2',
