@@ -20,7 +20,7 @@ class Show extends React.Component{
             link=<a href={this.props.data.facebook} className={'btn bg-dark text-light'}>Facebook Event</a>;
         }
         return (
-            <div className={'row'}>
+            <div className={'row mb-3'}>
                 <div className={'col-xs-12 col-sm-7'}>
                     <h3>{month} {day}    {hour}:{minute}PM</h3>
                     <ArtistList artistData={this.props.data.artists}/>
@@ -28,8 +28,8 @@ class Show extends React.Component{
                 <div className={'col-xs-12 col-sm-5'}>
                     <h3>${this.props.data.suggested_donation} Suggested Donation</h3>
                     {link}
-                    <hr/>
                     {this.props.data.description}
+                    <hr/>
                 </div>
             </div>
         )
