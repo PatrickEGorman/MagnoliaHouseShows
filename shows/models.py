@@ -14,6 +14,6 @@ class Show(models.Model):
 
     def __str__(self):
         display = self.date.__str__() + ":"
-        for band in self.bands.all():
-            display += band + "/"
+        for artist in self.artists.all():
+            display += artist + "/"
         return display
