@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import ArtistList from '../music/artists_react'
+import {ArtistList} from '../music/artists_react'
 
 
 class Show extends React.Component{
