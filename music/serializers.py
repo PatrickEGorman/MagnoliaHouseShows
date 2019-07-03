@@ -17,7 +17,7 @@ class ArtistSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField()
     name = serializers.CharField()
     hometown = serializers.CharField()
-    genres = GenreSerializer()
+    genres = GenreSerializer(many=True)
     bandcamp = serializers.URLField()
     facebook = serializers.URLField()
     soundcloud = serializers.URLField()
@@ -38,7 +38,7 @@ class ArtistSerializer(serializers.ModelSerializer):
 class AlbumSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField()
     name = serializers.CharField()
-    genres = GenreSerializer()
+    genres = GenreSerializer(many=True)
     release_date = serializers.DateField()
     bandcamp = serializers.URLField()
     youtube = serializers.URLField()
@@ -60,7 +60,7 @@ class AlbumSerializer(serializers.ModelSerializer):
 class SongSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField()
     name = serializers.CharField()
-    genres = GenreSerializer()
+    genres = GenreSerializer(many=True)
     album = AlbumSerializer()
 
     class Meta:
