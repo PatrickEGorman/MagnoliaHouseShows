@@ -16,8 +16,12 @@ class Show extends React.Component{
         const minute = split_time[1];
 
         let link;
+        let flier;
         if(this.props.data.facebook){
             link=<a href={this.props.data.facebook} className={'btn bg-dark text-light'}>Facebook Event</a>;
+        }
+        if(this.props.data.fliers[0]){
+            flier = <div>this.props.data.fliers[0].image <br/> this.props.data.fliers[0].caption </div>
         }
         return (
             <div className={'row mb-3'}>
@@ -32,7 +36,7 @@ class Show extends React.Component{
                     <br/>
                     {this.props.data.description}
                     <br/>
-                        {this.props.data.fliers[0].image}
+                        {flier}
                     <hr/>
                 </div>
             </div>

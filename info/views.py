@@ -15,3 +15,7 @@ def event_calendar(request):
 
 def history(request):
     return render(request, 'history.html', {})
+
+
+def contact(request):
+    return render(request, 'contact.html', {})
