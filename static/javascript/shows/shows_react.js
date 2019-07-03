@@ -16,35 +16,51 @@ class Show extends React.Component{
         const minute = split_time[1];
 
         let link;
-        let flier;
         if(this.props.data.facebook){
             link=<a href={this.props.data.facebook} className={'btn bg-dark text-light'}>Facebook Event</a>;
         }
         if(this.props.data.fliers[0]){
-            flier = <div className={"col-xs-6 col-sm-4 mb-3"}>
+            return(
+                <div className={'row mb-5'}>
+                    <div className={'col-xs-12 col-sm-8'}>
+                        <h3>{month} {day} {hour}:{minute}PM</h3>
+                        <ArtistList artistData={this.props.data.artists}/>
+                        <br/>
+                        <h3>${this.props.data.suggested_donation} Suggested Donation</h3>
+                        {link}
+                        <hr/>
+                        <br/>
+                        {this.props.data.description}
+                        <hr/>
+                    </div>
+                    <div className={"col-xs-6 col-sm-4 mb-3"}>
                         <img src={this.props.data.fliers[0].image} className={"image"} alt={this.props.data.fliers[0].caption}/>
                         <br/>
                         {this.props.data.fliers[0].caption}
                         <hr/>
-                    </div>;
+                    </div>
+                </div>
+            )
         }
-        return (
-            <div className={'row mb-5'}>
-                <div className={'col-xs-12 col-sm-8'}>
-                    <h3>{month} {day}    {hour}:{minute}PM</h3>
-                    <ArtistList artistData={this.props.data.artists}/>
+        else {
+            return (
+                <div className={'row mb-5'}>
+                    <div className={'col-xs-12 col-sm-8'}>
+                        <h3>{month} {day} {hour}:{minute}PM</h3>
+                        <ArtistList artistData={this.props.data.artists}/>
+                    </div>
+                    {flier}
+                    <div className={'col-xs-12 col-sm-4'}>
+                        <h3>${this.props.data.suggested_donation} Suggested Donation</h3>
+                        {link}
+                        <hr/>
+                        <br/>
+                        {this.props.data.description}
+                        <hr/>
+                    </div>
                 </div>
-                {flier}
-                <div className={'col-xs-12 col-sm-4'}>
-                    <h3>${this.props.data.suggested_donation} Suggested Donation</h3>
-                    {link}
-                    <hr/>
-                    <br/>
-                    {this.props.data.description}
-                    <hr/>
-                </div>
-            </div>
-        )
+            )
+        }
     }
 }
 
