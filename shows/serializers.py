@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from media.serializers import FlierSerializer
 
 from .models import Show
 from music.serializers import ArtistSerializer, GenreSerializer
@@ -11,6 +12,7 @@ class ShowSerializer(serializers.ModelSerializer):
     suggested_donation = serializers.IntegerField()
     facebook = serializers.URLField()
     description = serializers.CharField()
+    fliers = FlierSerializer(many=True)
     artists = ArtistSerializer(many=True)
     genres = GenreSerializer(many=True)
 

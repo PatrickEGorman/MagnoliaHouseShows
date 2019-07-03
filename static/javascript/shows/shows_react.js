@@ -31,6 +31,8 @@ class Show extends React.Component{
                     <hr/>
                     <br/>
                     {this.props.data.description}
+                    <br/>
+                        {this.props.data.fliers[0]}
                     <hr/>
                 </div>
             </div>
