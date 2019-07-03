@@ -32,7 +32,7 @@ class Show extends React.Component{
                     <br/>
                     {this.props.data.description}
                     <br/>
-                        {this.props.data.fliers[0]}
+                        {this.props.data.fliers[0].image}
                     <hr/>
                 </div>
             </div>
