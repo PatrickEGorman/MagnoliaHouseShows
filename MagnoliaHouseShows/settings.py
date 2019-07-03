@@ -100,7 +100,7 @@ AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
 }
 AWS_LOCATION = 'static'
-DEFAULT_FILE_STORAGE = 'MagnoliaHouseSHows.storage_backends.MediaStorage'
+DEFAULT_FILE_STORAGE = 'MagnoliaHouseShows.storage_backends.MediaStorage'
 # STATICFILES_DIRS = [
 #     os.path.join(BASE_DIR, 'mysite/static'),
 # ]
