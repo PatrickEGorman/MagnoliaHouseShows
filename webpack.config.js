@@ -6,7 +6,8 @@ module.exports = {
     entry: {
         base: './static/javascript/base.js',
         accounts: './static/javascript/accounts/accounts.js',
-        home: './static/javascript/home/home.js'
+        home: './static/javascript/home/home.js',
+        music_page: './static/javascript/music/music_page.js'
     },
     output: {
         path: path.join(__dirname,'static', 'dist'),

@@ -15,9 +15,20 @@ class Artist extends React.Component{
             link=<a href={this.props.data.youtube}>Youtube</a>;
         }
         return (
-            <div>
-                {this.props.data.name}~{this.props.data.hometown}~{link}~{this.props.data.description}
-                <hr/>
+            <div className="row">
+                <div className={'col-md-4'}>
+                    {this.props.data.name}
+                </div>
+                <div className={'col-md-4'}>
+                    {this.props.data.hometown}
+                </div>
+                <div className={'col-md-4'}>
+                    {link}
+                </div>
+                <div className={'col-md-12'}>
+                    {this.props.data.description}
+                    <hr/>
+                </div>
             </div>
         )
     }
@@ -35,7 +46,7 @@ export class ArtistList extends React.Component{
             i++;
         }
         return(
-            <div>
+            <div className='container'>
                 {contents}
             </div>
         )
