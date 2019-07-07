@@ -11,6 +11,7 @@ class Show(models.Model):
     suggested_donation = models.IntegerField(default=7)
 
     facebook = models.URLField(default='', blank=True)
+    instagram = models.URLField(default='', blank=True)
 
     description = models.TextField(default='', blank=True)
 

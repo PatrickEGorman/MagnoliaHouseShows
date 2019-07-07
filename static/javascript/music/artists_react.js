@@ -4,12 +4,8 @@ import ReactDOM from 'react-dom'
 
 class Artist extends React.Component{
     render() {
-        let embed;
         let link;
-        if(this.props.data.bandcampEmbedCode){
-            embed = this.props.data.bandcampEmbedCode;
-        }
-        else if(this.props.data.bandcamp){
+        if(this.props.data.bandcamp){
             link=<a href={this.props.data.bandcamp} className={'btn bg-dark text-light'}>Bandcamp</a>;
         }
         else if(this.props.data.soundcloud){
@@ -18,12 +14,26 @@ class Artist extends React.Component{
         else if(this.props.data.youtube){
             link=<a href={this.props.data.youtube} className={'btn bg-dark text-light'}>Youtube</a>;
         }
+        let genres = "";
+        let genreDiv = "";
+        for(const genreKey in this.props.data.genres){
+            if(genres.length>=1){
+                genres+=", ";
+            }
+            genres += this.props.data.genres[genreKey].name;
+        }
+        if(genres.length>=1){
+            genreDiv =
+                <div className="col-md-12">
+                    <h4>Genres: <small>{genres}</small> </h4>
+                </div>
+        }
         return (
             <div className="row">
                 <div className={'col-md-4'}>
-                    <h4>
+                    <h3>
                         {this.props.data.name}
-                    </h4>
+                    </h3>
                 </div>
                 <div className={'col-md-4'}>
                     <h4>
@@ -35,8 +45,9 @@ class Artist extends React.Component{
                 </div>
                 <div className={'col-md-12'}>
                     {this.props.data.description}
-                    <br/>
-                    {embed}
+                </div>
+                {genreDiv}
+                <div className={'col-md-12'}>
                     <hr/>
                 </div>
             </div>

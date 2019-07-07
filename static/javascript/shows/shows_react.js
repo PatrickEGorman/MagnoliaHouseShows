@@ -18,25 +18,29 @@ export class Show extends React.Component{
         const hour = parseInt(split_time[0]);
         const minute = split_time[1];
 
-        let link;
+        let links=[];
         if(this.props.data.facebook){
-            link=<a href={this.props.data.facebook} className={'btn bg-dark text-light'}>Facebook Event</a>;
+            links.push(<a href={this.props.data.facebook} className={'btn bg-dark text-light'} key={1}>Facebook Event</a>);
+        }
+        if(this.props.data.instagram){
+            links.push(<a href={this.props.data.instagram} className={'btn bg-dark text-light'} key={2}>Instagram Event</a>);
         }
         if(this.props.data.fliers[0]){
             return(
                 <div className={"container"}>
                     <div className={'row mb-3'}>
                         <div className={"col"}>
-                            <h3>{month} {day} {hour}:{minute}PM</h3>
+                            <h2>{month} {day} {hour}:{minute}PM</h2>
                         </div>
                     </div>
                     <div className={'row mb-5'}>
                         <div className={'col-xs-12 col-sm-8'}>
 
+
                             <ArtistList artistData={this.props.data.artists}/>
                             <br/>
                             <h3>${this.props.data.suggested_donation} Suggested Donation</h3>
-                            {link}
+                            {links}
                             <hr/>
                             <br/>
                             {this.props.data.description}
@@ -57,7 +61,7 @@ export class Show extends React.Component{
                 <div className={"container"}>
                     <div className={'row mb-3'}>
                         <div className={"col"}>
-                            <h3>{month} {day} {hour}:{minute}PM</h3>
+                            <h2>{month} {day} {hour}:{minute}PM</h2>
                         </div>
                     </div>
                     <div className={'row mb-5'}>
@@ -66,7 +70,7 @@ export class Show extends React.Component{
                         </div>
                         <div className={'col-xs-12 col-sm-4'}>
                             <h3>${this.props.data.suggested_donation} Suggested Donation</h3>
-                            {link}
+                            {links}
                             <hr/>
                             <br/>
                             {this.props.data.description}
@@ -93,13 +97,29 @@ class HomePageShow extends React.Component{
         let split_time = this.props.data.time.split(":");
         const hour = parseInt(split_time[0]);
         const minute = split_time[1];
+        let genres = "";
+        let genreDiv = "";
+        for(const genreKey in this.props.data.genres){
+            if(genres.length>=1){
+                genres+=", ";
+            }
+            genres += this.props.data.genres[genreKey].name;
+        }
+        if(genres.length>=1){
+            genreDiv =
+                <div className="col-md-12 ml-4">
+                    Genres: <small>{genres}</small>
+                </div>
+        }
         return(
-            <div className={'col mt-3'}>
+            <div className={'row mt-3'}>
                 <h2>
                     <a href={'/shows/view_show/'+this.props.data.id}>
-                        {month} {day} : <small>{artists.substring(0, artists.length-3)}</small>
-                        <br/>
-                        <div className={"ml-5"}>
+                        <div className={"col-md-12"}>
+                            {month} {day} : <small>{artists.substring(0, artists.length-3)}</small>
+                        </div>
+                        {genreDiv}
+                        <div className={"col-md-12 ml-4"}>
                             {hour}:{minute}<small> PM </small>
                             ${this.props.data.suggested_donation} <small>suggested donation  </small>
                         </div>
