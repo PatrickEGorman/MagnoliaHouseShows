@@ -107,7 +107,7 @@ class HomePageShow extends React.Component{
         }
         if(genres.length>=1){
             genreDiv =
-                <div className="col-md-12 ml-4">
+                <div className="col-md-12 ml-4 mr-0">
                     Genres: <small>{genres}</small>
                 </div>
         }
@@ -119,7 +119,7 @@ class HomePageShow extends React.Component{
                             {month} {day} : <small>{artists.substring(0, artists.length-3)}</small>
                         </div>
                         {genreDiv}
-                        <div className={"col-md-12 ml-4"}>
+                        <div className={"col-md-12 ml-4 mr-0"}>
                             {hour}:{minute}<small> PM </small>
                             ${this.props.data.suggested_donation} <small>suggested donation  </small>
                         </div>

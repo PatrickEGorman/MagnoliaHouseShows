@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Album, Artist, Genre, Song
+from .models import Album, Artist, Genre
 
 
 class GenreSerializer(serializers.ModelSerializer):
@@ -58,20 +58,4 @@ class AlbumSerializer(serializers.ModelSerializer):
                   'youtube',
                   'artist',
                   'cover_image',
-                  'description')
-
-
-class SongSerializer(serializers.ModelSerializer):
-    id = serializers.IntegerField()
-    name = serializers.CharField()
-    genres = GenreSerializer(many=True)
-    album = AlbumSerializer()
-    description = serializers.CharField()
-
-    class Meta:
-        model = Song
-        fields = ('id',
-                  'name',
-                  'genres',
-                  'album',
                   'description')

@@ -1,9 +1,9 @@
 from django.contrib import admin
-from .models import Album, Artist, Genre, Song
+from .models import Album, Artist, Genre
 
 
 class AlbumAdmin(admin.ModelAdmin):
-    list_display = ('name', 'bandcamp', 'release_date')
+    list_display = ('name', 'artist', 'bandcamp', 'release_date')
 
 
 class ArtistAdmin(admin.ModelAdmin):
@@ -14,11 +14,6 @@ class GenreAdmin(admin.ModelAdmin):
     list_display = ['name']
 
 
-class SongAdmin(admin.ModelAdmin):
-    list_display = ['name']
-
-
 admin.site.register(Album, AlbumAdmin)
 admin.site.register(Artist, ArtistAdmin)
 admin.site.register(Genre, GenreAdmin)
-admin.site.register(Song, SongAdmin)

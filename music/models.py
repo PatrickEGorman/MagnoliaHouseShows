@@ -34,12 +34,3 @@ class Album(models.Model):
 
     def __str__(self):
         return self.name
-
-class Song(models.Model):
-    name = models.TextField()
-    genres = models.ManyToManyField(Genre, blank=True)
-    album = models.ForeignKey(Album, null=True, blank=True, related_name='songs', on_delete=models.SET_NULL)
-    description = models.TextField(default='', blank=True)
-
-    def __str__(self):
-        return self.name

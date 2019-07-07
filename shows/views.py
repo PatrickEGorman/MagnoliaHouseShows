@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 import datetime
 
@@ -15,7 +15,7 @@ def view_show(request, show_id):
 
 
 def get_show(request, show_id):
-    show = Show.objects.get(id=show_id)
+    show = get_object_or_404(Show, id=show_id)
     serializer = ShowSerializer(show)
     return JsonResponse(serializer.data, safe=False)
 
