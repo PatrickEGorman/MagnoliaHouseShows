@@ -3,7 +3,6 @@ from django.db import models
 
 class Genre(models.Model):
     name = models.TextField(unique=True)
-    sub_genres = models.ManyToManyField('self', blank=True)
 
     def __str__(self):
         return self.name
