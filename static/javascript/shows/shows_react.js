@@ -3,11 +3,14 @@ import ReactDOM from 'react-dom'
 import {ArtistList} from '../music/artists_react'
 
 
-class Show extends React.Component{
+const months = {1:"January", 2: "February", 3:"March", 4: "April", 5:"May", 6: "June", 7:"July", 8: "August",
+    9:"September", 10: "October", 11:"November", 12: "December"};
+
+
+export class Show extends React.Component{
     render() {
         let split_date = this.props.data.date.split('-');
-        const months = {1:"January", 2: "February", 3:"March", 4: "April", 5:"May", 6: "June", 7:"July", 8: "August",
-            9:"September", 10: "October", 11:"November", 12: "December"};
+
         const month = months[parseInt(split_date[1])];
         const day = split_date[2];
 
@@ -64,15 +67,47 @@ class Show extends React.Component{
 }
 
 
+class HomePageShow extends React.Component{
+    render() {
+        let split_date = this.props.data.date.split('-');
+
+        const month = months[parseInt(split_date[1])];
+        const day = split_date[2];
+        let artists = '';
+        for(const key in this.props.data.artists){
+            artists += this.props.data.artists[key].name +" / ";
+        }
+        let split_time = this.props.data.time.split(":");
+        const hour = parseInt(split_time[0]);
+        const minute = split_time[1];
+        return(
+            <div className={'col mt-3'}>
+                <h2>
+                    <a href={'/shows/view_show/'+this.props.data.id}>
+                        {month} {day} : <small>{artists.substring(0, artists.length-3)}</small>
+                        <br/>
+                        <div className={"ml-5"}>
+                            {hour}:{minute}<small> PM </small>
+                            ${this.props.data.suggested_donation} <small>suggested donation  </small>
+                        </div>
+                    </a>
+                </h2>
+            </div>
+        )
+    }
+}
+
+
 export class ShowList extends React.Component{
     render(){
         let contents = [];
-        let i = 0;
         for(const val in this.props.showData){
             contents.push(
-                <Show data={this.props.showData[val]} key={i}/>
+                ((this.props.isHomePage)?
+                    <HomePageShow data={this.props.showData[val]} key={val}/>:
+                    <Show data={this.props.showData[val]}  key={val}/>
+                )
             );
-            i++;
         }
         return(
             <div>

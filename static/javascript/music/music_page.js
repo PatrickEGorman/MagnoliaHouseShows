@@ -5,7 +5,6 @@ import $ from 'jquery'
 
 
 $.get('/music/artist_list', function(data){
-    console.log(data);
     ReactDOM.render(<ArtistList artistData={data}/>, document.getElementById('react_container'));
 });
 

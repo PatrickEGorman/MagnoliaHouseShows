@@ -10,8 +10,14 @@ def shows(request):
     return render(request, 'shows.html', {})
 
 
-def view_show(request):
-    return render(request, 'view_show.html', {})
+def view_show(request, show_id):
+    return render(request, 'view_show.html', {'show_id': show_id})
+
+
+def get_show(request, show_id):
+    show = Show.objects.get(id=show_id)
+    serializer = ShowSerializer(show)
+    return JsonResponse(serializer.data, safe=False)
 
 
 def get_shows_list(request):
