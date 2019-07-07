@@ -8,6 +8,7 @@ module.exports = {
         accounts: './static/javascript/accounts/accounts.js',
         home: './static/javascript/home/home.js',
         music_page: './static/javascript/music/music_page.js',
+        past_shows: './static/javascript/shows/past_shows.js',
         view_show: './static/javascript/shows/view_show.js'
     },
     output: {

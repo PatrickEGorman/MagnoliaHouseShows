@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %}Shows{% endblock %}
+
+{% block content %}
+    <div id="react_container"></div>
+
+    {% load staticfiles %}
+    <script src={% static 'dist/past_shows.js' %}></script>
+{% endblock %}
