@@ -62,7 +62,7 @@ export class FlierList extends React.Component{
             past_show_link = "Show Past Shows Fliers";
         }
         for(const val in this.props.flierData){
-            if(parseInt(val) === num_fliers){
+            if(parseInt(val) === num_fliers-1){
                 num_fliers += 5;
                 view_more = <ViewMore callback={LoadFliers}/>
             }
