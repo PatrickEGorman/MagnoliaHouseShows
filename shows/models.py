@@ -19,4 +19,4 @@ class Show(models.Model):
         display = self.date.__str__() + ":"
         for artist in self.artists.all():
             display += artist.__str__() + "/"
-        return display
+        return display[:-1]

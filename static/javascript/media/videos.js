@@ -4,7 +4,7 @@ import $ from "jquery";
 import {parseDate} from "../util/date";
 
 $.get('/media/list_videos', function(data){
-    ReactDOM.render(<VideoList flierData={data}/>, document.getElementById('react_container'));
+    ReactDOM.render(<VideoList videoData={data}/>, document.getElementById('react_container'));
 });
 
 class Video extends React.Component{
@@ -52,9 +52,9 @@ class Video extends React.Component{
 export class VideoList extends React.Component{
     render(){
         let contents = [];
-        for(const val in this.props.flierData){
+        for(const val in this.props.videoData){
             contents.push(
-                <Video data={this.props.flierData[val]} key={val}/>
+                <Video data={this.props.videoData[val]} key={val}/>
             );
         }
         return(
