@@ -25,7 +25,7 @@ class Photo extends React.Component{
         return (
             <div className="row">
                 <div className={'col-md-12'}>
-                    <img src={this.props.data.image} alt={this.props.data.caption}/>
+                    <img className={'image'} src={this.props.data.image} alt={this.props.data.caption}/>
                 </div>
                 <div className={'col-md-12'}>
                     {this.props.data.caption}
