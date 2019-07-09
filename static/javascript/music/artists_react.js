@@ -59,12 +59,10 @@ class Artist extends React.Component{
 export class ArtistList extends React.Component{
     render(){
         let contents = [];
-        let i = 0;
         for(const val in this.props.artistData){
             contents.push(
-                <Artist data={this.props.artistData[val]} key={i}/>
+                <Artist data={this.props.artistData[val]} key={val}/>
             );
-            i++;
         }
         return(
             <div className='container'>

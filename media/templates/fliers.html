@@ -4,6 +4,10 @@
 
 {% block content %}
 
-    <h1>This the fliers page</h1>
+    <h1>Fliers</h1>
+    <div id="react_container"></div>
+
+    {% load staticfiles %}
+    <script src={% static '/dist/fliers.js' %}></script>
 
 {% endblock %}

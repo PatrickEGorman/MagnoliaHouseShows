@@ -4,6 +4,10 @@
 
 {% block content %}
 
-    <h1>This the photos page</h1>
+    <h1>Photos</h1>
+    <div id="react_container"></div>
+
+    {% load staticfiles %}
+    <script src={% static '/dist/photos.js' %}></script>
 
 {% endblock %}
