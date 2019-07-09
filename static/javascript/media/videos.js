@@ -16,7 +16,7 @@ class Video extends React.Component{
         }
         let artistDisplay;
         if(this.props.data.artist){
-            artistDisplay = <div className={'col-xs-12 col-md-6'}><h2>Artist: {this.props.data.artist}</h2></div>
+            artistDisplay = <div className={'col-xs-12 col-md-6'}><h2>Artist: {this.props.data.artist.name}</h2></div>
         }
         let showDisplay;
         if(this.props.data.show){
@@ -24,9 +24,7 @@ class Video extends React.Component{
         }
         let youtubeUrl = "https://www.youtube.com/embed/";
         let youtube_ender = this.props.data.youtube_url.split('/')[this.props.data.youtube_url.split('/').length-1];
-        if('=' in youtube_ender){
-            youtube_ender = youtube_ender.split('=')[youtube_ender.split('=').length-1]
-        }
+        youtube_ender = youtube_ender.split('=')[youtube_ender.split('=').length-1]
         youtubeUrl = youtubeUrl + youtube_ender;
         return (
             <div className="row">

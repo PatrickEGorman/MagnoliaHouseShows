@@ -16,7 +16,7 @@ class Photo extends React.Component{
         }
         let artistDisplay;
         if(this.props.data.artist){
-            artistDisplay = <div className={'col-xs-12 col-md-6'}><h2>Artist: {this.props.data.artist}</h2></div>;
+            artistDisplay = <div className={'col-xs-12 col-md-6'}><h2>Artist: {this.props.data.artist.name}</h2></div>;
         }
         let showDisplay;
         if(this.props.data.show){
