@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import $ from "jquery";
+import {parseDate} from "../util/date";
 
 $.get('/media/list_videos', function(data){
     ReactDOM.render(<VideoList flierData={data}/>, document.getElementById('react_container'));
@@ -10,7 +11,8 @@ class Video extends React.Component{
     render() {
         let dateDisplay;
         if(this.props.data.date){
-            dateDisplay = <div className={'col-xs-12 col-md-6'}><h2>Date: {this.props.data.date}</h2></div>
+            const date = parseDate(this.props.data.date);
+            dateDisplay = <div className={'col-xs-12 col-md-6'}><h2>Date: {date}</h2></div>
         }
         let artistDisplay;
         if(this.props.data.artist){

@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {ArtistList} from '../music/artists_react'
+import {parseDate} from "../util/date";
 
 
 const months = {1:"January", 2: "February", 3:"March", 4: "April", 5:"May", 6: "June", 7:"July", 8: "August",
@@ -9,10 +10,7 @@ const months = {1:"January", 2: "February", 3:"March", 4: "April", 5:"May", 6: "
 
 export class Show extends React.Component{
     render() {
-        let split_date = this.props.data.date.split('-');
-
-        const month = months[parseInt(split_date[1])];
-        const day = split_date[2];
+        const date = parseDate(this.props.data.date);
 
         let split_time = this.props.data.time.split(":");
         const hour = parseInt(split_time[0]);
@@ -30,7 +28,7 @@ export class Show extends React.Component{
                 <div className={"container"}>
                     <div className={'row mb-3'}>
                         <div className={"col"}>
-                            <h2>{month} {day} {hour}:{minute}PM</h2>
+                            <h2>{date} {hour}:{minute}PM</h2>
                         </div>
                     </div>
                     <div className={'row mb-5'}>
@@ -61,7 +59,7 @@ export class Show extends React.Component{
                 <div className={"container"}>
                     <div className={'row mb-3'}>
                         <div className={"col"}>
-                            <h2>{month} {day} {hour}:{minute}PM</h2>
+                            <h2>{date} {hour}:{minute}PM</h2>
                         </div>
                     </div>
                     <div className={'row mb-5'}>
@@ -86,10 +84,7 @@ export class Show extends React.Component{
 
 class HomePageShow extends React.Component{
     render() {
-        let split_date = this.props.data.date.split('-');
-
-        const month = months[parseInt(split_date[1])];
-        const day = split_date[2];
+        const date = parseDate(this.props.data.date);
         let artists = '';
         for(const key in this.props.data.artists){
             artists += this.props.data.artists[key].name +" / ";
@@ -118,7 +113,7 @@ class HomePageShow extends React.Component{
                 <h2>
                     <a href={'/shows/view_show/'+this.props.data.id}>
                         <div className={"col-md-12"}>
-                            {month} {day} : <small>{artists.substring(0, artists.length-3)}</small>
+                            {date} : <small>{artists.substring(0, artists.length-3)}</small>
                         </div>
                         {genreDiv}
                         <div className={"col-md-12"}>

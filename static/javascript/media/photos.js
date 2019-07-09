@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import $ from "jquery";
+import {parseDate} from "../util/date";
 
 $.get('/media/list_photos', function(data){
     ReactDOM.render(<PhotoList flierData={data}/>, document.getElementById('react_container'));
@@ -10,7 +11,8 @@ class Photo extends React.Component{
     render() {
         let dateDisplay;
         if(this.props.data.date){
-            dateDisplay = <div className={'col-xs-12 col-md-6'}><h2>Date: {this.props.data.date}</h2></div>;
+            const date = parseDate(this.props.data.date);
+            dateDisplay = <div className={'col-xs-12 col-md-6'}><h2>Date: {date}</h2></div>;
         }
         let artistDisplay;
         if(this.props.data.artist){
@@ -18,12 +20,15 @@ class Photo extends React.Component{
         }
         let showDisplay;
         if(this.props.data.show){
-            showDisplay = <div className={'col-xs-12 col-md-6'}>Show: {this.props.data.show}</div>;
+            showDisplay = <div className={'col-xs-12 col-md-6'}><h2>Show: {this.props.data.show}</h2></div>;
         }
         return (
             <div className="row">
                 <div className={'col-md-12'}>
                     <img src={this.props.data.image} alt={this.props.data.caption}/>
+                </div>
+                <div className={'col-md-12'}>
+                    {this.props.data.caption}
                 </div>
                 {dateDisplay}
                 {artistDisplay}
