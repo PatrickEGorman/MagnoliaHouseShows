@@ -75,7 +75,7 @@ export class FlierList extends React.Component{
         return(
             <div className='container'>
                 <div className={'row-md-12'}>
-                    <a className={'btn bg-dark text-light'} href="#" onclick="togglePastShows">{past_show_link}</a>
+                    <a className={'btn bg-dark text-light'} href="#" onClick={togglePastShows}>{past_show_link}</a>
                 </div>
                 {contents}
             </div>
