@@ -5,6 +5,6 @@ import $ from 'jquery'
 
 
 $.get('/shows/list_shows?past_shows=True', function(data){
-    ReactDOM.render(<ShowList showData={data} isHomePage={true}/>, document.getElementById('react_container'));
+    ReactDOM.render(<ShowList data={data} isHomePage={true}/>, document.getElementById('react_container'));
 });
 

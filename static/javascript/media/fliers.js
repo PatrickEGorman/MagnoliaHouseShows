@@ -2,10 +2,19 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import $ from "jquery";
 import {parseDate} from "../util/date";
+import {ViewMore} from "../util/view_support";
 
-$.get('/media/list_fliers', function(data){
-    ReactDOM.render(<FlierList flierData={data}/>, document.getElementById('react_container'));
-});
+
+let num_fliers = 6;
+
+
+function LoadFliers() {
+    $.get('/media/list_fliers?num_fliers='+num_fliers, function (data) {
+        ReactDOM.render(<FlierList flierData={data}/>, document.getElementById('react_container'));
+    });
+}
+
+$.ready(LoadFliers());
 
 class Flier extends React.Component{
     render() {
@@ -38,10 +47,17 @@ class Flier extends React.Component{
 export class FlierList extends React.Component{
     render(){
         let contents = [];
+        let view_more;
         for(const val in this.props.flierData){
-            contents.push(
-                <Flier data={this.props.flierData[val]} key={val}/>
-            );
+            if(parseInt(val) === num_fliers){
+                num_fliers += 5;
+                view_more = <ViewMore callback={LoadFliers}/>
+            }
+            else {
+                contents.push(
+                    <Flier data={this.props.flierData[val]} key={val}/>
+                );
+            }
         }
         return(
             <div className='container'>

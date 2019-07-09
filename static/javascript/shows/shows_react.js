@@ -133,11 +133,11 @@ class HomePageShow extends React.Component{
 export class ShowList extends React.Component{
     render(){
         let contents = [];
-        for(const val in this.props.showData){
+        for(const val in this.props.data){
             contents.push(
                 ((this.props.isHomePage)?
-                    <HomePageShow data={this.props.showData[val]} key={val}/>:
-                    <Show data={this.props.showData[val]}  key={val}/>
+                    <HomePageShow data={this.props.data[val]} key={val}/>:
+                    <Show data={this.props.data[val]}  key={val}/>
                 )
             );
         }
