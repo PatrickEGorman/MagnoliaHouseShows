@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom'
 export class ViewMore extends  React.Component{
     constructor(props){
         super(props);
-        this.onClickCallback = props.callback();
+        this.onClickCallback = props.callback;
     }
     render(){
         return(
