@@ -78,6 +78,7 @@ export class FlierList extends React.Component{
                     <a className={'btn bg-dark text-light'} href="#" onClick={togglePastShows}>{past_show_link}</a>
                 </div>
                 {contents}
+                {view_more}
             </div>
         )
     }
