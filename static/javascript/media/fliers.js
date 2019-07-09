@@ -5,11 +5,12 @@ import {parseDate} from "../util/date";
 import {ViewMore} from "../util/view_support";
 
 
-let num_fliers = 6;
+let num_fliers = 1;
 let past_shows = false;
 
 
 function LoadFliers() {
+    num_fliers += 10;
     $.get('/media/list_fliers?num_fliers='+num_fliers+"&past_shows="+past_shows, function (data) {
         ReactDOM.render(<FlierList flierData={data}/>, document.getElementById('react_container'));
     });
@@ -17,6 +18,7 @@ function LoadFliers() {
 
 function togglePastShows(){
     past_shows = !past_shows;
+    num_fliers = 1;
     LoadFliers();
 }
 
@@ -63,7 +65,6 @@ export class FlierList extends React.Component{
         }
         for(const val in this.props.flierData){
             if(parseInt(val) === num_fliers-1){
-                num_fliers += 5;
                 view_more = <ViewMore callback={LoadFliers}/>
             }
             else {

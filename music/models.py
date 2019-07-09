@@ -2,7 +2,10 @@ from django.db import models
 
 
 class Genre(models.Model):
-    name = models.TextField(unique=True)
+    name = models.TextField(unique=True, max_length=20)
+
+    class Meta:
+        ordering = ["name"]
 
     def __str__(self):
         return self.name
@@ -18,6 +21,14 @@ class Artist(models.Model):
     soundcloud = models.URLField(default='', blank=True)
     description = models.TextField(default='', blank=True)
 
+    class Meta:
+        ordering = ["name"]
+
+    def display_genre(self):
+        return ', '.join(genre.name for genre in self.genres.all()[:5])
+
+    display_genre.short_description = 'Genre'
+
     def __str__(self):
         return self.name
 
@@ -31,6 +42,14 @@ class Album(models.Model):
     genres = models.ManyToManyField(Genre, blank=True)
     release_date = models.DateField(blank=True, null=True, default=None)
     description = models.TextField(default='', blank=True)
+
+    class Meta:
+        ordering = ["artist", "name"]
+
+    def display_genre(self):
+        return ', '.join(genre.name for genre in self.genres.all()[:5])
+
+    display_genre.short_description = 'Genre'
 
     def __str__(self):
         return self.name

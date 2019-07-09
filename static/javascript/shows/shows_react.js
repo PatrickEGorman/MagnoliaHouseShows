@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import {ArtistList} from '../music/artists_react'
 import {parseDate} from "../util/date";
+import {ViewMore} from "../util/view_support";
 
 
 const months = {1:"January", 2: "February", 3:"March", 4: "April", 5:"May", 6: "June", 7:"July", 8: "August",
@@ -23,6 +24,12 @@ export class Show extends React.Component{
         if(this.props.data.instagram){
             links.push(<a href={this.props.data.instagram} className={'btn bg-dark text-light'} key={2}>Instagram Event</a>);
         }
+
+        let donationMax;
+        if(this.props.data.suggested_donation_max > this.props.data.suggested_donation){
+            donationMax = "-"+this.props.data.suggested_donation_max;
+        }
+
         if(this.props.data.fliers[0]){
             return(
                 <div className={"container"}>
@@ -37,7 +44,7 @@ export class Show extends React.Component{
 
                             <ArtistList artistData={this.props.data.artists}/>
                             <br/>
-                            <h3>${this.props.data.suggested_donation} Suggested Donation</h3>
+                            <h3>${this.props.data.suggested_donation}{donationMax} Suggested Donation</h3>
                             {links}
                             <hr/>
                             <br/>
@@ -67,7 +74,7 @@ export class Show extends React.Component{
                             <ArtistList artistData={this.props.data.artists}/>
                         </div>
                         <div className={'col-xs-12 col-sm-4'}>
-                            <h3>${this.props.data.suggested_donation} Suggested Donation</h3>
+                            <h3>${this.props.data.suggested_donation}{donationMax} Suggested Donation</h3>
                             {links}
                             <hr/>
                             <br/>
@@ -82,7 +89,7 @@ export class Show extends React.Component{
 }
 
 
-class HomePageShow extends React.Component{
+class ListShow extends React.Component{
     render() {
         const date = parseDate(this.props.data.date);
         let artists = '';
@@ -95,7 +102,15 @@ class HomePageShow extends React.Component{
         let genres = "";
         let genreDiv = "";
         for(const genreKey in this.props.data.genres){
-            if(genres.length>=1){
+            if(genreKey > 5){
+                console.log("Show on "+date+"has more than 5 genres.  Terminating display")
+                break;
+            }
+            else if(genres.length > 50){
+                console.log("Show on "+date+"has genre string of more than 50 letters.  Terminating display")
+                break;
+            }
+            else if(genres.length>=1){
                 genres+=", ";
             }
             genres += this.props.data.genres[genreKey].name;
@@ -108,6 +123,12 @@ class HomePageShow extends React.Component{
                     </div>
                 </div>
         }
+
+        let donationMax;
+        if(this.props.data.suggested_donation_max > this.props.data.suggested_donation){
+            donationMax = "-"+this.props.data.suggested_donation_max;
+        }
+
         return(
             <div className={'row mt-3'}>
                 <h2>
@@ -119,7 +140,7 @@ class HomePageShow extends React.Component{
                         <div className={"col-md-12"}>
                             <div className={ ' ml-4'}>
                                 {hour}:{minute}<small> PM </small>
-                                ${this.props.data.suggested_donation} <small>suggested donation  </small>
+                                ${this.props.data.suggested_donation}{donationMax} <small>suggested donation  </small>
                             </div>
                         </div>
                     </a>
@@ -133,17 +154,22 @@ class HomePageShow extends React.Component{
 export class ShowList extends React.Component{
     render(){
         let contents = [];
+        let view_more;
+        console.log(this.props.data);
         for(const val in this.props.data){
-            contents.push(
-                ((this.props.isHomePage)?
-                    <HomePageShow data={this.props.data[val]} key={val}/>:
-                    <Show data={this.props.data[val]}  key={val}/>
-                )
-            );
-        }
+             if(parseInt(val) === this.props.data.num_shows-1){
+                    view_more = <ViewMore callback={this.props.callback}/>
+                }
+                else {
+                    contents.push(
+                        <ListShow data={this.props.data[val]} key={val}/>
+                    );
+                }
+            }
         return(
             <div>
                 {contents}
+                {view_more}
             </div>
         )
     }

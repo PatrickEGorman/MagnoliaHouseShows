@@ -2,10 +2,20 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import $ from "jquery";
 import {parseDate} from "../util/date";
+import {ViewMore} from "../util/view_support";
 
-$.get('/media/list_photos', function(data){
-    ReactDOM.render(<PhotoList photoData={data}/>, document.getElementById('react_container'));
-});
+
+let num_photos = 1;
+
+function loadPhotos(){
+    num_photos += 10;
+    $.get('/media/list_photos?num_photos='+num_photos, function(data){
+        ReactDOM.render(<PhotoList photoData={data}/>, document.getElementById('react_container'));
+    });
+}
+
+$.ready(loadPhotos());
+
 
 class Photo extends React.Component{
     render() {
@@ -45,14 +55,21 @@ class Photo extends React.Component{
 export class PhotoList extends React.Component{
     render(){
         let contents = [];
+        let view_more;
         for(const val in this.props.photoData){
-            contents.push(
-                <Photo data={this.props.photoData[val]} key={val}/>
-            );
+            if(parseInt(val) === num_photos-1){
+                view_more = <ViewMore callback={LoadPhotos}/>
+            }
+            else {
+                contents.push(
+                    <Photo data={this.props.photoData[val]} key={val}/>
+                );
+            }
         }
         return(
             <div className='container'>
                 {contents}
+                {view_more}
             </div>
         )
     }

@@ -2,10 +2,19 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import $ from "jquery";
 import {parseDate} from "../util/date";
+import {ViewMore} from "../util/view_support";
 
-$.get('/media/list_videos', function(data){
-    ReactDOM.render(<VideoList videoData={data}/>, document.getElementById('react_container'));
-});
+
+let num_videos = 1;
+
+function loadVideos(){
+    num_videos += 10;
+    $.get('/media/list_photos?num_videos='+num_videos, function(data){
+        ReactDOM.render(<VideoList videoData={data}/>, document.getElementById('react_container'));
+    });
+}
+
+$.ready(loadVideos());
 
 class Video extends React.Component{
     render() {
@@ -50,14 +59,21 @@ class Video extends React.Component{
 export class VideoList extends React.Component{
     render(){
         let contents = [];
+        let view_more;
         for(const val in this.props.videoData){
-            contents.push(
-                <Video data={this.props.videoData[val]} key={val}/>
-            );
+            if(parseInt(val) === num_photos-1){
+                view_more = <ViewMore callback={LoadVideos}/>
+            }
+            else {
+                contents.push(
+                    <Video data={this.props.videoData[val]} key={val}/>
+                );
+            }
         }
         return(
             <div className='container'>
                 {contents}
+                {view_more}
             </div>
         )
     }

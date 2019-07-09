@@ -20,7 +20,7 @@ def videos(request):
 
 
 def get_fliers_list(request):
-    num_fliers = 6
+    num_fliers = 11
     if request.GET.get('num_fliers'):
         num_fliers = int(request.GET.get('num_fliers'))
     past_shows = False
@@ -37,7 +37,7 @@ def get_fliers_list(request):
 
 
 def get_photos_list(request):
-    num_photos = 10
+    num_photos = 11
     if request.GET.get('num_photos'):
         num_photos = request.GET.get('num_photos')
     photo_list = Photo.objects.all()
@@ -47,7 +47,7 @@ def get_photos_list(request):
 
 
 def get_videos_list(request):
-    num_videos = 10
+    num_videos = 11
     if request.GET.get('num_videos'):
         num_videos = request.GET.get('num_videos')
     video_list = YoutubeVideo.objects.all()

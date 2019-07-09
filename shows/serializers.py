@@ -10,6 +10,7 @@ class ShowSerializer(serializers.ModelSerializer):
     date = serializers.DateField()
     time = serializers.TimeField()
     suggested_donation = serializers.IntegerField()
+    suggested_donation_max = serializers.IntegerField()
     facebook = serializers.URLField()
     instagram = serializers.URLField()
     description = serializers.CharField()
@@ -23,6 +24,7 @@ class ShowSerializer(serializers.ModelSerializer):
                   'date',
                   'time',
                   'suggested_donation',
+                  'suggested_donation_max',
                   'description',
                   'facebook',
                   'instagram',
