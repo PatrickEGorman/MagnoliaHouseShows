@@ -8,11 +8,16 @@ $.get('/media/list_fliers', function(data){
 
 class Flier extends React.Component{
     render() {
+        let dateDisplay;
+        if(this.props.data.date){
+            dateDisplay = <div className={'col-xs-12 col-md-6'}><h2>Date: {this.props.data.date}</h2></div>;
+        }
         return (
             <div className="row">
                 <div className={'col-md-12'}>
                     <img src={this.props.data.image} alt={this.props.data.caption}/>
                 </div>
+                {dateDisplay}
                 <div className={'col-md-12'}>
                     {this.props.data.caption}
                 </div>

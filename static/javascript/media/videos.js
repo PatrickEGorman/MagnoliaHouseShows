@@ -8,19 +8,34 @@ $.get('/media/list_videos', function(data){
 
 class Video extends React.Component{
     render() {
+        let dateDisplay;
+        if(this.props.data.date){
+            dateDisplay = <div className={'col-xs-12 col-md-6'}><h2>Date: {this.props.data.date}</h2></div>
+        }
         let artistDisplay;
         if(this.props.data.artist){
-            artistDisplay = <div className={'col-xs-12 col-md-6'}>Artist: this.props.data.artist</div>
+            artistDisplay = <div className={'col-xs-12 col-md-6'}><h2>Artist: {this.props.data.artist}</h2></div>
         }
         let showDisplay;
         if(this.props.data.show){
-            showDisplay = <div className={'col-xs-12 col-md-6'}>Show: this.props.data.show</div>
+            showDisplay = <div className={'col-xs-12 col-md-6'}>Show: {this.props.data.show}</div>
         }
+        let youtubeUrl = "https://www.youtube.com/embed/";
+        let youtube_ender = this.props.data.youtube_url.split('/')[this.props.data.youtube_url.split('/').length-1];
+        if('=' in youtube_ender){
+            youtube_ender = youtube_ender.split('=')[youtube_ender.split('=')-1]
+        }
+        youtubeUrl = youtubeUrl + youtube_ender;
         return (
             <div className="row">
                 <div className={'col-md-12'}>
-                    <img src={this.props.data.image} alt={this.props.data.caption}/>
+                    <iframe width="560" height="315" src={youtubeUrl} frameBorder="0"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen>
+
+                    </iframe>
                 </div>
+                {dateDisplay}
                 {artistDisplay}
                 {showDisplay}
                 <div className={'col-md-12'}>
