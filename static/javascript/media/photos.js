@@ -4,7 +4,7 @@ import $ from "jquery";
 import {parseDate} from "../util/date";
 
 $.get('/media/list_photos', function(data){
-    ReactDOM.render(<PhotoList flierData={data}/>, document.getElementById('react_container'));
+    ReactDOM.render(<PhotoList photoData={data}/>, document.getElementById('react_container'));
 });
 
 class Photo extends React.Component{
@@ -45,9 +45,9 @@ class Photo extends React.Component{
 export class PhotoList extends React.Component{
     render(){
         let contents = [];
-        for(const val in this.props.flierData){
+        for(const val in this.props.photoData){
             contents.push(
-                <Photo data={this.props.flierData[val]} key={val}/>
+                <Photo data={this.props.photoData[val]} key={val}/>
             );
         }
         return(

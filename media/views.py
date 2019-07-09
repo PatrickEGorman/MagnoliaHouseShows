@@ -42,7 +42,7 @@ def get_photos_list(request):
         num_photos = request.GET.get('num_photos')
     photo_list = Flier.objects.all()
     date = datetime.datetime.now().date()
-    photo_list = photo_list.filter(date__lte=date)[:num_photos]
+    photo_list = photo_list.filter()[:num_photos]
     serializer = PhotoSerializer(photo_list, many=True)
     return JsonResponse(serializer.data, safe=False)
 
@@ -53,6 +53,6 @@ def get_videos_list(request):
         num_videos = request.GET.get('num_videos')
     video_list = Flier.objects.all()
     date = datetime.datetime.now().date()
-    video_list = video_list.filter(date__lte=date)[:num_videos]
+    video_list = video_list.filter()[:num_videos]
     serializer = YoutubeSerializer(video_list, many=True)
     return JsonResponse(serializer.data, safe=False)
