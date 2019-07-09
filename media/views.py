@@ -22,7 +22,7 @@ def videos(request):
 def get_fliers_list(request):
     num_fliers = 6
     if request.GET.get('num_fliers'):
-        num_fliers = request.GET.get('num_fliers')
+        num_fliers = int(request.GET.get('num_fliers'))
     past_shows = False
     if request.GET.get('past_shows'):
         past_shows = request.GET.get('past_shows')

@@ -6,12 +6,18 @@ import {ViewMore} from "../util/view_support";
 
 
 let num_fliers = 6;
+let past_shows = false;
 
 
 function LoadFliers() {
-    $.get('/media/list_fliers?num_fliers='+num_fliers, function (data) {
+    $.get('/media/list_fliers?num_fliers='+num_fliers+"&past_shows="+past_shows, function (data) {
         ReactDOM.render(<FlierList flierData={data}/>, document.getElementById('react_container'));
     });
+}
+
+function togglePastShows(){
+    past_shows = !past_shows;
+    LoadFliers();
 }
 
 $.ready(LoadFliers());
@@ -48,6 +54,13 @@ export class FlierList extends React.Component{
     render(){
         let contents = [];
         let view_more;
+        let past_show_link;
+        if(past_shows){
+            past_show_link = "Show Future Shows Fliers";
+        }
+        else{
+            past_show_link = "Show Past Shows Fliers";
+        }
         for(const val in this.props.flierData){
             if(parseInt(val) === num_fliers){
                 num_fliers += 5;
@@ -61,6 +74,9 @@ export class FlierList extends React.Component{
         }
         return(
             <div className='container'>
+                <div className={'row-md-12'}>
+                    <a className={'btn bg-dark text-light'} href="#" onclick="togglePastShows">{past_show_link}</a>
+                </div>
                 {contents}
             </div>
         )

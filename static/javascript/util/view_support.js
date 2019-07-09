@@ -2,10 +2,10 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 
-export class ViewMore extends React.Component(){
-    constructor(){
-        super();
-        this.onClickCallback = this.props.callback;
+export class ViewMore extends  React.Component{
+    constructor(props){
+        super(props);
+        this.onClickCallback = props.callback();
     }
     render(){
         return(

@@ -5,7 +5,7 @@ from shows.models import Show
 
 class Flier(models.Model):
     image = models.ImageField()
-    date = models.DateField(blank=True, null=True, default=None)
+    date = models.DateField(default=None)
     caption = models.TextField(default='', blank=True)
     show = models.ForeignKey(Show, null=True, blank=True, related_name="fliers", on_delete=models.SET_NULL)
 
