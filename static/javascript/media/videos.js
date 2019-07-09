@@ -20,12 +20,12 @@ class Video extends React.Component{
         }
         let showDisplay;
         if(this.props.data.show){
-            showDisplay = <div className={'col-xs-12 col-md-6'}>Show: {this.props.data.show}</div>
+            showDisplay = <div className={'col-xs-12 col-md-6'}><h2>Show: {this.props.data.show}</h2></div>
         }
         let youtubeUrl = "https://www.youtube.com/embed/";
         let youtube_ender = this.props.data.youtube_url.split('/')[this.props.data.youtube_url.split('/').length-1];
         if('=' in youtube_ender){
-            youtube_ender = youtube_ender.split('=')[youtube_ender.split('=')-1]
+            youtube_ender = youtube_ender.split('=')[youtube_ender.split('=').length-1]
         }
         youtubeUrl = youtubeUrl + youtube_ender;
         return (
