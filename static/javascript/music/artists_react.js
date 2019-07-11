@@ -28,7 +28,12 @@ class Artist extends React.Component{
                                   dangerouslySetInnerHTML={htmlCode}/>
         }
         else if(this.props.data.soundcloud_embed_code){
-             const htmlCode = {__html: this.props.data.soundcloud_embed_code };
+            const htmlCode = {__html: this.props.data.soundcloud_embed_code };
+            embed = <div className="col-md-12"
+                                  dangerouslySetInnerHTML={htmlCode}/>
+        }
+        else if(this.props.data.youtube_embed_code){
+            const htmlCode = {__html: this.props.data.youtube_embed_code };
             embed = <div className="col-md-12"
                                   dangerouslySetInnerHTML={htmlCode}/>
         }
