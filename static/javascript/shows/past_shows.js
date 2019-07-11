@@ -4,7 +4,14 @@ import ReactDOM from 'react-dom'
 import $ from 'jquery'
 
 
-$.get('/shows/list_shows?past_shows=True', function(data){
-    ReactDOM.render(<ShowList data={data} isHomePage={true}/>, document.getElementById('react_container'));
-});
+let num_shows = 1;
 
+
+function get_past_show_list() {
+    num_shows += 10;
+    $.get('/shows/list_shows?num_shows='+num_shows+"&past_shows=True", function (data) {
+        ReactDOM.render(<ShowList data={data} callback={get_past_show_list} num_shows={num_shows}/>, document.getElementById('react_container'));
+    });
+}
+
+$.ready(get_past_show_list());

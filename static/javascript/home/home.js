@@ -8,8 +8,8 @@ let num_shows = 1;
 
 
 function get_show_list() {
-    num_shows += 2;
-    $.get('/shows/list_shows', function (data) {
+    num_shows += 10;
+    $.get('/shows/list_shows?num_shows='+num_shows, function (data) {
         ReactDOM.render(<ShowList data={data} callback={get_show_list} num_shows={num_shows}/>, document.getElementById('react_container'));
     });
 }

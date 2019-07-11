@@ -23,7 +23,7 @@ def get_show(request, show_id):
 def get_shows_list(request):
     num_shows = 11
     if request.GET.get('num_shows'):
-        num_shows = request.GET.get('num_shows')
+        num_shows = int(request.GET.get('num_shows'))
     past_shows = False
     if request.GET.get('past_shows'):
         past_shows = request.GET.get('past_shows')

@@ -157,8 +157,9 @@ export class ShowList extends React.Component{
         let view_more;
         console.log(this.props.data);
         for(const val in this.props.data){
-             if(parseInt(val) === this.props.data.num_shows-1){
+             if(parseInt(val) >= this.props.num_shows){
                     view_more = <ViewMore callback={this.props.callback}/>
+                    break;
                 }
                 else {
                     contents.push(

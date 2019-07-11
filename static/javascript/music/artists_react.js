@@ -4,16 +4,6 @@ import ReactDOM from 'react-dom'
 
 class Artist extends React.Component{
     render() {
-        let link;
-        if(this.props.data.bandcamp){
-            link=<a href={this.props.data.bandcamp} className={'btn bg-dark text-light'}>Bandcamp</a>;
-        }
-        else if(this.props.data.soundcloud){
-            link=<a href={this.props.data.soundcloud} className={'btn bg-dark text-light'}>Soundcloud</a>;
-        }
-        else if(this.props.data.youtube){
-            link=<a href={this.props.data.youtube} className={'btn bg-dark text-light'}>Youtube</a>;
-        }
         let genres = "";
         let genreDiv = "";
         for(const genreKey in this.props.data.genres){
@@ -27,6 +17,29 @@ class Artist extends React.Component{
                 <div className="col-md-12">
                     <h4>Genres: <small>{genres}</small> </h4>
                 </div>
+        }
+
+        let embed;
+        let link;
+        if(this.props.data.bandcamp_embed_code)
+        {
+            const htmlCode = {__html: this.props.data.bandcamp_embed_code};
+            embed = <div className="col-md-12"
+                                  dangerouslySetInnerHTML={htmlCode}/>
+        }
+        else if(this.props.data.soundcloud_embed_code){
+             const htmlCode = {__html: this.props.data.soundcloud_embed_code };
+            embed = <div className="col-md-12"
+                                  dangerouslySetInnerHTML={htmlCode}/>
+        }
+        else if(this.props.data.bandcamp){
+            link=<a href={this.props.data.bandcamp} className={'btn bg-dark text-light'}>Bandcamp</a>;
+        }
+        else if(this.props.data.soundcloud){
+            link=<a href={this.props.data.soundcloud} className={'btn bg-dark text-light'}>Soundcloud</a>;
+        }
+        else if(this.props.data.youtube){
+            link=<a href={this.props.data.youtube} className={'btn bg-dark text-light'}>Youtube</a>;
         }
         return (
             <div className="row">
@@ -46,6 +59,7 @@ class Artist extends React.Component{
                 <div className={'col-md-12'}>
                     {this.props.data.description}
                 </div>
+                {embed}
                 {genreDiv}
                 <div className={'col-md-12'}>
                     <hr/>

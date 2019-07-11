@@ -18,6 +18,8 @@ class ArtistSerializer(serializers.ModelSerializer):
     name = serializers.CharField()
     hometown = serializers.CharField()
     genres = GenreSerializer(many=True)
+    bandcamp_embed_code = serializers.CharField()
+    soundcloud_embed_code = serializers.CharField()
     bandcamp = serializers.URLField()
     facebook = serializers.URLField()
     soundcloud = serializers.URLField()
@@ -34,7 +36,9 @@ class ArtistSerializer(serializers.ModelSerializer):
                   'facebook',
                   'soundcloud',
                   'youtube',
-                  'description')
+                  'description',
+                  'soundcloud_embed_code',
+                  'bandcamp_embed_code')
 
 
 class AlbumSerializer(serializers.ModelSerializer):
@@ -47,6 +51,7 @@ class AlbumSerializer(serializers.ModelSerializer):
     artist = ArtistSerializer()
     cover_image = serializers.ImageField()
     description = serializers.CharField()
+    bandcamp_embed_code = serializers.CharField()
 
     class Meta:
         model = Album
@@ -58,4 +63,5 @@ class AlbumSerializer(serializers.ModelSerializer):
                   'youtube',
                   'artist',
                   'cover_image',
-                  'description')
+                  'description',
+                  'bandcamp_embed_code')
