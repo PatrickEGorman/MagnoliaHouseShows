@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import {ViewMore} from "../util/view_support";
 
 
 class Artist extends React.Component{
@@ -78,14 +79,22 @@ class Artist extends React.Component{
 export class ArtistList extends React.Component{
     render(){
         let contents = [];
+        let view_more;
         for(const val in this.props.artistData){
-            contents.push(
-                <Artist data={this.props.artistData[val]} key={val}/>
-            );
+            if(parseInt(val) >= this.props.num_artists - 1){
+                view_more = <ViewMore callback={this.props.callback}/>;
+                break;
+            }
+            else {
+                contents.push(
+                    <Artist data={this.props.artistData[val]} key={val}/>
+                );
+            }
         }
         return(
             <div className='container'>
                 {contents}
+                {view_more}
             </div>
         )
     }

@@ -155,16 +155,15 @@ export class ShowList extends React.Component{
     render(){
         let contents = [];
         let view_more;
-        console.log(this.props.data);
         for(const val in this.props.data){
-             if(parseInt(val) >= this.props.num_shows - 1){
-                    view_more = <ViewMore callback={this.props.callback}/>
-                    break;
-                }
-                else {
-                    contents.push(
-                        <ListShow data={this.props.data[val]} key={val}/>
-                    );
+            if(parseInt(val) >= this.props.num_shows - 1){
+                view_more = <ViewMore callback={this.props.callback}/>;
+                break;
+            }
+            else {
+                contents.push(
+                    <ListShow data={this.props.data[val]} key={val}/>
+                );
                 }
             }
         return(
