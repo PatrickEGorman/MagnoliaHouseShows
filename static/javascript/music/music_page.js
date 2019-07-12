@@ -9,7 +9,7 @@ let num_artists = 1;
 
 function loadArtists(){
     num_artists += 10;
-    $.get('/media/list_photos?num_artists='+num_artists, function(data){
+    $.get('/music/list_artists?num_artists='+num_artists, function(data){
         ReactDOM.render(<ArtistList artistData={data} num_artists={num_artists} callback={loadArtists}/>,
             document.getElementById('react_container'));
     });

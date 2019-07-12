@@ -65,8 +65,8 @@ class Artist extends React.Component{
                 <div className={'col-md-12'}>
                     {this.props.data.description}
                 </div>
-                {embed}
                 {genreDiv}
+                {embed}
                 <div className={'col-md-12'}>
                     <hr/>
                 </div>
