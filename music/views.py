@@ -19,7 +19,7 @@ def view_band(request):
 def get_artist_list(request):
     num_artists = 10
     if request.GET.get('num_artists'):
-        num_artists = request.GET.get('num_artists')
+        num_artists = int(request.GET.get('num_artists'))
     artist_list = Artist.objects.all()[:num_artists]
     serializer = ArtistSerializer(artist_list, many=True)
     return JsonResponse(serializer.data, safe=False)

@@ -39,7 +39,7 @@ def get_fliers_list(request):
 def get_photos_list(request):
     num_photos = 11
     if request.GET.get('num_photos'):
-        num_photos = request.GET.get('num_photos')
+        num_photos = int(request.GET.get('num_photos'))
     photo_list = Photo.objects.all()
     photo_list = photo_list[:num_photos]
     serializer = PhotoSerializer(photo_list, many=True)
@@ -49,7 +49,7 @@ def get_photos_list(request):
 def get_videos_list(request):
     num_videos = 11
     if request.GET.get('num_videos'):
-        num_videos = request.GET.get('num_videos')
+        num_videos = int(request.GET.get('num_videos'))
     video_list = YoutubeVideo.objects.all()
     video_list = video_list[:num_videos]
     serializer = YoutubeSerializer(video_list, many=True)
