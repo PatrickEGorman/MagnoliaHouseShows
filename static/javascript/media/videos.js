@@ -61,7 +61,7 @@ export class VideoList extends React.Component{
         let contents = [];
         let view_more;
         for(const val in this.props.videoData){
-            if(parseInt(val) === num_photos-1){
+            if(parseInt(val) === num_videos-1){
                 view_more = <ViewMore callback={LoadVideos}/>
             }
             else {
