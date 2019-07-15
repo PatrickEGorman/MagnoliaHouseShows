@@ -35,8 +35,8 @@ class Artist extends React.Component{
         }
         else if(this.props.data.youtube_embed_code){
             const htmlCode = {__html: this.props.data.youtube_embed_code };
-            embed = <div className="col-md-12 video-responsive"
-                                  dangerouslySetInnerHTML={htmlCode}/>
+            embed = <div className="col-md-6"><div className="video-responsive"
+                                                   dangerouslySetInnerHTML={htmlCode}/></div>
         }
         else if(this.props.data.bandcamp){
             link=<a href={this.props.data.bandcamp} className={'btn bg-dark text-light'}>Bandcamp</a>;
