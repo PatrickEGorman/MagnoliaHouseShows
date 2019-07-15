@@ -38,11 +38,12 @@ class Video extends React.Component{
         return (
             <div className="row">
                 <div className={'col-md-12'}>
-                    <iframe width="560" height="315" src={youtubeUrl} frameBorder="0"
-                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen>
-
-                    </iframe>
+                    <div className="video-responsive">
+                        <iframe width="560" height="315" src={youtubeUrl} frameBorder="0"
+                                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullScreen>
+                        </iframe>
+                    </div>
                 </div>
                 {dateDisplay}
                 {artistDisplay}
