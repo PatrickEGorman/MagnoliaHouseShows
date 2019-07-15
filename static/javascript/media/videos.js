@@ -9,7 +9,7 @@ let num_videos = 1;
 
 function loadVideos(){
     num_videos += 10;
-    $.get('/media/list_photos?num_videos='+num_videos, function(data){
+    $.get('/media/list_videos?num_videos='+num_videos, function(data){
         ReactDOM.render(<VideoList videoData={data}/>, document.getElementById('react_container'));
     });
 }
