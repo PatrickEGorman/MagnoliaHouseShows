@@ -17,10 +17,13 @@ class Genre(models.Model):
 
     metaData = models.OneToOneField(MetaData, on_delete=models.SET_NULL, null=True)
 
-    def save(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
+        super(Genre, self).__init__(*args, **kwargs)
         if not self.metaData:
             meta = MetaData()
             self.metaData = meta
+
+    def save(self, *args, **kwargs):
         self.metaData.set_name(name="Genre %s" % self.name)
         self.metaData.save()
         self.metaData = MetaData.objects.get(pk=self.metaData.pk)
@@ -55,10 +58,13 @@ class Artist(models.Model):
 
     metaData = models.OneToOneField(MetaData, on_delete=models.SET_NULL, null=True)
 
-    def save(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
+        super(Artist, self).__init__(*args, **kwargs)
         if not self.metaData:
             meta = MetaData()
             self.metaData = meta
+
+    def save(self, *args, **kwargs):
         self.metaData.set_name(name="Artist %s" % self.name)
         self.metaData.save()
         self.metaData = MetaData.objects.get(pk=self.metaData.pk)
@@ -96,11 +102,14 @@ class Album(models.Model):
 
     metaData = models.OneToOneField(MetaData, on_delete=models.SET_NULL, null=True)
 
-    def save(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
+        super(Album, self).__init__(*args, **kwargs)
         if not self.metaData:
             meta = MetaData()
             self.metaData = meta
-        self.metaData.set_name(name="Album %s" % (self.name))
+
+    def save(self, *args, **kwargs):
+        self.metaData.set_name(name="Genre %s" % self.name)
         self.metaData.save()
         self.metaData = MetaData.objects.get(pk=self.metaData.pk)
         super(Album, self).save(*args, **kwargs)

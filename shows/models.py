@@ -48,17 +48,14 @@ class Show(models.Model):
 
     metaData = models.OneToOneField(MetaData, on_delete=models.SET_NULL, null=True)
 
-    def save(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
+        super(Show, self).__init__(*args, **kwargs)
         if not self.metaData:
             meta = MetaData()
             self.metaData = meta
-        self.metaData.set_name(name="Show for %s" % (self.__str__()))
+
+    def save(self, *args, **kwargs):
+        self.metaData.set_name(name="Show %s" % self.__str__())
         self.metaData.save()
         self.metaData = MetaData.objects.get(pk=self.metaData.pk)
-        super(Show, self).save(*args, **kwargs)
-
-        for artist in Artist.objects.filter(show__id=self.id):
-            for genre in artist.genres.all():
-                self.genres.add(genre)
-
         super(Show, self).save(*args, **kwargs)

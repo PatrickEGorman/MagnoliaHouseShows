@@ -4,6 +4,7 @@ import datetime
 
 from main.models import MetaData
 from main.util import priority_choices, parse_date_string
+from media.models import Flier, Photo, YoutubeVideo
 from music.models import Artist
 from shows.models import Show
 
@@ -25,19 +26,26 @@ class InfoPage(models.Model):
 
     metaData = models.OneToOneField(MetaData, on_delete=models.SET_NULL, null=True)
 
-    def save(self, *args, **kwargs):
-        if self.metaData:
-            self.metaData.save()
-        else:
-            meta = MetaData(name="Info from %s page titled %s"%(self.page_name, self.title))
+    def __init__(self, *args, **kwargs):
+        super(InfoPage, self).__init__(*args, **kwargs)
+        if not self.metaData:
+            meta = MetaData()
             self.metaData = meta
+
+    def save(self, *args, **kwargs):
+        self.metaData.set_name(name="Info page category %s title %s" % (self.page_name, self.title))
+        self.metaData.save()
+        self.metaData = MetaData.objects.get(pk=self.metaData.pk)
         super(InfoPage, self).save(*args, **kwargs)
 
 
 class History(InfoPage):
     artists = models.ManyToManyField(Artist, blank=True)
     shows = models.ManyToManyField(Show, blank=True)
-    start_or_primary_date = models.DateField(blank=True, null=True)
+    flier = models.ForeignKey(Flier, blank=True, null=True, on_delete=models.SET_NULL)
+    photo = models.ForeignKey(Photo, blank=True, null=True, on_delete=models.SET_NULL)
+    youtube_video = models.ForeignKey(YoutubeVideo, blank=True, null=True, on_delete=models.SET_NULL)
+    start_or_primary_date = models.DateField()
     end_date = models.DateField(blank=True, null=True)
     approximate_date = models.BooleanField()
 
