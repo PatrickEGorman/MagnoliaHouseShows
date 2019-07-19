@@ -1,5 +1,8 @@
 from django.db import models
+
+from main.models import MetaData
 from music.models import Artist, Genre
+from main.util import priority_choices, parse_date_string
 
 
 class Show(models.Model):
@@ -16,8 +19,18 @@ class Show(models.Model):
 
     description = models.TextField(default='', blank=True)
 
+    priority = models.IntegerField(choices=priority_choices, default=3)
+
+    @property
+    def year_month(self):
+        return parse_date_string(self.date, year_month=True)
+
+    @property
+    def date_string(self):
+        return parse_date_string(self.date)
+
     class Meta:
-        ordering = ["-date"]
+        ordering = ["priority", "-date"]
 
     def display_artists(self):
         return '/ '.join(artist.name for artist in self.artists.all()[:5])
@@ -27,6 +40,14 @@ class Show(models.Model):
         return ', '.join(genre.name for genre in self.genres.all()[:5])
     display_genre.short_description = 'Genre'
 
+    def __str__(self):
+        display = self.date.__str__() + ":"
+        for artist in self.artists.all():
+            display += artist.__str__() + "/"
+        return display[:-1]
+
+    metaData = models.OneToOneField(MetaData, on_delete=models.SET_NULL, null=True)
+
     def save(self, *args, **kwargs):
         super(Show, self).save(*args, **kwargs)
         for artist in self.artists.all():
@@ -34,8 +55,9 @@ class Show(models.Model):
                 self.genres.add(genre)
         super(Show, self).save(*args, **kwargs)
 
-    def __str__(self):
-        display = self.date.__str__() + ":"
-        for artist in self.artists.all():
-            display += artist.__str__() + "/"
-        return display[:-1]
+        if self.metaData:
+            self.metaData.save()
+        else:
+            meta = MetaData(name="Show for %s %s" % (self.date.__str__(), self.display_artists))
+            self.metaData = meta
+        super(Show, self).save(*args, **kwargs)

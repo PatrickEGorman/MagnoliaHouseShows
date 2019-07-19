@@ -1,4 +1,6 @@
 from rest_framework import serializers
+
+from main.serializers import MetaDataSerializer
 from media.serializers import FlierSerializer
 
 from .models import Show
@@ -17,6 +19,7 @@ class ShowSerializer(serializers.ModelSerializer):
     fliers = FlierSerializer(many=True)
     artists = ArtistSerializer(many=True)
     genres = GenreSerializer(many=True)
+    metaData = MetaDataSerializer()
 
     class Meta:
         model = Show
@@ -30,6 +33,7 @@ class ShowSerializer(serializers.ModelSerializer):
                   'instagram',
                   'artists',
                   'genres',
-                  'fliers')
+                  'fliers',
+                  'metaData')
 
 

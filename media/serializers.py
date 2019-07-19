@@ -1,5 +1,6 @@
 from rest_framework import serializers
 
+from main.serializers import MetaDataSerializer
 from music.serializers import ArtistSerializer
 from .models import Flier, Photo, YoutubeVideo
 
@@ -10,6 +11,7 @@ class FlierSerializer(serializers.ModelSerializer):
     date = serializers.DateField()
     caption = serializers.CharField()
     show = serializers.StringRelatedField(many=False)
+    metaData = MetaDataSerializer()
 
     class Meta:
         model = Flier
@@ -17,7 +19,8 @@ class FlierSerializer(serializers.ModelSerializer):
                   'image',
                   'date',
                   'caption',
-                  'show')
+                  'show',
+                  'metaData')
 
 
 class PhotoSerializer(serializers.ModelSerializer):
@@ -27,6 +30,7 @@ class PhotoSerializer(serializers.ModelSerializer):
     caption = serializers.CharField()
     artist = ArtistSerializer()
     show = serializers.StringRelatedField(many=False)
+    metaData = MetaDataSerializer()
 
     class Meta:
         model = Photo
@@ -35,7 +39,8 @@ class PhotoSerializer(serializers.ModelSerializer):
                   'date',
                   'caption',
                   'artist',
-                  'show')
+                  'show',
+                  'metaData')
 
 
 class YoutubeSerializer(serializers.ModelSerializer):
@@ -45,6 +50,7 @@ class YoutubeSerializer(serializers.ModelSerializer):
     caption = serializers.CharField()
     artist = ArtistSerializer()
     show = serializers.StringRelatedField(many=False)
+    metaData = MetaDataSerializer()
 
     class Meta:
         model = YoutubeVideo
@@ -53,4 +59,5 @@ class YoutubeSerializer(serializers.ModelSerializer):
                   'youtube_url',
                   'caption',
                   'artist',
-                  'show')
+                  'show',
+                  'metaData')

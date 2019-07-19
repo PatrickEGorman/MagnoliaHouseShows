@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'storages',
     'accounts',
-    'home',
+    'main',
     'info',
     'media',
     'music',
@@ -61,6 +61,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'MagnoliaHouseShows.urls'
+
+AUTH_USER_MODEL = "accounts.CustomUser"
 
 TEMPLATES = [
     {

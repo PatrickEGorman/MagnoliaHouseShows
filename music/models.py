@@ -1,14 +1,29 @@
 from django.db import models
 
+from main.models import MetaData
+from main.util import priority_choices, parse_date_string
+
 
 class Genre(models.Model):
     name = models.TextField(unique=True, max_length=20)
 
+    priority = models.IntegerField(choices=priority_choices, default=3)
+
     class Meta:
-        ordering = ["name"]
+        ordering = ["priority", "name"]
 
     def __str__(self):
         return self.name
+
+    metaData = models.OneToOneField(MetaData, on_delete=models.SET_NULL, null=True)
+
+    def save(self, *args, **kwargs):
+        if self.metaData:
+            self.metaData.save()
+        else:
+            meta = MetaData(name="Genre %s" % self.name)
+            self.metaData = meta
+        super(Genre, self).save(*args, **kwargs)
 
 
 class Artist(models.Model):
@@ -24,8 +39,10 @@ class Artist(models.Model):
     soundcloud = models.URLField(default='', blank=True)
     description = models.TextField(default='', blank=True)
 
+    priority = models.IntegerField(choices=priority_choices, default=3)
+
     class Meta:
-        ordering = ["name"]
+        ordering = ["priority", "metadata__posted_on", "name"]
 
     def display_genre(self):
         return ', '.join(genre.name for genre in self.genres.all()[:5])
@@ -34,6 +51,16 @@ class Artist(models.Model):
 
     def __str__(self):
         return self.name
+
+    metaData = models.OneToOneField(MetaData, on_delete=models.SET_NULL, null=True)
+
+    def save(self, *args, **kwargs):
+        if self.metaData:
+            self.metaData.save()
+        else:
+            meta = MetaData(name="Artist %s" % self.name)
+            self.metaData = meta
+        super(Artist, self).save(*args, **kwargs)
 
 
 class Album(models.Model):
@@ -48,8 +75,14 @@ class Album(models.Model):
     release_date = models.DateField(blank=True, null=True, default=None)
     description = models.TextField(default='', blank=True)
 
+    priority = models.IntegerField(choices=priority_choices, default=3)
+
+    @property
+    def release_date_string(self):
+        return parse_date_string(self.release_date)
+
     class Meta:
-        ordering = ["artist", "name"]
+        ordering = ["priority", "artist", "name"]
 
     def display_genre(self):
         return ', '.join(genre.name for genre in self.genres.all()[:5])
@@ -58,3 +91,13 @@ class Album(models.Model):
 
     def __str__(self):
         return self.name
+
+    metaData = models.OneToOneField(MetaData, on_delete=models.SET_NULL, null=True)
+
+    def save(self, *args, **kwargs):
+        if self.metaData:
+            self.metaData.save()
+        else:
+            meta = MetaData(name="Album %s" % self.name)
+            self.metaData = meta
+        super(Album, self).save(*args, **kwargs)

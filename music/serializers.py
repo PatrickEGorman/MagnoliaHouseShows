@@ -1,16 +1,19 @@
 from rest_framework import serializers
 
+from main.serializers import MetaDataSerializer
 from .models import Album, Artist, Genre
 
 
 class GenreSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField()
     name = serializers.CharField()
+    metaData = MetaDataSerializer()
 
     class Meta:
         model = Genre
         fields = ('id',
-                  'name')
+                  'name',
+                  'metaData')
 
 
 class ArtistSerializer(serializers.ModelSerializer):
@@ -26,6 +29,7 @@ class ArtistSerializer(serializers.ModelSerializer):
     soundcloud = serializers.URLField()
     youtube = serializers.URLField()
     description = serializers.CharField()
+    metaData = MetaDataSerializer()
 
     class Meta:
         model = Artist
@@ -40,7 +44,8 @@ class ArtistSerializer(serializers.ModelSerializer):
                   'description',
                   'soundcloud_embed_code',
                   'youtube_embed_code',
-                  'bandcamp_embed_code')
+                  'bandcamp_embed_code',
+                  'metaDataSerializer')
 
 
 class AlbumSerializer(serializers.ModelSerializer):
@@ -55,6 +60,7 @@ class AlbumSerializer(serializers.ModelSerializer):
     description = serializers.CharField()
     bandcamp_embed_code = serializers.CharField()
     youtube_embed_code = serializers.CharField()
+    metaData = MetaDataSerializer()
 
     class Meta:
         model = Album
@@ -68,4 +74,5 @@ class AlbumSerializer(serializers.ModelSerializer):
                   'cover_image',
                   'description',
                   'youtube_embed_code',
-                  'bandcamp_embed_code')
+                  'bandcamp_embed_code',
+                  'metaData')
