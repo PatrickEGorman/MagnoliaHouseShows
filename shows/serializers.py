@@ -16,6 +16,8 @@ class ShowSerializer(serializers.ModelSerializer):
     facebook = serializers.URLField()
     instagram = serializers.URLField()
     description = serializers.CharField()
+    year_month = serializers.ListField()
+    date_string = serializers.CharField()
     fliers = FlierSerializer(many=True)
     artists = ArtistSerializer(many=True)
     genres = GenreSerializer(many=True)
@@ -31,6 +33,8 @@ class ShowSerializer(serializers.ModelSerializer):
                   'description',
                   'facebook',
                   'instagram',
+                  'year_month',
+                  'date_string',
                   'artists',
                   'genres',
                   'fliers',

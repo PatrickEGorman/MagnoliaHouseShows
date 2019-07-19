@@ -12,10 +12,10 @@ class MetaDataSerializer(serializers.ModelSerializer):
     last_updated_on = serializers.DateField()
     last_updated_by = UserSerializer()
 
-    posted_date = serializers.CharField()
+    posted_date_string = serializers.CharField()
     posted_string = serializers.CharField()
-    last_updated_date = serializers.CharField()
-    last_updated_string = serializers.CharField()
+    updated_date_string = serializers.CharField()
+    updated_string = serializers.CharField()
 
     class Meta:
         model = MetaData
@@ -25,8 +25,8 @@ class MetaDataSerializer(serializers.ModelSerializer):
                 'posted_by',
                 'last_updated_on',
                 'last_updated_by',
-                'posted_date',
                 'posted_string',
-                'last_updated_date',
-                'last_updated_string'
+                'posted_date_string',
+                'updated_string',
+                'updated_date_string'
             )

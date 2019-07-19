@@ -2,6 +2,7 @@ from rest_framework import serializers
 
 from main.serializers import MetaDataSerializer
 from music.serializers import ArtistSerializer
+from shows.models import Show
 from .models import Flier, Photo, YoutubeVideo
 
 
@@ -10,7 +11,9 @@ class FlierSerializer(serializers.ModelSerializer):
     image = serializers.ImageField()
     date = serializers.DateField()
     caption = serializers.CharField()
-    show = serializers.StringRelatedField(many=False)
+    year_month = serializers.ListField()
+    date_string = serializers.CharField()
+    show = serializers.PrimaryKeyRelatedField(queryset=Show.objects.all(), many=False)
     metaData = MetaDataSerializer()
 
     class Meta:
@@ -19,6 +22,8 @@ class FlierSerializer(serializers.ModelSerializer):
                   'image',
                   'date',
                   'caption',
+                  'year_month',
+                  'date_string',
                   'show',
                   'metaData')
 
@@ -28,6 +33,8 @@ class PhotoSerializer(serializers.ModelSerializer):
     image = serializers.ImageField()
     date = serializers.DateField()
     caption = serializers.CharField()
+    year_month = serializers.ListField()
+    date_string = serializers.CharField()
     artist = ArtistSerializer()
     show = serializers.StringRelatedField(many=False)
     metaData = MetaDataSerializer()
@@ -38,6 +45,8 @@ class PhotoSerializer(serializers.ModelSerializer):
                   'image',
                   'date',
                   'caption',
+                  'year_month',
+                  'date_string',
                   'artist',
                   'show',
                   'metaData')
@@ -48,6 +57,8 @@ class YoutubeSerializer(serializers.ModelSerializer):
     date = serializers.DateField()
     youtube_url = serializers.URLField()
     caption = serializers.CharField()
+    year_month = serializers.ListField()
+    date_string = serializers.CharField()
     artist = ArtistSerializer()
     show = serializers.StringRelatedField(many=False)
     metaData = MetaDataSerializer()
@@ -58,6 +69,8 @@ class YoutubeSerializer(serializers.ModelSerializer):
                   'date',
                   'youtube_url',
                   'caption',
+                  'year_month',
+                  'date_string',
                   'artist',
                   'show',
                   'metaData')

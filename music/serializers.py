@@ -45,7 +45,7 @@ class ArtistSerializer(serializers.ModelSerializer):
                   'soundcloud_embed_code',
                   'youtube_embed_code',
                   'bandcamp_embed_code',
-                  'metaDataSerializer')
+                  'metaData')
 
 
 class AlbumSerializer(serializers.ModelSerializer):
