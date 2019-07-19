@@ -25,8 +25,8 @@ def parse_date_string(date, year_month=False):
         return "%s %d, %d" % (month, day, year)
 
 
-priority_choices = [(1, "Minimum"),
-                    (2, "Low"),
+priority_choices = [(5, "Minimum"),
+                    (4, "Low"),
                     (3, "Average"),
-                    (4, "High"),
-                    (5, "Maxiumum")]
+                    (2, "High"),
+                    (1, "Maxiumum")]

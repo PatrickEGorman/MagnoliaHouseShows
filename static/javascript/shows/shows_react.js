@@ -5,10 +5,6 @@ import {parseDate} from "../util/date";
 import {ViewMore} from "../util/view_support";
 
 
-const months = {1:"January", 2: "February", 3:"March", 4: "April", 5:"May", 6: "June", 7:"July", 8: "August",
-    9:"September", 10: "October", 11:"November", 12: "December"};
-
-
 export class Show extends React.Component{
     render() {
         const date = parseDate(this.props.data.date);
@@ -156,7 +152,7 @@ export class ShowList extends React.Component{
         let contents = [];
         let view_more;
         for(const val in this.props.data){
-            if(parseInt(val) >= this.props.num_shows - 1){
+            if(parseInt(val) >= this.props.num_shows){
                 view_more = <ViewMore callback={this.props.callback}/>;
                 break;
             }

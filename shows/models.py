@@ -58,4 +58,8 @@ class Show(models.Model):
         self.metaData.set_name(name="Show %s" % self.__str__())
         self.metaData.save()
         self.metaData = MetaData.objects.get(pk=self.metaData.pk)
+
+        for artist in self.artists.all():
+            for genre in artist.genres.all():
+                self.genres.add(genre)
         super(Show, self).save(*args, **kwargs)
