@@ -62,6 +62,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'MagnoliaHouseShows.urls'
 
+AUTH_USER_MODEL = "accounts.CustomUser"
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
