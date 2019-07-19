@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}View Show{% endblock %}
+
+{% block content %}
+
+    <div id="react_container"></div>
+
+    <meta id="show_id" content={{ show_id }}>
+    {% load staticfiles %}
+    <script src={% static 'dist/view_show.js' %}></script>
+{% endblock %}

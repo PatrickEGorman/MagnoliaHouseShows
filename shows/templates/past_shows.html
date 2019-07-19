@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Past Shows{% endblock %}
+
+{% block content %}
+
+    <h1>Past Shows</h1>
+    <div id="react_container"></div>
+
+    {% load staticfiles %}
+    <script src={% static 'dist/past_shows.js' %}></script>
+{% endblock %}
