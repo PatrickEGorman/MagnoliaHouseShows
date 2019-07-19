@@ -18,7 +18,7 @@ class InfoPage(models.Model):
     priority = models.IntegerField(choices=priority_choices, default=3)
 
     class Meta:
-        ordering = ["priority", "metadata__posted_on", "title"]
+        ordering = ["priority", "metaData__posted_on", "title"]
 
     def __str__(self):
         return "Page:%s Title %s"%(self.page_name, self.title)

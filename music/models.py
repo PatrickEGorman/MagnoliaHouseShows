@@ -18,11 +18,12 @@ class Genre(models.Model):
     metaData = models.OneToOneField(MetaData, on_delete=models.SET_NULL, null=True)
 
     def save(self, *args, **kwargs):
-        if self.metaData:
-            self.metaData.save()
-        else:
-            meta = MetaData(name="Genre %s" % self.name)
+        if not self.metaData:
+            meta = MetaData()
             self.metaData = meta
+        self.metaData.set_name(name="Genre %s" % self.name)
+        self.metaData.save()
+        self.metaData = MetaData.objects.get(pk=self.metaData.pk)
         super(Genre, self).save(*args, **kwargs)
 
 
@@ -42,7 +43,7 @@ class Artist(models.Model):
     priority = models.IntegerField(choices=priority_choices, default=3)
 
     class Meta:
-        ordering = ["priority", "metadata__posted_on", "name"]
+        ordering = ["priority", "metaData__posted_on", "name"]
 
     def display_genre(self):
         return ', '.join(genre.name for genre in self.genres.all()[:5])
@@ -55,11 +56,12 @@ class Artist(models.Model):
     metaData = models.OneToOneField(MetaData, on_delete=models.SET_NULL, null=True)
 
     def save(self, *args, **kwargs):
-        if self.metaData:
-            self.metaData.save()
-        else:
-            meta = MetaData(name="Artist %s" % self.name)
+        if not self.metaData:
+            meta = MetaData()
             self.metaData = meta
+        self.metaData.set_name(name="Artist %s" % self.name)
+        self.metaData.save()
+        self.metaData = MetaData.objects.get(pk=self.metaData.pk)
         super(Artist, self).save(*args, **kwargs)
 
 
@@ -95,9 +97,10 @@ class Album(models.Model):
     metaData = models.OneToOneField(MetaData, on_delete=models.SET_NULL, null=True)
 
     def save(self, *args, **kwargs):
-        if self.metaData:
-            self.metaData.save()
-        else:
-            meta = MetaData(name="Album %s" % self.name)
+        if not self.metaData:
+            meta = MetaData()
             self.metaData = meta
+        self.metaData.set_name(name="Album %s" % (self.name))
+        self.metaData.save()
+        self.metaData = MetaData.objects.get(pk=self.metaData.pk)
         super(Album, self).save(*args, **kwargs)

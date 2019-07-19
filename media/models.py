@@ -35,14 +35,17 @@ class Flier(models.Model):
         else:
             return "Database id for flier: "+str(self.id)
 
+    def __init__(self, *args, **kwargs):
+        super(Flier, self).__init__(*args, **kwargs)
+        if not self.metaData:
+            meta = MetaData()
+            self.metaData = meta
+
     metaData = models.OneToOneField(MetaData, on_delete=models.SET_NULL, null=True)
 
     def save(self, *args, **kwargs):
-        if self.metaData:
-            self.metaData.save()
-        else:
-            meta = MetaData(name="Flier for %s %s" % (self.date.__str__(), self.show))
-            self.metaData = meta
+        self.metaData.set_name(name="Flier %s" % self.image)
+        self.metaData.save()
         super(Flier, self).save(*args, **kwargs)
 
 
@@ -76,14 +79,17 @@ class Photo(models.Model):
         else:
             return "Image database id: "+str(self.id)
 
+    def __init__(self, *args, **kwargs):
+        super(Photo, self).__init__(*args, **kwargs)
+        if not self.metaData:
+            meta = MetaData()
+            self.metaData = meta
+
     metaData = models.OneToOneField(MetaData, on_delete=models.SET_NULL, null=True)
 
     def save(self, *args, **kwargs):
-        if self.metaData:
-            self.metaData.save()
-        else:
-            meta = MetaData(name="Photo for %s %s %s" % (self.date.__str__(), self.artist, self.show))
-            self.metaData = meta
+        self.metaData.set_name(name="Photo %s" % self.image)
+        self.metaData.save()
         super(Photo, self).save(*args, **kwargs)
 
 
@@ -117,12 +123,15 @@ class YoutubeVideo(models.Model):
         else:
             return "Image database id: "+str(self.id)
 
+    def __init__(self, *args, **kwargs):
+        super(YoutubeVideo, self).__init__(*args, **kwargs)
+        if not self.metaData:
+            meta = MetaData()
+            self.metaData = meta
+
     metaData = models.OneToOneField(MetaData, on_delete=models.SET_NULL, null=True)
 
     def save(self, *args, **kwargs):
-        if self.metaData:
-            self.metaData.save()
-        else:
-            meta = MetaData(name="Youtube video %s" % self.youtube_url)
-            self.metaData = meta
+        self.metaData.set_name(name="Youtube Video at URL: %s" % self.youtube_url)
+        self.metaData.save()
         super(YoutubeVideo, self).save(*args, **kwargs)

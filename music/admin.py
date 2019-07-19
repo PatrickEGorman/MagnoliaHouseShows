@@ -1,10 +1,10 @@
 from django.contrib import admin
 
-from main.admin import meta_created_date, meta_created_by
+from main.admin import meta_created_date, meta_created_by, ModelAdminWithMeta
 from .models import Album, Artist, Genre
 
 
-class AlbumAdmin(admin.ModelAdmin):
+class AlbumAdmin(ModelAdminWithMeta):
     list_display = ('name', 'artist', 'priority', 'bandcamp', 'release_date', 'display_genre', meta_created_date,
                     meta_created_by)
     list_filter = ['artist', 'priority', 'release_date', 'genres']
@@ -12,15 +12,23 @@ class AlbumAdmin(admin.ModelAdmin):
               ('suggested_donation', 'suggested_donation_max'), ('facebook', 'instagram')]
 
 
-class ArtistAdmin(admin.ModelAdmin):
+class ArtistAdmin(ModelAdminWithMeta):
     list_display = ('name', 'priority', 'hometown', 'display_genre', meta_created_date, meta_created_by)
     list_filter = ['hometown', 'priority', 'genres']
     fields = ['name', 'priority', 'hometown', 'genres', ('bandcamp_embed_code', 'soundcloud_embed_code', 'youtube_embed_code'),
               ('bandcamp', 'soundcloud', 'youtube', 'facebook'), 'description']
 
 
-class GenreAdmin(admin.ModelAdmin):
+class GenreAdmin(ModelAdminWithMeta):
     list_display = ['name', 'priority']
+    fields = ['name', 'priority']
+
+    def save_model(self, request, obj, form, change):
+        obj.metaData.last_updated_by = request.user
+        if not obj.metaData.posted_by:
+            obj.metaData.posted_by = request.user
+        obj.metaData.save()
+        super().save_model(request, obj, form, change)
 
 
 admin.site.register(Album, AlbumAdmin)

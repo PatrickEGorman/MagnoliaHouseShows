@@ -8,7 +8,7 @@ months = {1:"January", 2: "February", 3:"March", 4: "April", 5:"May", 6: "June",
 def parse_date_string(date, year_month=False):
     if not date:
         return None
-    split_date = date.__str__.split('-')
+    split_date = date.__str__().split('-')
     now = datetime.datetime.now()
     this_year = now.year
 

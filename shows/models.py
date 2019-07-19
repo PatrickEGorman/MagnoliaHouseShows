@@ -33,7 +33,7 @@ class Show(models.Model):
         ordering = ["priority", "-date"]
 
     def display_artists(self):
-        return '/ '.join(artist.name for artist in self.artists.all()[:5])
+        return '/ '.join(artist.name for artist in Artist.objects.filter(show__id=self.id)[:5])
     display_artists.short_description = 'Artists'
 
     def display_genre(self):
@@ -42,22 +42,23 @@ class Show(models.Model):
 
     def __str__(self):
         display = self.date.__str__() + ":"
-        for artist in self.artists.all():
+        for artist in Artist.objects.filter(show__id=self.id):
             display += artist.__str__() + "/"
         return display[:-1]
 
     metaData = models.OneToOneField(MetaData, on_delete=models.SET_NULL, null=True)
 
     def save(self, *args, **kwargs):
-        super(Show, self).save(*args, **kwargs)
-        for artist in self.artists.all():
-            for genre in artist.genres.all():
-                self.genres.add(genre)
+        if not self.metaData:
+            meta = MetaData()
+            self.metaData = meta
+        self.metaData.set_name(name="Show for %s" % (self.__str__()))
+        self.metaData.save()
+        self.metaData = MetaData.objects.get(pk=self.metaData.pk)
         super(Show, self).save(*args, **kwargs)
 
-        if self.metaData:
-            self.metaData.save()
-        else:
-            meta = MetaData(name="Show for %s %s" % (self.date.__str__(), self.display_artists))
-            self.metaData = meta
+        for artist in Artist.objects.filter(show__id=self.id):
+            for genre in artist.genres.all():
+                self.genres.add(genre)
+
         super(Show, self).save(*args, **kwargs)
