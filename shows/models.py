@@ -26,7 +26,8 @@ class Show(models.Model):
         for artist in self.artists.all():
             for genre in artist.genres.all():
                 if not genre.name in genre_name_list:
-                    genre_name_list[genre.name] = {'count': 1, 'priority': genre.priority}
+                    genre_name_list[genre.name] = {'name': genre.name, 'count': 1, 'priority': genre.priority,
+                                                   'id': genre.id}
                 else:
                     genre_name_list[genre.name]['count'] += 1
         return genre_name_list

@@ -5,20 +5,34 @@ import $ from 'jquery'
 
 
 let num_shows = 0;
-
+let filter;
 
 function reset_num_shows(){
     num_shows = 0;
 }
 
-
 function get_show_list() {
     num_shows += 10;
-    $.get('/shows/list_shows', function (data) {
-        ReactDOM.render(<ShowFilters data={data}/>, document.getElementById('filter_bar'))
+    let url ='/shows/list_shows';
+    if(filter){
+        url += "?"+filter;
+    }
+    console.log(url);
+    $.get(url, function (data) {
+        if(!filter) {
+            ReactDOM.render(<ShowFilters data={data}
+                                         callback={filtered_callback}/>, document.getElementById('filter_bar'))
+        }
         ReactDOM.render(<ShowList data={data} callback={get_show_list} num_shows={num_shows}
-                                  reset_num_shows={reset_num_shows()}/>, document.getElementById('react_container'));
+                                  reset_num_shows={reset_num_shows}/>, document.getElementById('react_container'));
     });
 }
+
+function filtered_callback(filter_setting){
+    num_shows = 0;
+    filter = filter_setting;
+    get_show_list();
+}
+
 
 $.ready(get_show_list());

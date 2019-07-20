@@ -97,7 +97,6 @@ class ListShow extends React.Component{
         let genreDiv = "";
         let i = 0;
         for(const genreKey in this.props.data.sorted_genres){
-            console.log(this.props.data.sorted_genres);
             if(i > 5){
                 console.log("Show on "+date+"has more than 5 genres.  Terminating display")
                 break;
@@ -153,25 +152,55 @@ export class ShowFilters extends React.Component{
         let dates = [];
         let genres = [];
         let artists = [];
-        // if(this.props.data.length<11){
-            for(const val in this.props.data) {
-                if (this.props.data.hasOwnProperty(val)) {
-                    const show = this.props.data[val];
-                    let included = false;
-                    for (let i = 0; i < dates.length; i++) {
-                        if (dates[i].name[0] === show.year_month[0] && dates[i].name[1] === show.year_month[1]) {
-                            dates[i].number++;
-                            included = true;
+        for(const val in this.props.data) {
+            if (this.props.data.hasOwnProperty(val)) {
+                const show = this.props.data[val];
+                let included_date = false;
+                for (let i = 0; i < dates.length; i++) {
+                    if (dates[i].name[0] === show.year_month[0] && dates[i].name[1] === show.year_month[1]) {
+                        dates[i].number++;
+                        included_date = true;
+                        break;
+                    }
+                }
+                if (!included_date) {
+                    const option = {name: show.year_month, number: 1, value: show.year_month[0]+"-"+show.year_month[1]};
+                    dates.push(option);
+                }
+                let included_genre = false;
+                for(const genreKey in show.genres) {
+                    let genre = show.genres[genreKey];
+                    for (let i = 0; i < genres.length; i++) {
+                        if (genres[i].name === genre.name) {
+                            genres[i].number++;
+                            included_genre = true;
                             break;
                         }
                     }
-                    if (!included) {
-                        const option = {name: show.year_month, number: 1};
-                        dates.push(option);
+
+                    if (!included_genre) {
+                        const option = {name: genre.name, number: 1, value: genre.id};
+                        genres.push(option);
+                    }
+                }
+                let included_artist = false;
+                for(const artistKey in show.artists) {
+                    const artist = show.artists[artistKey];
+                    for (let i = 0; i < artists.length; i++) {
+                        if (artists[i].name === artist.name) {
+                            artists[i].number++;
+                            included_artist = true;
+                            break;
+                        }
+                    }
+
+                    if (!included_artist) {
+                        const option = {name: artist.name, number: 1, value: artist.id};
+                        artists.push(option);
                     }
                 }
             }
-        // }
+        }
         for(let i=0; i < dates.length; i++){
             for(let j = 0; j < dates.length; j++){
                 let year_month_i = dates[i].name[0].toString() + dates[i].name[1].toString(),
@@ -194,41 +223,22 @@ export class ShowFilters extends React.Component{
                 {
                     name: "Date",
                     options: dates,
-                    method: function(option){}
+                },
+                {
+                    name: "Genre",
+                    options: genres
+                },
+                {
+                    name: "Artist",
+                    options: artists
                 }
             ]
         }
     }
 
-    filter_by_date(date){
-        const month = date.name.split(" ")[0];
-        const year = date.name.split(" ")[1];
-        let month_value;
-        for(let key in months){
-            if(months[key] === month){
-                month_value = key;
-                break;
-            }
-        }
-        let contents = [];
-        for(const val in this.props.data){
-            if(this.props.data[val].year_month[0] === year && this.props.data[val].year_month[1] === month) {
-                contents.push(
-                    <ListShow data={this.props.data[val]} key={val}/>
-                );
-                }
-            }
-        ReactDom.render(
-            <div>
-                <FilterBar data={this.filter_data()}/>
-                {contents}
-            </div>,
-            document.getElementById('react_container'))
-    }
-
     render(){
         return(
-            <FilterBar data={this.filter_data()}/>
+            <FilterBar data={this.filter_data()} callback={this.props.callback} name={"Shows"}/>
         )
     }
 }
