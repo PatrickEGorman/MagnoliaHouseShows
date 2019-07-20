@@ -16,7 +16,7 @@ def parse_date_string(date, year_month=False):
     day = int(split_date[2])
     year = int(split_date[0])
     if year_month:
-        return [year, month]
+        return [year, int(split_date[1])]
 
     if year == this_year:
         return "%s %d" % (month, day)

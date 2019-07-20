@@ -1,14 +1,12 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import {ArtistList} from '../music/artists_react'
-import {parseDate} from "../util/date";
 import {ViewMore} from "../util/view_support";
+import {FilterBar} from "../util/filter_bar";
+import {months} from "../util/date";
 
 
 export class Show extends React.Component{
     render() {
-        const date = parseDate(this.props.data.date);
-
         let split_time = this.props.data.time.split(":");
         const hour = parseInt(split_time[0]);
         const minute = split_time[1];
@@ -31,7 +29,7 @@ export class Show extends React.Component{
                 <div className={"container"}>
                     <div className={'row mb-3'}>
                         <div className={"col"}>
-                            <h2>{date} {hour}:{minute}PM</h2>
+                            <h2>{this.props.data.date_string} {hour}:{minute}PM</h2>
                         </div>
                     </div>
                     <div className={'row mb-5'}>
@@ -62,7 +60,7 @@ export class Show extends React.Component{
                 <div className={"container"}>
                     <div className={'row mb-3'}>
                         <div className={"col"}>
-                            <h2>{date} {hour}:{minute}PM</h2>
+                            <h2>{this.props.data.date_string} {hour}:{minute}PM</h2>
                         </div>
                     </div>
                     <div className={'row mb-5'}>
@@ -87,7 +85,6 @@ export class Show extends React.Component{
 
 class ListShow extends React.Component{
     render() {
-        const date = parseDate(this.props.data.date);
         let artists = '';
         for(const key in this.props.data.artists){
             artists += this.props.data.artists[key].name +" / ";
@@ -130,7 +127,7 @@ class ListShow extends React.Component{
                 <h2>
                     <a href={'/shows/view_show/'+this.props.data.id}>
                         <div className={"col-md-12"}>
-                            {date} : <small>{artists.substring(0, artists.length-3)}</small>
+                            {this.props.data.date_string} : <small>{artists.substring(0, artists.length-3)}</small>
                         </div>
                         {genreDiv}
                         <div className={"col-md-12"}>
@@ -148,6 +145,55 @@ class ListShow extends React.Component{
 
 
 export class ShowList extends React.Component{
+
+    filter_data(){
+        let dates = [];
+        let genres = [];
+        let artists = [];
+        if(this.props.data.length<11){
+            for(const val in this.props.data) {
+                if (this.props.data.hasOwnProperty(val)) {
+                    const show = this.props.data[val];
+                    if (!(show.year_month in dates)) {
+                        const option = {name: show.year_month, number: 1};
+                        dates.push(option)
+                    }
+                    else{
+                        for(let i=0; i < dates.length; i++){
+                            if(dates[i].name === show.year_month){
+                                dates[i].number++;
+                            }
+                        }
+                    }
+                    for(let i=0; i < dates.length; i++){
+                        for(let j = 0; j < dates.length; j++){
+                            let year_month_i = dates[i].name[0].toString() + dates[i].name[1].toString();
+                            let year_month_j = dates[j].name[0].toString() + dates[j].name[1].toString();
+                            if(parseInt(year_month_i) > parseInt(year_month_j) && i < j){
+                                let name_holder = dates[i].name;
+                                dates[i] = dates[j];
+                                dates[j] = name_holder;
+                            }
+                            if(parseInt(year_month_i) < parseInt(year_month_j) && i > j){
+                                let name_holder = dates[i].name;
+                                dates[i] = dates[j];
+                                dates[j] = name_holder;
+                            }
+                        }
+                        dates[i].name = months[dates[i].name[1]] +" "+dates[i].name[0];
+                    }
+                }
+            }
+        }
+        return {filters: [
+                    {
+                        name: "Date",
+                        options: dates,
+                        method: function(option){}
+                    }
+                ]}
+    }
+
     render(){
         let contents = [];
         let view_more;
@@ -164,6 +210,7 @@ export class ShowList extends React.Component{
             }
         return(
             <div>
+                <FilterBar data={this.filter_data()}/>
                 {contents}
                 {view_more}
             </div>
