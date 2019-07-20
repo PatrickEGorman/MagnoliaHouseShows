@@ -59,7 +59,7 @@ class Show(models.Model):
         self.metaData.save()
         self.metaData = MetaData.objects.get(pk=self.metaData.pk)
 
-        for artist in self.artists.all():
+        for artist in Artist.objects.filter(show__id=self.id):
             for genre in artist.genres.all():
                 self.genres.add(genre)
         super(Show, self).save(*args, **kwargs)
