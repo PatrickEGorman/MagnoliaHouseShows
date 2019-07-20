@@ -154,44 +154,46 @@ export class ShowList extends React.Component{
             for(const val in this.props.data) {
                 if (this.props.data.hasOwnProperty(val)) {
                     const show = this.props.data[val];
-                    if (!(show.year_month in dates)) {
+                    let included = false;
+                    for (let i = 0; i < dates.length; i++) {
+                        if (dates[i].name[0] === show.year_month[0] && dates[i].name[1] === show.year_month[1]) {
+                            dates[i].number++;
+                            included = true;
+                            break;
+                        }
+                    }
+                    if (!included) {
                         const option = {name: show.year_month, number: 1};
                         dates.push(option)
-                    }
-                    else{
-                        for(let i=0; i < dates.length; i++){
-                            if(dates[i].name === show.year_month){
-                                dates[i].number++;
-                            }
-                        }
-                    }
-                    for(let i=0; i < dates.length; i++){
-                        for(let j = 0; j < dates.length; j++){
-                            let year_month_i = dates[i].name[0].toString() + dates[i].name[1].toString();
-                            let year_month_j = dates[j].name[0].toString() + dates[j].name[1].toString();
-                            if(parseInt(year_month_i) > parseInt(year_month_j) && i < j){
-                                let name_holder = dates[i].name;
-                                dates[i] = dates[j];
-                                dates[j] = name_holder;
-                            }
-                            if(parseInt(year_month_i) < parseInt(year_month_j) && i > j){
-                                let name_holder = dates[i].name;
-                                dates[i] = dates[j];
-                                dates[j] = name_holder;
-                            }
-                        }
-                        dates[i].name = months[dates[i].name[1]] +" "+dates[i].name[0];
                     }
                 }
             }
         }
-        return {filters: [
-                    {
-                        name: "Date",
-                        options: dates,
-                        method: function(option){}
-                    }
-                ]}
+        for(let i=0; i < dates.length; i++){
+            for(let j = 0; j < dates.length; j++){
+                let year_month_i = dates[i].name[0].toString() + dates[i].name[1].toString();
+                let year_month_j = dates[j].name[0].toString() + dates[j].name[1].toString();
+                if(parseInt(year_month_i) > parseInt(year_month_j) && i < j){
+                    let name_holder = dates[i].name;
+                    dates[i] = dates[j];
+                    dates[j] = name_holder;
+                }
+                if(parseInt(year_month_i) < parseInt(year_month_j) && i > j){
+                    let name_holder = dates[i].name;
+                    dates[i] = dates[j];
+                    dates[j] = name_holder;
+                }
+            }
+            dates[i].name = months[dates[i].name[1]] +" "+dates[i].name[0];
+        }
+        return {filters:
+            [
+                {
+                    name: "Date",
+                    options: dates,
+                    method: function(option){}
+                }
+            ]}
     }
 
     render(){
