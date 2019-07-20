@@ -20,7 +20,8 @@ class ShowSerializer(serializers.ModelSerializer):
     date_string = serializers.CharField()
     fliers = FlierSerializer(many=True)
     artists = ArtistSerializer(many=True)
-    genres = GenreSerializer(many=True)
+    genres = serializers.DictField()
+    sorted_genres = serializers.ListField()
     metaData = MetaDataSerializer()
 
     class Meta:
@@ -37,6 +38,7 @@ class ShowSerializer(serializers.ModelSerializer):
                   'date_string',
                   'artists',
                   'genres',
+                  'sorted_genres',
                   'fliers',
                   'metaData')
 

@@ -7,7 +7,6 @@ from main.util import priority_choices, parse_date_string
 
 class Show(models.Model):
     artists = models.ManyToManyField(Artist)
-    genres = models.ManyToManyField(Genre, blank=True)
 
     date = models.DateField()
     time = models.TimeField(default="08:00")
@@ -20,6 +19,40 @@ class Show(models.Model):
     description = models.TextField(default='', blank=True)
 
     priority = models.IntegerField(choices=priority_choices, default=3)
+
+    @property
+    def genres(self):
+        genre_name_list = {}
+        for artist in self.artists.all():
+            for genre in artist.genres.all():
+                if not genre.name in genre_name_list:
+                    genre_name_list[genre.name] = {'count': 1, 'priority': genre.priority}
+                else:
+                    genre_name_list[genre.name]['count'] += 1
+        return genre_name_list
+
+    @property
+    def sorted_genres(self):
+        sorted = []
+        genres = self.genres
+        for genre in genres:
+            is_inserted = False
+            if not sorted:
+                sorted.append(genre)
+                continue
+            for x in range(len(sorted)):
+                if genres[genre]['count'] > genres[sorted[x]]['count']:
+                    sorted.insert(x-1, genre)
+                    is_inserted = True
+                    break
+                elif genres[genre]['count'] == genres[sorted[x]]['count']:
+                    if genres[genre]['priority'] >= genres[sorted[x]]['priority']:
+                        sorted.insert(x-1, genre)
+                        is_inserted = True
+                        break
+            if not is_inserted:
+                sorted.append(genre)
+        return sorted
 
     @property
     def year_month(self):
@@ -37,7 +70,7 @@ class Show(models.Model):
     display_artists.short_description = 'Artists'
 
     def display_genre(self):
-        return ', '.join(genre.name for genre in self.genres.all()[:5])
+        return ', '.join(genre for genre in self.sorted_genres[:5])
     display_genre.short_description = 'Genre'
 
     def __str__(self):
@@ -53,13 +86,18 @@ class Show(models.Model):
         if not self.metaData:
             meta = MetaData()
             self.metaData = meta
+        try:
+            if not self.genres:
+                for artist in Artist.objects.filter(show__id=self.id):
+                    for genre in artist.genres.all():
+                        self.genres.add(genre)
+                self.save()
+        except ValueError:
+            print("Show not initialized")
 
     def save(self, *args, **kwargs):
-        self.metaData.set_name(name="Show %s" % self.__str__())
+        self.metaData.set_name(name="Show for %s" % (self.__str__()))
         self.metaData.save()
         self.metaData = MetaData.objects.get(pk=self.metaData.pk)
-
-        for artist in Artist.objects.filter(show__id=self.id):
-            for genre in artist.genres.all():
-                self.genres.add(genre)
         super(Show, self).save(*args, **kwargs)
+

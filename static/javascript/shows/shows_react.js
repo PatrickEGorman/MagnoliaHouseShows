@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactDom from 'react-dom'
 import {ArtistList} from '../music/artists_react'
 import {ViewMore} from "../util/view_support";
 import {FilterBar} from "../util/filter_bar";
@@ -94,8 +95,10 @@ class ListShow extends React.Component{
         const minute = split_time[1];
         let genres = "";
         let genreDiv = "";
-        for(const genreKey in this.props.data.genres){
-            if(genreKey > 5){
+        let i = 0;
+        for(const genreKey in this.props.data.sorted_genres){
+            console.log(this.props.data.sorted_genres);
+            if(i > 5){
                 console.log("Show on "+date+"has more than 5 genres.  Terminating display")
                 break;
             }
@@ -106,7 +109,7 @@ class ListShow extends React.Component{
             else if(genres.length>=1){
                 genres+=", ";
             }
-            genres += this.props.data.genres[genreKey].name;
+            genres += this.props.data.sorted_genres[genreKey];
         }
         if(genres.length>=1){
             genreDiv =
@@ -150,7 +153,7 @@ export class ShowList extends React.Component{
         let dates = [];
         let genres = [];
         let artists = [];
-        if(this.props.data.length<11){
+        // if(this.props.data.length<11){
             for(const val in this.props.data) {
                 if (this.props.data.hasOwnProperty(val)) {
                     const show = this.props.data[val];
@@ -164,24 +167,24 @@ export class ShowList extends React.Component{
                     }
                     if (!included) {
                         const option = {name: show.year_month, number: 1};
-                        dates.push(option)
+                        dates.push(option);
                     }
                 }
             }
-        }
+        // }
         for(let i=0; i < dates.length; i++){
             for(let j = 0; j < dates.length; j++){
-                let year_month_i = dates[i].name[0].toString() + dates[i].name[1].toString();
-                let year_month_j = dates[j].name[0].toString() + dates[j].name[1].toString();
+                let year_month_i = dates[i].name[0].toString() + dates[i].name[1].toString(),
+                    year_month_j = dates[j].name[0].toString() + dates[j].name[1].toString();
                 if(parseInt(year_month_i) > parseInt(year_month_j) && i < j){
-                    let name_holder = dates[i].name;
+                    let holder = dates[i];
                     dates[i] = dates[j];
-                    dates[j] = name_holder;
+                    dates[j] = holder;
                 }
                 if(parseInt(year_month_i) < parseInt(year_month_j) && i > j){
-                    let name_holder = dates[i].name;
+                    let holder = dates[i];
                     dates[i] = dates[j];
-                    dates[j] = name_holder;
+                    dates[j] = holder;
                 }
             }
             dates[i].name = months[dates[i].name[1]] +" "+dates[i].name[0];
@@ -193,7 +196,34 @@ export class ShowList extends React.Component{
                     options: dates,
                     method: function(option){}
                 }
-            ]}
+            ]
+        }
+    }
+
+    filter_by_date(date){
+        const month = date.name.split(" ")[0];
+        const year = date.name.split(" ")[1];
+        let month_value;
+        for(let key in months){
+            if(months[key] === month){
+                month_value = key;
+                break;
+            }
+        }
+        let contents = [];
+        for(const val in this.props.data){
+            if(this.props.data[val].year_month[0] === year && this.props.data[val].year_month[1] === month) {
+                contents.push(
+                    <ListShow data={this.props.data[val]} key={val}/>
+                );
+                }
+            }
+        ReactDom.render(
+            <div>
+                <FilterBar data={this.filter_data()}/>
+                {contents}
+            </div>,
+            document.getElementById('react_container'))
     }
 
     render(){

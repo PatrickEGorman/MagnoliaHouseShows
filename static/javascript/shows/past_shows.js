@@ -7,10 +7,16 @@ import $ from 'jquery'
 let num_shows = 1;
 
 
+function reset_num_shows(){
+    num_shows = 0;
+}
+
+
 function get_past_show_list() {
     num_shows += 10;
     $.get('/shows/list_shows?num_shows='+num_shows+"&past_shows=True", function (data) {
-        ReactDOM.render(<ShowList data={data} callback={get_past_show_list} num_shows={num_shows}/>, document.getElementById('react_container'));
+        ReactDOM.render(<ShowList data={data} callback={get_past_show_list} num_shows={num_shows}
+                                  reset_num_shows={reset_num_shows()}/>, document.getElementById('react_container'));
     });
 }
 

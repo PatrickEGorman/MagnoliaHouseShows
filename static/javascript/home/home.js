@@ -4,13 +4,19 @@ import ReactDOM from 'react-dom'
 import $ from 'jquery'
 
 
-let num_shows = 1;
+let num_shows = 0;
+
+
+function reset_num_shows(){
+    num_shows = 0;
+}
 
 
 function get_show_list() {
     num_shows += 10;
     $.get('/shows/list_shows', function (data) {
-        ReactDOM.render(<ShowList data={data} callback={get_show_list} num_shows={num_shows}/>, document.getElementById('react_container'));
+        ReactDOM.render(<ShowList data={data} callback={get_show_list} num_shows={num_shows}
+                                  reset_num_shows={reset_num_shows()}/>, document.getElementById('react_container'));
     });
 }
 
