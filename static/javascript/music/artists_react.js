@@ -1,6 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {ViewMore} from "../util/view_support";
+import {months} from "../util/date";
+import {FilterBar} from "../util/filter_bar";
 
 
 class Artist extends React.Component{
@@ -76,12 +78,164 @@ class Artist extends React.Component{
 }
 
 
+export class ArtistFilter extends React.Component{
+    
+    filter_data(){
+        let first_letter = [];
+        let genres = [];
+        let hometown = [];
+        let embed_code = [
+            {
+                name: "Bandcamp",
+                number: 0,
+                value:"bandcamp"
+            },
+            {
+                name: "Soundcloud",
+                number: 0,
+                value:"soundcloud"
+            },
+            {
+                name: "Youtube",
+                number: 0,
+                value:"youtube"
+            }];
+        let social_media = [
+            {
+                name: "Bandcamp",
+                number: 0,
+                value:"bandcamp"
+            },
+            {
+                name: "Facebook",
+                number: 0,
+                value:"facebook"
+            },
+            {
+                name: "Soundcloud",
+                number: 0,
+                value:"soundcloud"
+            },
+            {
+                name: "Youtube",
+                number: 0,
+                value:"youtube"
+            }];
+
+        for(const val in this.props.data) {
+            if (this.props.data.hasOwnProperty(val)) {
+                const artist = this.props.data[val];
+                let included_letter = false;
+                for (let i = 0; i < first_letter.length; i++) {
+                    if (first_letter[i].name[0]===artist.name[0]) {
+                        first_letter[i].number++;
+                        included_letter = true;
+                        break;
+                    }
+                }
+                if (!included_letter) {
+                    const option = {name: artist.name[0], number: 1, value: artist.name[0]};
+                    first_letter.push(option);
+                }
+                let included_genre = false;
+                for(const genreKey in artist.genres) {
+                    let genre = artist.genres[genreKey];
+                    for (let i = 0; i < genres.length; i++) {
+                        if (genres[i].name === genre.name) {
+                            genres[i].number++;
+                            included_genre = true;
+                            break;
+                        }
+                    }
+
+                    if (!included_genre) {
+                        const option = {name: genre.name, number: 1, value: genre.id};
+                        genres.push(option);
+                    }
+                }
+                let included_hometown = false;
+                if (artist.hometown) {
+                    for (let i = 0; i < hometown.length; i++) {
+                        if (hometown[i].name === artist.hometown) {
+                            hometown[i].number++;
+                            included_hometown = true;
+                            break;
+                        }
+                    }
+
+                    if (!included_hometown) {
+                        const option = {name: artist.hometown, number: 1, value: artist.hometown};
+                        hometown.push(option);
+                    }
+                }
+                if(artist.facebook){
+                    social_media[1].number++;
+                }
+                if(artist.bandcamp_embed_code){
+                    embed_code[0].number++;
+                    social_media[0].number++;
+                }
+                else if(artist.bandcamp){
+                    social_media[1].number++;
+                }
+                if(artist.soundcloud_embed_code){
+                    embed_code[1].number++;
+                    social_media[2].number++;
+                }
+                else if(artist.soundcloud){
+                    social_media[2].number++;
+                }
+                if(artist.youtube_embed_code){
+                    embed_code[2].number++;
+                    social_media[3].number++;
+                }
+                else if(artist.youtube){
+                    social_media[3].number++;
+                }
+            }
+        }
+        return {filters:
+            [
+                {
+                    name: "Letter",
+                    display_name:"First Letter",
+                    options: first_letter,
+                },
+                {
+                    name: "Genre",
+                    options: genres
+                },
+                {
+                    name: "Hometown",
+                    options: hometown
+                },
+                {
+                    name: "Social",
+                    display_name: "Social Media",
+                    options: social_media
+                },{
+                    name: "Embed",
+                    display_name: "Embed Code",
+                    options: embed_code
+                }
+            ]
+        }
+    }
+
+    render(){
+        return(
+            <FilterBar data={this.filter_data()} callback={this.props.callback} name={"Artists"}/>
+        )
+    }
+}
+
+
 export class ArtistList extends React.Component{
     render(){
         let contents = [];
         let view_more;
         for(const val in this.props.artistData){
-            if(parseInt(val) >= this.props.num_artists - 1){
+            if(parseInt(val) >= this.props.num_artists){
                 view_more = <ViewMore callback={this.props.callback}/>;
                 break;
             }
