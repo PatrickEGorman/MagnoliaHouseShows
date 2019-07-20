@@ -147,7 +147,7 @@ class ListShow extends React.Component{
 }
 
 
-export class ShowList extends React.Component{
+export class ShowFilters extends React.Component{
 
     filter_data(){
         let dates = [];
@@ -227,6 +227,15 @@ export class ShowList extends React.Component{
     }
 
     render(){
+        return(
+            <FilterBar data={this.filter_data()}/>
+        )
+    }
+}
+
+
+export class ShowList extends React.Component{
+    render(){
         let contents = [];
         let view_more;
         for(const val in this.props.data){
@@ -242,7 +251,6 @@ export class ShowList extends React.Component{
             }
         return(
             <div>
-                <FilterBar data={this.filter_data()}/>
                 {contents}
                 {view_more}
             </div>

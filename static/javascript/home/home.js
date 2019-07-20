@@ -1,4 +1,4 @@
-import {ShowList} from '../shows/shows_react'
+import {ShowFilters, ShowList} from '../shows/shows_react'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import $ from 'jquery'
@@ -15,6 +15,7 @@ function reset_num_shows(){
 function get_show_list() {
     num_shows += 10;
     $.get('/shows/list_shows', function (data) {
+        ReactDOM.render(<ShowFilters data={data}/>, document.getElementById('filter_bar'))
         ReactDOM.render(<ShowList data={data} callback={get_show_list} num_shows={num_shows}
                                   reset_num_shows={reset_num_shows()}/>, document.getElementById('react_container'));
     });
