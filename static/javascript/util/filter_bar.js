@@ -9,10 +9,14 @@ export class FilterBar extends React.Component {
         for(const key in this.props.data.filters){
             if(this.props.data.filters.hasOwnProperty(key)) {
                 const filter = this.props.data.filters[key];
+                let display_name = filter.name;
+                if(filter.display_name){
+                    display_name = filter.display_name;
+                }
                 let id = "dropdown" + i.toString();
                 let filter_inside = [];
                 filter_inside.push(<a className="nav-link dropdown-toggle" href="#"  id={id} data-toggle="dropdown"
-                                      aria-haspopup="true" aria-expanded="false" key={i}>{filter.name}</a>
+                                      aria-haspopup="true" aria-expanded="false" key={i}>{display_name}</a>
                 );
                 i++;
                 let nav_options = [];

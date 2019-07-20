@@ -41,5 +41,7 @@ def get_shows_list(request):
         show_list = show_list.filter(artists__genres__id=request.GET.get('Genre'))
     if request.GET.get('Artist'):
         show_list = show_list.filter(artists__id=request.GET.get('Artist'))
+    if request.GET.get('Hometown'):
+        show_list = show_list.filter(artists__hometown=request.GET.get('Hometown'))
     serializer = ShowSerializer(show_list, many=True)
     return JsonResponse(serializer.data, safe=False)

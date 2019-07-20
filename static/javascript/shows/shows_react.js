@@ -152,6 +152,7 @@ export class ShowFilters extends React.Component{
         let dates = [];
         let genres = [];
         let artists = [];
+        let hometowns = [];
         for(const val in this.props.data) {
             if (this.props.data.hasOwnProperty(val)) {
                 const show = this.props.data[val];
@@ -198,6 +199,22 @@ export class ShowFilters extends React.Component{
                         const option = {name: artist.name, number: 1, value: artist.id};
                         artists.push(option);
                     }
+
+                    let included_hometown = false;
+                    if (artist.hometown) {
+                        for (let i = 0; i < hometowns.length; i++) {
+                            if (hometowns[i].name === artist.hometown) {
+                                hometowns[i].number++;
+                                included_hometown = true;
+                                break;
+                            }
+                        }
+
+                        if (!included_hometown) {
+                            const option = {name: artist.hometown, number: 1, value: artist.hometown};
+                            hometowns.push(option);
+                        }
+                    }
                 }
             }
         }
@@ -231,6 +248,11 @@ export class ShowFilters extends React.Component{
                 {
                     name: "Artist",
                     options: artists
+                },
+                {
+                    name: "Hometown",
+                    display_name: "Artist Hometown",
+                    options: hometowns
                 }
             ]
         }
