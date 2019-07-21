@@ -20,6 +20,14 @@ export class FilterBar extends React.Component {
                 );
                 i++;
                 let nav_options = [];
+                if(!filter.sort_function){
+                    filter.options.sort(function(a, b){
+                        return b.number - a.number;
+                    })
+                }
+                else {
+                    filter.options.sort(function(a, b){filter.sort_function(a, b)});
+                }
                 for (const option_key in filter.options) {
                     if (filter.options.hasOwnProperty(option_key)) {
                         let option = filter.options[option_key];

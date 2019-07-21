@@ -219,20 +219,6 @@ export class ShowFilters extends React.Component{
             }
         }
         for(let i=0; i < dates.length; i++){
-            for(let j = 0; j < dates.length; j++){
-                let year_month_i = dates[i].name[0].toString() + dates[i].name[1].toString(),
-                    year_month_j = dates[j].name[0].toString() + dates[j].name[1].toString();
-                if(parseInt(year_month_i) > parseInt(year_month_j) && i < j){
-                    let holder = dates[i];
-                    dates[i] = dates[j];
-                    dates[j] = holder;
-                }
-                if(parseInt(year_month_i) < parseInt(year_month_j) && i > j){
-                    let holder = dates[i];
-                    dates[i] = dates[j];
-                    dates[j] = holder;
-                }
-            }
             dates[i].name = months[dates[i].name[1]] +" "+dates[i].name[0];
         }
         return {filters:
@@ -240,6 +226,16 @@ export class ShowFilters extends React.Component{
                 {
                     name: "Date",
                     options: dates,
+                    sort_function: function(a, b){
+                        const a_value_split = a.value.split("-");
+                        const b_value_split = b.value.split("-");
+                        if(a_value_split[0] !== b_value_split[0]){
+                            return a_value_split[0] - b_value_split[0]
+                        }
+                        else{
+                            return a_value_split[1] - b_value_split[1];
+                        }
+                    }
                 },
                 {
                     name: "Genre",
