@@ -81,7 +81,6 @@ class Artist extends React.Component{
 export class ArtistFilter extends React.Component{
     
     filter_data(){
-        let first_letter = [];
         let genres = [];
         let hometown = [];
         let embed_code = [
@@ -125,18 +124,6 @@ export class ArtistFilter extends React.Component{
         for(const val in this.props.data) {
             if (this.props.data.hasOwnProperty(val)) {
                 const artist = this.props.data[val];
-                let included_letter = false;
-                for (let i = 0; i < first_letter.length; i++) {
-                    if (first_letter[i].name[0]===artist.name[0]) {
-                        first_letter[i].number++;
-                        included_letter = true;
-                        break;
-                    }
-                }
-                if (!included_letter) {
-                    const option = {name: artist.name[0], number: 1, value: artist.name[0]};
-                    first_letter.push(option);
-                }
                 let included_genre = false;
                 for(const genreKey in artist.genres) {
                     let genre = artist.genres[genreKey];
@@ -196,11 +183,6 @@ export class ArtistFilter extends React.Component{
         }
         return {filters:
             [
-                {
-                    name: "Letter",
-                    display_name:"First Letter",
-                    options: first_letter,
-                },
                 {
                     name: "Genre",
                     options: genres
