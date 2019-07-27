@@ -200,32 +200,6 @@ export class ArtistFilter extends React.Component{
                     display_name: "Embed Code",
                     options: embed_code
                 }
-            ],
-            display_fields:
-            [
-                {
-                    name: "Artist",
-                    options: [
-                        {name:"Genres", value:"Artist_Genres", default:true},
-                        {name:"Hometown", default:true},
-                        {name:"Description", default:true},
-                        {name:"Bandcamp", default:true},
-                    ]
-                },
-                {
-                    name: "Media",
-                    options: [
-                        {name:"Photos", default:false},
-                        {name:"Videos", default:false},
-                    ]
-                },
-                {
-                    name: "Shows",
-                    options: [
-                        {name:"Past Shows", value:"Past_Shows", default:false},
-                        {name:"Upcoming Shows",value:"Upcoming_Shows" , default:false},
-                    ]
-                }
             ]
         }
     }

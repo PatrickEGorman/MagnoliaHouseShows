@@ -251,37 +251,6 @@ export class ShowFilters extends React.Component{
                     display_name: "Artist Hometown",
                     options: hometowns
                 }
-            ],
-            display_fields:
-            [
-                {
-                    name: "Show",
-                    options: [
-                        {name:"Date", default:true},
-                        {name:"Time", default:true},
-                        {name:"Donation", display_name: "Suggested Donation", default:true},
-                        {name:"Description", default:false},
-                        {name:"Genres", default:true},
-                        {name:"Facebook", default:false},
-                        ]
-                },
-                {
-                    name: "Artist",
-                    options: [
-                        {name:"Artist Genres", value:"Artist_Genres", default:false},
-                        {name:"Artist Description", value:"Artist_Description", default:false},
-                        {name:"Hometown", default:false},
-                        {name:"Bandcamp", default:false},
-                    ]
-                },
-                {
-                    name: "Media",
-                    options: [
-                        {name:"Fliers", default:false},
-                        {name:"Photos", default:false},
-                        {name:"Videos", default:false},
-                    ]
-                }
             ]
         }
     }
