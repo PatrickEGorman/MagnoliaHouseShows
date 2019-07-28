@@ -1,11 +1,87 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import {ViewMore} from "../util/view_support";
-import {months} from "../util/date";
 import {FilterBar} from "../util/filter_bar";
 
 
-class Artist extends React.Component{
+export class Artist extends React.Component{
+    render() {
+        let genres = "";
+        let genreDiv = "";
+        for(const genreKey in this.props.data.genres){
+            if(genres.length>=1){
+                genres+=", ";
+            }
+            genres += this.props.data.genres[genreKey].name;
+        }
+        if(genres.length>=1){
+            genreDiv =
+                <div className="col-md-12">
+                    <h4>Genres: <small>{genres}</small> </h4>
+                </div>
+        }
+
+        let embed = [];
+        let links = [];
+        let i = 0;
+        if(this.props.data.bandcamp_embed_code)
+        {
+            const htmlCode = {__html: this.props.data.bandcamp_embed_code};
+            embed.push(<div className="col-md-12" key={i}
+                                  dangerouslySetInnerHTML={htmlCode}/>)
+            i++;
+        }
+        if(this.props.data.soundcloud_embed_code){
+            const htmlCode = {__html: this.props.data.soundcloud_embed_code };
+            embed.push(<div className="col-md-12" key={i}
+                                  dangerouslySetInnerHTML={htmlCode}/>)
+            i++;
+        }
+        if(this.props.data.youtube_embed_code){
+            const htmlCode = {__html: this.props.data.youtube_embed_code };
+            embed.push(<div className="col-md-12" key={i}
+                                  dangerouslySetInnerHTML={htmlCode}/>)
+            i++;
+        }
+        if(this.props.data.bandcamp){
+            links.push(<a href={this.props.data.bandcamp} key={i} className={'btn bg-dark text-light'}>Bandcamp</a>)
+        }
+        if(this.props.data.facebook){
+            links.push(<a href={this.props.data.facebook} key={i} className={'btn bg-dark text-light'}>Facebook</a>)
+        }
+        if(this.props.data.soundcloud){
+            links.push(<a href={this.props.data.soundcloud} key={i} className={'btn bg-dark text-light'}>Soundcloud</a>)
+        }
+        if(this.props.data.youtube){
+            links.push(<a href={this.props.data.youtube} key={i} className={'btn bg-dark text-light'}>Youtube</a>)
+        }
+        return (
+            <div className="row">
+                <div className={'col-md-12'}>
+                    <h1>
+                        {this.props.data.name}
+                    </h1>
+                </div>
+                <br/>
+                <div className={'col-md-12'}>
+                    <h3>
+                        {this.props.data.hometown}
+                    </h3>
+                </div>
+                <div className={'col-md-12'}>
+                    {this.props.data.description}
+                </div>
+                {genreDiv}
+                {embed}
+                <div className={'col-md-12'}>
+                    {links}
+                </div>
+            </div>
+        )
+    }
+}
+
+
+class ListArtist extends React.Component{
     render() {
         let genres = "";
         let genreDiv = "";
@@ -52,9 +128,11 @@ class Artist extends React.Component{
         return (
             <div className="row">
                 <div className={'col-md-4'}>
-                    <h3>
-                        {this.props.data.name}
-                    </h3>
+                    <a href={'/music/artist/'+ this.props.data.id}>
+                        <h3>
+                            {this.props.data.name}
+                        </h3>
+                    </a>
                 </div>
                 <div className={'col-md-4'}>
                     <h4>
@@ -223,7 +301,7 @@ export class ArtistList extends React.Component{
             }
             else {
                 contents.push(
-                    <Artist data={this.props.artistData[val]} key={val}/>
+                    <ListArtist data={this.props.artistData[val]} key={val}/>
                 );
             }
         }

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}View Band{% endblock %}
+
+{% block content %}
+
+    <div id="react_container"></div>
+
+    <meta id="artist_id" content={{ artist_id }}>
+    {% load staticfiles %}
+    <script src={% static 'dist/view_artist.js' %}></script>
+{% endblock %}

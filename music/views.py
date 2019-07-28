@@ -1,5 +1,5 @@
 from django.http import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Artist
 from .serializers import ArtistSerializer
 
@@ -12,8 +12,14 @@ def view_album(request):
     return render(request, 'view_album.html', {})
 
 
-def view_band(request):
-    return render(request, 'view_band.html', {})
+def view_artist(request, artist_id):
+    return render(request, 'view_artist.html', {'artist_id': artist_id})
+
+
+def get_artist(request, artist_id):
+    artist = get_object_or_404(Artist, id=artist_id)
+    serializer = ArtistSerializer(artist)
+    return JsonResponse(serializer.data, safe=False)
 
 
 def get_artist_list(request):

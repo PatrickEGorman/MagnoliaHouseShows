@@ -131,14 +131,14 @@ class ListShow extends React.Component{
                         <div className={"col-md-12"}>
                             {this.props.data.date_string} : <small>{artists.substring(0, artists.length-3)}</small>
                         </div>
-                        {genreDiv}
-                        <div className={"col-md-12"}>
-                            <div className={ ' ml-4'}>
-                                {hour}:{minute}<small> PM </small>
-                                ${this.props.data.suggested_donation}{donationMax} <small>suggested donation  </small>
-                            </div>
-                        </div>
                     </a>
+                        {genreDiv}
+                    <div className={"col-md-12"}>
+                        <div className={ ' ml-4'}>
+                            {hour}:{minute}<small> PM </small>
+                            ${this.props.data.suggested_donation}{donationMax} <small>suggested donation  </small>
+                        </div>
+                    </div>
                 </h2>
             </div>
         )
