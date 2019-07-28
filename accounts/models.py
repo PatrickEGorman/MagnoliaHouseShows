@@ -1,7 +1,10 @@
 from django.contrib.auth.models import AbstractUser
+from django.db import models
 
 
 class CustomUser(AbstractUser):
+
+    permission_to_contact = models.BooleanField(default=False, blank=True)
 
     @property
     def name(self):
