@@ -241,7 +241,7 @@ export class ArtistFilter extends React.Component{
                     social_media[0].number++;
                 }
                 else if(artist.bandcamp){
-                    social_media[1].number++;
+                    social_media[0].number++;
                 }
                 if(artist.soundcloud_embed_code){
                     embed_code[1].number++;

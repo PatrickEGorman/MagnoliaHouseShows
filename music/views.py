@@ -38,6 +38,14 @@ def get_artist_list(request):
             artist_list = artist_list.exclude(soundcloud='', soundcloud_embed_code='')
         elif social == "youtube":
             artist_list = artist_list.exclude(youtube='', youtube_embed_code='')
+    if request.GET.get('Embed'):
+        embed = request.GET.get('Embed')
+        if embed == "bandcamp":
+            artist_list = artist_list.exclude(bandcamp_embed_code='')
+        elif embed == "soundcloud":
+            artist_list = artist_list.exclude(soundcloud_embed_code='')
+        elif embed == "youtube":
+            artist_list = artist_list.exclude(youtube_embed_code='')
     artist_list = artist_list.distinct()
     serializer = ArtistSerializer(artist_list, many=True)
     return JsonResponse(serializer.data, safe=False)
