@@ -10,6 +10,7 @@ class ShowAdmin(ModelAdminWithMeta):
     list_filter = ['date', 'priority', 'artists']
     fields = [('date', 'time'), 'artists', 'priority', 'description', ('suggested_donation', 'suggested_donation_max'),
               ('facebook', 'instagram')]
+    ordering = ['-date']
 
 
 admin.site.register(Show, ShowAdmin)
