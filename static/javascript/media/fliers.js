@@ -26,10 +26,12 @@ $.ready(LoadFliers());
 
 class Flier extends React.Component{
     render() {
+        console.log(this.props.data.show);
         this.state = {show_name: null};
         $.get('/shows/get_show/'+this.props.data.show, function(data){
             this.setState({show_name: data.name});
-        });
+            console.log(data);
+        }).fail(console.log("Failed!"));
         return (
             <div className="row">
                 <div className={'col-md-12'}>
