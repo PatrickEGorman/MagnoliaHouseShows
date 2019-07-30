@@ -76,8 +76,29 @@
 {% endblock %}
 </main>
 
-
+<footer class="footer bg-dark">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 text-light">
+                <img src="{% static "images/banner.png" %}" class="image">
+                <a href="https://www.facebook.com/housemagnolia/" target="_blank" class="fa fa-facebook"></a>
+                <a href="https://www.instagram.com/magnoliahouseshows/" target="_blank" class="fa fa-instagram"></a>
+            </div>
+            <div class="col-md-3 mt-3">
+                <a class="text-info" href="/">Upcoming Shows</a> <br>
+                <a class="text-info" href="/shows/past">Past Shows</a> <br>
+                <a class="text-info" href="">Artists</a>
+            </div>
+            <div class="col-md-3 mt-3">
+                <a class="text-info" href="/info/about">About</a> <br>
+                <a class="text-info" href="/info/contact">Contact</a> <br>
+                <a class="text-info" href="/info/directions">Directions</a>
+            </div>
+        </div>
+    </div>
+</footer>
 <script src={% static '/dist/base.js' %}></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
