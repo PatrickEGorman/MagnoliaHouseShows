@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import $ from "jquery";
 import {ViewMore} from "../util/view_support";
+import {Show} from "../shows/shows_react";
 
 
 let num_fliers = 1;
@@ -25,6 +26,10 @@ $.ready(LoadFliers());
 
 class Flier extends React.Component{
     render() {
+        let show;
+        $.get('/shows/get_show/'+this.props.data.show, function(data){
+            show = data;
+        });
         return (
             <div className="row">
                 <div className={'col-md-12'}>
@@ -37,7 +42,7 @@ class Flier extends React.Component{
                     {this.props.data.caption}
                 </div>
                 <div className={'col-md-12'}>
-                    <h2>{this.props.data.show}</h2>
+                    <h2>{show.name}</h2>
                 </div>
                 <div className={'col-md-12'}>
                     <hr/>

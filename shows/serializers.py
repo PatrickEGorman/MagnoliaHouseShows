@@ -22,6 +22,7 @@ class ShowSerializer(serializers.ModelSerializer):
     artists = ArtistSerializer(many=True)
     genres = serializers.DictField()
     sorted_genres = serializers.ListField()
+    name = serializers.CharField()
     metaData = MetaDataSerializer()
 
     class Meta:
@@ -40,6 +41,7 @@ class ShowSerializer(serializers.ModelSerializer):
                   'genres',
                   'sorted_genres',
                   'fliers',
+                  "name",
                   'metaData')
 
 

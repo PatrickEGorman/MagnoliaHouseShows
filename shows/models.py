@@ -74,11 +74,15 @@ class Show(models.Model):
         return ', '.join(genre for genre in self.sorted_genres[:5])
     display_genre.short_description = 'Genre'
 
-    def __str__(self):
+    @property
+    def name(self):
         display = self.date.__str__() + ":"
         for artist in Artist.objects.filter(show__id=self.id):
             display += artist.__str__() + "/"
         return display[:-1]
+
+    def __str__(self):
+        return self.name
 
     metaData = models.OneToOneField(MetaData, on_delete=models.SET_NULL, null=True)
 
