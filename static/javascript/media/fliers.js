@@ -1,7 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import $ from "jquery";
-import {parseDate} from "../util/date";
 import {ViewMore} from "../util/view_support";
 
 
@@ -26,17 +25,14 @@ $.ready(LoadFliers());
 
 class Flier extends React.Component{
     render() {
-        let dateDisplay;
-        if(this.props.data.date){
-            const date = parseDate(this.props.data.date);
-            dateDisplay = <div className={'col-xs-12 col-md-6'}><h2>Date: {date}</h2></div>;
-        }
         return (
             <div className="row">
                 <div className={'col-md-12'}>
                     <img src={this.props.data.image} alt={this.props.data.caption}/>
                 </div>
-                {dateDisplay}
+                <div className={'col-md-12'}>
+                    {this.props.data.date_string}
+                </div>
                 <div className={'col-md-12'}>
                     {this.props.data.caption}
                 </div>

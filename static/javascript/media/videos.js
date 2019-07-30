@@ -1,7 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import $ from "jquery";
-import {parseDate} from "../util/date";
 import {ViewMore} from "../util/view_support";
 
 
@@ -18,11 +17,6 @@ $.ready(loadVideos());
 
 class Video extends React.Component{
     render() {
-        let dateDisplay;
-        if(this.props.data.date){
-            const date = parseDate(this.props.data.date);
-            dateDisplay = <div className={'col-xs-12 col-md-6'}><h2>Date: {date}</h2></div>
-        }
         let artistDisplay;
         if(this.props.data.artist){
             artistDisplay = <div className={'col-xs-12 col-md-6'}><h2>Artist: {this.props.data.artist.name}</h2></div>
@@ -45,7 +39,9 @@ class Video extends React.Component{
                         </iframe>
                     </div>
                 </div>
-                {dateDisplay}
+                <div className={'col-md-12'}>
+                    {this.props.data.date_string}
+                </div>
                 {artistDisplay}
                 {showDisplay}
                 <div className={'col-md-12'}>
