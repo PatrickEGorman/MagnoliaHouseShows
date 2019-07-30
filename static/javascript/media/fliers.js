@@ -26,14 +26,14 @@ $.ready(LoadFliers());
 
 class Flier extends React.Component{
     render() {
-        let show;
+        this.state = {show_name: null};
         $.get('/shows/get_show/'+this.props.data.show, function(data){
-            show = data;
+            this.state = {show_name: data.name}
         });
         return (
             <div className="row">
                 <div className={'col-md-12'}>
-                    <img src={this.props.data.image} alt={this.props.data.caption}/>
+                    <img className={"image"} src={this.props.data.image} alt={this.props.data.caption}/>
                 </div>
                 <div className={'col-md-12'}>
                     {this.props.data.date_string}
@@ -42,7 +42,7 @@ class Flier extends React.Component{
                     {this.props.data.caption}
                 </div>
                 <div className={'col-md-12'}>
-                    <h2>{show.name}</h2>
+                    <h2>{this.state.show_name}</h2>
                 </div>
                 <div className={'col-md-12'}>
                     <hr/>
