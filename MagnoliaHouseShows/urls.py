@@ -18,7 +18,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 from main.views import home
-from .settings import IS_ONLINE
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home),
@@ -31,5 +31,5 @@ urlpatterns = [
     path('social-auth/', include('social_django.urls', namespace="social")),
 ]
 
-if not IS_ONLINE:
+if settings.MEDIA_URL == "/uploads":
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

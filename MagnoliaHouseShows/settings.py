@@ -84,15 +84,12 @@ SOCIAL_AUTH_FACEBOOK_KEY = '319824315573183'
 
 AWS_ACCESS_KEY_ID = 'AKIAT3LD6P6NVDHRBWW5'
 
-IS_ONLINE = False
-
 try:
     AWS_SECRET_ACCESS_KEY = os.environ["AWS_SECRET"]
     #  Add configuration for static files storage using whitenoise
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
     MIDDLEWARE.append('whitenoise.middleware.WhiteNoiseMiddleware')
     DEFAULT_FILE_STORAGE = 'MagnoliaHouseShows.storage_backends.MediaStorage'
-    IS_ONLINE = True
 
 except KeyError:
     print("No AWS secret key given")
