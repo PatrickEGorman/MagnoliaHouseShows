@@ -35,5 +35,3 @@ function filtered_callback(filter_setting){
 
 
 $.ready(get_show_list());
-
-$.ready(get_past_show_list());

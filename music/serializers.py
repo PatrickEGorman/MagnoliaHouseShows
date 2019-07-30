@@ -1,7 +1,26 @@
 from rest_framework import serializers
 
 from main.serializers import MetaDataSerializer
+from shows.models import Show
 from .models import Album, Artist, Genre
+
+
+class ShowEmbedSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField()
+    date = serializers.DateField()
+    date_string = serializers.CharField()
+    genres = serializers.DictField()
+    name = serializers.CharField()
+    metaData = MetaDataSerializer()
+
+    class Meta:
+        model = Show
+        fields = ('id',
+                  'date',
+                  'date_string',
+                  'genres',
+                  "name",
+                  'metaData')
 
 
 class GenreSerializer(serializers.ModelSerializer):
@@ -28,7 +47,9 @@ class ArtistSerializer(serializers.ModelSerializer):
     facebook = serializers.URLField()
     soundcloud = serializers.URLField()
     youtube = serializers.URLField()
+    show_set = ShowEmbedSerializer(many=True)
     description = serializers.CharField()
+
     metaData = MetaDataSerializer()
 
     class Meta:
@@ -45,6 +66,7 @@ class ArtistSerializer(serializers.ModelSerializer):
                   'soundcloud_embed_code',
                   'youtube_embed_code',
                   'bandcamp_embed_code',
+                  'show_set',
                   'metaData')
 
 

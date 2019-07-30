@@ -54,6 +54,23 @@ export class Artist extends React.Component{
         if(this.props.data.youtube){
             links.push(<a href={this.props.data.youtube} key={i} className={'btn bg-dark text-light'}>Youtube</a>)
         }
+        let showList = [];
+        if(this.props.data.show_set){
+            let i = 0;
+            showList.push(<div className={"col-md-12 mt-4"}><h4>Shows</h4></div> );
+            i++;
+            for(const key in this.props.data.show_set){
+                const show = this.props.data.show_set[key];
+                showList.push(
+                    <div key={i} className={"col-md-12"}>
+                        <a href={"/shows/view_show/"+show.id}>
+                            {show.name}
+                        </a>
+                    </div>
+                );
+                i++;
+            }
+        }
         return (
             <div className="row">
                 <div className={'col-md-12'}>
@@ -75,6 +92,7 @@ export class Artist extends React.Component{
                 <div className={'col-md-12'}>
                     {links}
                 </div>
+                {showList}
             </div>
         )
     }

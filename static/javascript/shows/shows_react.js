@@ -86,9 +86,21 @@ export class Show extends React.Component{
 
 class ListShow extends React.Component{
     render() {
-        let artists = '';
+        let artist_list = [];
+        let divider;
         for(const key in this.props.data.artists){
-            artists += this.props.data.artists[key].name +" / ";
+            if(this.props.data.artists.hasOwnProperty(key)) {
+                let artist = this.props.data.artists[key];
+                artist_list.push(
+                    <span key={key}>
+                        {divider}
+                        <a href={'/music/artist/' + artist.id}>
+                            {artist.name}
+                        </a>
+                    </span>
+                );
+                divider = " / ";
+            }
         }
         let split_time = this.props.data.time.split(":");
         const hour = parseInt(split_time[0]);
@@ -127,16 +139,18 @@ class ListShow extends React.Component{
         return(
             <div className={'row mt-3'}>
                 <h2>
-                    <a href={'/shows/view_show/'+this.props.data.id}>
-                        <div className={"col-md-12"}>
-                            {this.props.data.date_string} : <small>{artists.substring(0, artists.length-3)}</small>
-                        </div>
-                    </a>
+                    <div className={"col-md-12"}>
+                        {this.props.data.date_string} : <small>{artist_list}</small>
+                    </div>
                         {genreDiv}
                     <div className={"col-md-12"}>
-                        <div className={ ' ml-4'}>
+                        <div className={ 'ml-4'}>
                             {hour}:{minute}<small> PM </small>
                             ${this.props.data.suggested_donation}{donationMax} <small>suggested donation  </small>
+                            <br/>
+                            <a href={'/shows/view_show/'+this.props.data.id}>
+                                More Info
+                            </a>
                         </div>
                     </div>
                 </h2>
