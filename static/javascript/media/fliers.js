@@ -25,13 +25,19 @@ function togglePastShows(){
 $.ready(LoadFliers());
 
 class Flier extends React.Component{
-    render() {
-        console.log(this.props.data.show);
+    constructor(props){
+        super(props);
         this.state = {show_name: null};
-        $.get('/shows/get_show/'+this.props.data.show, function(data){
-            this.setState({show_name: data.name});
-            console.log(data);
-        }).fail(console.log("Failed!"));
+        let show_id = this.props.data.show;
+        let show_data;
+        var showLoaded = new Event("showLoaded");
+        document.addEventListener("showLoaded",() => {this.setState({show_name: show_data.name})});
+        $.get('/shows/get_show/'+show_id, (data) => {
+            show_data = data;
+            document.dispatchEvent(showLoaded);
+        }).fail(console.log("Failed to load show with ID="+show_id));
+    }
+    render() {
         return (
             <div className="row">
                 <div className={'col-md-12'}>

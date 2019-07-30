@@ -50,7 +50,6 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -84,17 +83,28 @@ TEMPLATES = [
 SOCIAL_AUTH_FACEBOOK_KEY = '319824315573183'
 
 AWS_ACCESS_KEY_ID = 'AKIAT3LD6P6NVDHRBWW5'
+
+IS_ONLINE = False
+
 try:
     AWS_SECRET_ACCESS_KEY = os.environ["AWS_SECRET"]
+    #  Add configuration for static files storage using whitenoise
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+    MIDDLEWARE.append('whitenoise.middleware.WhiteNoiseMiddleware')
+    DEFAULT_FILE_STORAGE = 'MagnoliaHouseShows.storage_backends.MediaStorage'
+    IS_ONLINE = True
+
 except KeyError:
     print("No AWS secret key given")
+    MEDIA_URL = '/uploads/'
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
+
 AWS_STORAGE_BUCKET_NAME = 'magnolia-house-shows'
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
 }
 AWS_LOCATION = 'static'
-DEFAULT_FILE_STORAGE = 'MagnoliaHouseShows.storage_backends.MediaStorage'
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
@@ -157,9 +167,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = (
   os.path.join(BASE_DIR, 'static/'),
 )
-
-#  Add configuration for static files storage using whitenoise
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 import dj_database_url
 prod_db  =  dj_database_url.config(conn_max_age=500)
