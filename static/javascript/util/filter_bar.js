@@ -50,13 +50,13 @@ export class FilterBar extends React.Component {
         }
         return(
             <nav className="navbar navbar-expand-md navbar-dark bg-dark">
+                <a className="navbar-brand text-light" >Filter {this.props.name}</a>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#filterNav"
                         aria-controls="filterNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"> </span>
                 </button>
                 <div className="navbar-collapse collapse" id="filterNav">
                     <ul className="navbar-nav mr-auto">
-                        <li className="nav-item"><a className="nav-link" >Filter {this.props.name}</a></li>
                         <li className="nav-item"><a className="nav-link" href="#"  onClick={() => {this.props.callback("")}}>Show All</a></li>
                         {nav_filters}
                     </ul>
