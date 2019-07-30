@@ -28,7 +28,7 @@ class Flier extends React.Component{
     render() {
         this.state = {show_name: null};
         $.get('/shows/get_show/'+this.props.data.show, function(data){
-            this.state = {show_name: data.name}
+            this.setState({show_name: data.name});
         });
         return (
             <div className="row">
