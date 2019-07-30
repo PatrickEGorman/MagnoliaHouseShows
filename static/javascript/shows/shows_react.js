@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactDom from 'react-dom'
 import {ArtistList} from '../music/artists_react'
 import {ViewMore} from "../util/view_support";
 import {FilterBar} from "../util/filter_bar";
@@ -110,11 +109,11 @@ class ListShow extends React.Component{
         let i = 0;
         for(const genreKey in this.props.data.sorted_genres){
             if(i > 5){
-                console.log("Show on "+date+"has more than 5 genres.  Terminating display")
+                console.log("Show on "+this.props.data.date_string+"has more than 5 genres.  Terminating display")
                 break;
             }
             else if(genres.length > 50){
-                console.log("Show on "+date+"has genre string of more than 50 letters.  Terminating display")
+                console.log("Show on "+this.props.data.date_string+"has genre string of more than 50 letters.  Terminating display")
                 break;
             }
             else if(genres.length>=1){
