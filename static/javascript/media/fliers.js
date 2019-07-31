@@ -26,18 +26,6 @@ function togglePastShows(){
 $.ready(LoadFliers());
 
 class Flier extends React.Component{
-    constructor(props){
-        super(props);
-        this.state = {show_name: null};
-        let show_id = this.props.data.show;
-        let show_data;
-        var showLoaded = new Event("showLoaded");
-        document.addEventListener("showLoaded",() => {this.setState({show_name: show_data.name})});
-        $.get('/shows/get_show/'+show_id, (data) => {
-            show_data = data;
-            document.dispatchEvent(showLoaded);
-        }).fail(console.log("Failed to load show with ID="+show_id));
-    }
     render() {
         return (
             <div className="row">
@@ -51,7 +39,7 @@ class Flier extends React.Component{
                     {this.props.data.caption}
                 </div>
                 <div className={'col-md-12'}>
-                    <h2><a href={'/shows/view_show/'+this.props.data.show}>{this.state.show_name}</a></h2>
+                    <h2><a href={'/shows/view_show/'+this.props.data.show.id}>{this.props.data.show.name}</a></h2>
                 </div>
                 <div className={'col-md-12'}>
                     <hr/>
@@ -85,7 +73,7 @@ export class FlierList extends React.Component{
         }
         return(
             <div className='container'>
-                <div className={'row-md-12'}>
+                <div className={'row-md-12 mb-4'}>
                     <a className={'btn bg-dark text-light'} href="#" onClick={togglePastShows}>{past_show_link}</a>
                 </div>
                 {contents}

@@ -10,7 +10,18 @@ export class Show extends React.Component{
         let split_time = this.props.data.time.split(":");
         const hour = parseInt(split_time[0]);
         const minute = split_time[1];
-
+        let facebook;
+        let instagram;
+        if(this.props.data.facebook) {
+            facebook = <a href="this.props.data.facebook" target="_blank" className="fa fa-facebook"> </a>;
+        }
+        if(this.props.data.instagram){
+            instagram =
+                <a href = {this.props.data.instagram}
+                    target = "_blank"
+                    className = "fa fa-instagram" >
+                </a>
+        }
         let links=[];
         if(this.props.data.facebook){
             links.push(<a href={this.props.data.facebook} className={'btn bg-dark text-light'} key={1}>Facebook Event</a>);
@@ -29,7 +40,7 @@ export class Show extends React.Component{
                 <div className={"container"}>
                     <div className={'row mb-3'}>
                         <div className={"col"}>
-                            <h2>{this.props.data.date_string} {hour}:{minute}PM</h2>
+                            <h2>{this.props.data.date_string} {hour}:{minute}PM</h2> {facebook} {instagram}
                         </div>
                     </div>
                     <div className={'row mb-5'}>
