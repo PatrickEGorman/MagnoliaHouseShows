@@ -11,6 +11,7 @@ module.exports = {
         photos: './static/javascript/media/photos.js',
         videos: './static/javascript/media/videos.js',
         list_genres: './static/javascript/music/list_genres.js',
+        view_genre: './static/javascript/music/view_genre.js',
         music_page: './static/javascript/music/music_page.js',
         view_artist: './static/javascript/music/view_artist.js',
         past_shows: './static/javascript/shows/past_shows.js',

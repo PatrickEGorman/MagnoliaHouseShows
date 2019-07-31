@@ -10,7 +10,7 @@ class Genre(models.Model):
     priority = models.IntegerField(choices=priority_choices, default=3)
 
     class Meta:
-        ordering = ["-priority", "name"]
+        ordering = ["priority", "name"]
 
     def __str__(self):
         return self.name

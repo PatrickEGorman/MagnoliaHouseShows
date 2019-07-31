@@ -59,3 +59,13 @@ def get_genre_list(request):
     genre_list = Genre.objects.all()
     serializer = GenreSerializer(genre_list, many=True)
     return JsonResponse(serializer.data, safe=False)
+
+
+def view_genre(request, genre_id):
+    return render(request, 'view_genre.html', {'genre_id': genre_id})
+
+
+def get_genre(request, genre_id):
+    genre = Genre.objects.get(id=genre_id)
+    serializer = GenreSerializer(genre)
+    return JsonResponse(serializer.data, safe=False)
