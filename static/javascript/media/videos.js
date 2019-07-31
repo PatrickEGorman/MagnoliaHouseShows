@@ -23,7 +23,7 @@ class Video extends React.Component{
         if(this.props.data.artist){
             artistDisplay =
                 <div className={'col-xs-12 col-md-6'}>
-                    <a href={'/music/artist/'+this.props.data.artist.id}><h2>Show: {this.props.data.artist.name}</h2></a>
+                    <a href={'/music/artist/'+this.props.data.artist.id}><h2>Artist: {this.props.data.artist.name}</h2></a>
                 </div>
         }
         let showDisplay;
