@@ -12,6 +12,7 @@ class ShowEmbedSerializer(serializers.ModelSerializer):
     date_string = serializers.CharField()
     genres = serializers.DictField()
     name = serializers.CharField()
+    time = serializers.TimeField()
     metaData = MetaDataSerializer()
 
     class Meta:
@@ -21,6 +22,7 @@ class ShowEmbedSerializer(serializers.ModelSerializer):
                   'date_string',
                   'genres',
                   "name",
+                  "time",
                   'metaData')
 
 

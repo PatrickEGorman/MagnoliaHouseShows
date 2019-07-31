@@ -1,34 +1,21 @@
 import React from 'react'
 import {ViewMore} from "../util/view_support";
+import {ArtistList} from "./artists_react";
+import {ShowList} from "../shows/shows_react";
 
 
 
 export class Genre extends React.Component{
     render() {
-        let artist_display_list = [];
-        let show_organize_list = [];
-        let show_display_list = [];
+        let show_list = [];
         for(const key in this.props.data.artist_set) {
             const artist = this.props.data.artist_set[key];
-            artist_display_list.push(
-                <li className="list-group-item" key={key}>
-                    <a href={'/music/artist/' + artist.id}>{artist.name}</a>
-                </li>
-            );
             for (const show_key in artist.show_set) {
                 const show = artist.show_set[show_key];
-                if (!(show_organize_list.includes(show))) {
-                    show_organize_list.push(show);
+                if (!(show_list.includes(show))) {
+                    show_list.push(show);
                 }
             }
-        }
-        for(const key in show_organize_list) {
-            const show = show_organize_list[key];
-            show_display_list.push(
-                <li className="list-group-item" key={key}>
-                    <a href={'/music/artist/' + show.id}>{show.name}</a>
-                </li>
-            );
         }
 
         return (
@@ -46,18 +33,15 @@ export class Genre extends React.Component{
                         Artists:
                     </h4>
                     <br/>
-                    <ul className={"list-group"}>
-                        {artist_display_list}
-                    </ul>
+                    <ArtistList artistData={this.props.data.artist_set} num_artists={this.props.num_artists}
+                    callback={this.props.artist_callback}/>
                 </div>
                 <div className={'col-xs-12 col-md-6'}>
                     <h4>
                         Shows:
                     </h4>
                     <br/>
-                    <ul className={"list-group"}>
-                        {show_display_list}
-                    </ul>
+                    <ShowList data={show_list} num_shows={this.props.num_shows} callback={this.props.show_callback}/>
                 </div>
             </div>
         )

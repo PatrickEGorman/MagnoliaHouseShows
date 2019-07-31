@@ -104,6 +104,7 @@ class ListArtist extends React.Component{
         let genres = [];
         let genreDiv = "";
         let divider = '';
+        console.log(this.props.data.genres);
         for(const genreKey in this.props.data.genres){
             const genre = this.props.data.genres[genreKey];
             genres.push(<span key={genreKey}>{divider}<a href={'/music/genre/'+genre.id}>{genre.name}</a></span>);
