@@ -20,7 +20,7 @@ class YoutubeAdmin(ModelAdminWithMeta):
     list_display = ('caption', 'priority', 'youtube_url', 'artist', 'show', 'date', meta_created_date,
                     meta_created_by)
     list_filter = ('date', 'priority', 'artist', 'show')
-    fields = (('artist', 'show'), 'youtube_url', 'priority', 'image', 'caption', 'date')
+    fields = (('artist', 'show'), 'youtube_url', 'priority', 'caption', 'date')
 
 
 admin.site.register(Flier, FlierAdmin)
