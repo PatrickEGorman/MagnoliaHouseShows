@@ -10,6 +10,7 @@ module.exports = {
         fliers: './static/javascript/media/fliers.js',
         photos: './static/javascript/media/photos.js',
         videos: './static/javascript/media/videos.js',
+        list_genres: './static/javascript/music/list_genres.js',
         music_page: './static/javascript/music/music_page.js',
         view_artist: './static/javascript/music/view_artist.js',
         past_shows: './static/javascript/shows/past_shows.js',

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Music{% endblock %}
+
+{% block content %}
+
+    <h1>Featured Artists</h1>
+
+    <div class="mt-3" id="react_container"></div>
+
+    {% load staticfiles %}
+    <script src={% static '/dist/list_genres.js' %}></script>
+{% endblock %}

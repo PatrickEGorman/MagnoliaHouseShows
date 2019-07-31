@@ -5,7 +5,7 @@ from main.util import priority_choices, parse_date_string
 
 
 class Genre(models.Model):
-    name = models.TextField(unique=True, max_length=20)
+    name = models.TextField(unique=True, blank=False, default="", max_length=20)
 
     priority = models.IntegerField(choices=priority_choices, default=3)
 
