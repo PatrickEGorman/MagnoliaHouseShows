@@ -72,6 +72,7 @@ class ArtistEmbedGenreSerializer(serializers.ModelSerializer):
                   'show_set',
                   'genres',
                   "hometown",
+                  "description",
                   'bandcamp_embed_code',
                   'soundcloud_embed_code',
                   "youtube_embed_code",

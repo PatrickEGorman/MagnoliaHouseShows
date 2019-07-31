@@ -55,6 +55,13 @@ class ListGenre extends React.Component{
         let show_organize_list = [];
         let show_display_list = [];
         for(const key in this.props.data.artist_set) {
+            if(key >4){
+                show_display_list.push(
+                <li className="list-group-item" key={key}>
+                    <a href={'/music/genre/' + this.props.data.id}>View More</a>
+                </li>);
+                break;
+            }
             const artist = this.props.data.artist_set[key];
             artist_display_list.push(
                 <li className="list-group-item" key={key}>
@@ -69,6 +76,13 @@ class ListGenre extends React.Component{
             }
         }
         for(const key in show_organize_list) {
+            if(key >4){
+                show_display_list.push(
+                <li className="list-group-item" key={key}>
+                    <a href={'/music/genre/' + this.props.data.id}>View More</a>
+                </li>);
+                break;
+            }
             const show = show_organize_list[key];
             show_display_list.push(
                 <li className="list-group-item" key={key}>

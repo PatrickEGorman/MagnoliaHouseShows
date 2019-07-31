@@ -1,7 +1,7 @@
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404
 from .models import Artist, Genre
-from .serializers import ArtistSerializer, GenreSerializer
+from .serializers import ArtistSerializer, GenreSerializer, ArtistEmbedGenreSerializer
 
 
 def music(request):
@@ -47,7 +47,7 @@ def get_artist_list(request):
         elif embed == "youtube":
             artist_list = artist_list.exclude(youtube_embed_code='')
     artist_list = artist_list.distinct()
-    serializer = ArtistSerializer(artist_list, many=True)
+    serializer = ArtistEmbedGenreSerializer(artist_list, many=True)
     return JsonResponse(serializer.data, safe=False)
 
 
