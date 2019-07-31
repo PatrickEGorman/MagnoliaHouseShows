@@ -21,11 +21,17 @@ class Video extends React.Component{
     render() {
         let artistDisplay;
         if(this.props.data.artist){
-            artistDisplay = <div className={'col-xs-12 col-md-6'}><h2>Artist: {this.props.data.artist.name}</h2></div>
+            artistDisplay =
+                <div className={'col-xs-12 col-md-6'}>
+                    <a href={'/music/artist/'+this.props.data.artist.id}><h2>Show: {this.props.data.artist.name}</h2></a>
+                </div>
         }
         let showDisplay;
         if(this.props.data.show){
-            showDisplay = <div className={'col-xs-12 col-md-6'}><h2>Show: {this.props.data.show}</h2></div>
+            showDisplay =
+                <div className={'col-xs-12 col-md-6'}>
+                    <a href={'/shows/view_show/'+this.props.data.show.id}><h2>Show: {this.props.data.show.name}</h2></a>
+                </div>
         }
         let youtubeUrl = "https://www.youtube.com/embed/";
         let youtube_ender = this.props.data.youtube_url.split('/')[this.props.data.youtube_url.split('/').length-1];

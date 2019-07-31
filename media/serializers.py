@@ -6,6 +6,24 @@ from shows.models import Show
 from .models import Flier, Photo, YoutubeVideo
 
 
+class ShowEmbedSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField()
+    date = serializers.DateField()
+    date_string = serializers.CharField()
+    genres = serializers.DictField()
+    name = serializers.CharField()
+    metaData = MetaDataSerializer()
+
+    class Meta:
+        model = Show
+        fields = ('id',
+                  'date',
+                  'date_string',
+                  'genres',
+                  "name",
+                  'metaData')
+
+
 class FlierSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField()
     image = serializers.ImageField()
@@ -13,7 +31,7 @@ class FlierSerializer(serializers.ModelSerializer):
     caption = serializers.CharField()
     year_month = serializers.ListField()
     date_string = serializers.CharField()
-    show = serializers.PrimaryKeyRelatedField(queryset=Show.objects.all(), many=False)
+    show = ShowEmbedSerializer()
     metaData = MetaDataSerializer()
 
     class Meta:
@@ -36,7 +54,7 @@ class PhotoSerializer(serializers.ModelSerializer):
     year_month = serializers.ListField()
     date_string = serializers.CharField()
     artist = ArtistSerializer()
-    show = serializers.StringRelatedField(many=False)
+    show = ShowEmbedSerializer()
     metaData = MetaDataSerializer()
 
     class Meta:
@@ -60,7 +78,7 @@ class YoutubeSerializer(serializers.ModelSerializer):
     year_month = serializers.ListField()
     date_string = serializers.CharField()
     artist = ArtistSerializer()
-    show = serializers.StringRelatedField(many=False)
+    show = ShowEmbedSerializer()
     metaData = MetaDataSerializer()
 
     class Meta:
