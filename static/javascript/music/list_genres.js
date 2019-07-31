@@ -6,6 +6,8 @@ import $ from 'jquery'
 
 let num_genres = 0;
 
+ReactDOM.render(<h1>Loading...</h1>, document.getElementById('react_container'))
+
 function loadGenres(){
     num_genres += 10;
     let url = '/music/genre_list';

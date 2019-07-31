@@ -6,6 +6,8 @@ import {ViewMore} from "../util/view_support";
 
 let num_videos = 1;
 
+ReactDOM.render(<h1>Loading...</h1>, document.getElementById('react_container'))
+
 function loadVideos(){
     num_videos += 10;
     $.get('/media/list_videos?num_videos='+num_videos, function(data){

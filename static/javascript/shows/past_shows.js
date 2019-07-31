@@ -11,6 +11,8 @@ function reset_num_shows(){
     num_shows = 0;
 }
 
+ReactDOM.render(<h1>Loading...</h1>, document.getElementById('react_container'))
+
 function get_show_list() {
     num_shows += 10;
     let url ='/shows/list_shows?past_shows=True';

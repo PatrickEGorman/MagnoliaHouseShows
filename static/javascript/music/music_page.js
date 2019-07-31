@@ -7,6 +7,8 @@ import $ from 'jquery'
 let num_artists = 0;
 let filter;
 
+ReactDOM.render(<h1>Loading...</h1>, document.getElementById('react_container'))
+
 function loadArtists(){
     num_artists += 10;
     let url = '/music/artist_list';

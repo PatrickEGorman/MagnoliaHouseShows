@@ -6,6 +6,9 @@ import {ViewMore} from "../util/view_support";
 
 let num_photos = 1;
 
+ReactDOM.render(<h1>Loading...</h1>, document.getElementById('react_container'))
+
+
 function loadPhotos(){
     num_photos += 10;
     $.get('/media/list_photos?num_photos='+num_photos, function(data){
