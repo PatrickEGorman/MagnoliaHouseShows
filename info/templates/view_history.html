@@ -11,7 +11,7 @@
                         allowFullScreen>
                 </iframe>
             </div><br>
-            {{ history.photo.caption }}
+            {{ history.video.caption }}
         </div>
 
     {% elif history.photo and history.flier %}
@@ -58,14 +58,14 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6 col-xs-12">
             {% for show in history.shows.all %}
                 <a href="/shows/view_show/{{ show.id }}">{{ show.name }}</a><br>
             {% endfor %}
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 col-xs-12">
             {% for artist in history.artists.all %}
-                <a href="/shows/view_show/{{ artist.id }}">{{ artist.name }}</a><br>
+                <a class="mr-3" href="/shows/view_show/{{ artist.id }}">{{ artist.name }}</a>
             {% endfor %}
         </div>
     </div>
