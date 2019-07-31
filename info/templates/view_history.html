@@ -52,9 +52,21 @@
             {% else %}
                 {{ history.start_date_string }}
                 {% if history.end_date %}
-                    to {{ history.end_date_string }}
+                    to {{ history.end_date_string }} {{ history.end_year_month }}
                 {% endif %}
             {% endif %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            {% for show in history.shows.all %}
+                <a href="/shows/view_show/{{ show.id }}">{{ show.name }}</a><br>
+            {% endfor %}
+        </div>
+        <div class="col-md-6">
+            {% for artist in history.artists.all %}
+                <a href="/shows/view_show/{{ artist.id }}">{{ artist.name }}</a><br>
+            {% endfor %}
         </div>
     </div>
     <div class="row">
