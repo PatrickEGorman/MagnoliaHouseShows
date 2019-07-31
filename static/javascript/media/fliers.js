@@ -51,7 +51,7 @@ class Flier extends React.Component{
                     {this.props.data.caption}
                 </div>
                 <div className={'col-md-12'}>
-                    <h2>{this.state.show_name}</h2>
+                    <h2><a href={'/shows/view_show/'+this.props.data.show}>{this.state.show_name}</a></h2>
                 </div>
                 <div className={'col-md-12'}>
                     <hr/>

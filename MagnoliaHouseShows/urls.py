@@ -31,5 +31,5 @@ urlpatterns = [
     path('social-auth/', include('social_django.urls', namespace="social")),
 ]
 
-if settings.MEDIA_URL == "/uploads":
+if settings.MEDIA_URL == "/uploads/":
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
