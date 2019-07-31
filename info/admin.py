@@ -5,17 +5,17 @@ from .models import InfoPage, Directions, History
 
 
 class InfoAdmin(ModelAdminWithMeta):
-    list_display = ('page_name', 'title', 'image', 'text', meta_created_date, meta_created_by)
-    fields = ('page_name', 'title', 'image', 'text', 'priority')
+    list_display = ('page_name', 'title', 'text', meta_created_date, meta_created_by)
+    fields = ('page_name', 'title', 'text', 'priority')
 
 
 class DirectionsAdmin(ModelAdminWithMeta):
-    list_display = ('starting_point', 'title', 'image', 'text', meta_created_date, meta_created_by)
-    fields = ('title', 'image', 'text', 'starting_point', 'priority')
+    list_display = ('starting_point', 'text', 'priority', meta_created_date, meta_created_by)
+    fields = ('starting_point', 'text', 'priority')
 
 
 class HistoryAdmin(ModelAdminWithMeta):
-    list_display = ('start_or_primary_date', 'end_date', 'title', 'image', 'text', meta_created_date,
+    list_display = ('start_or_primary_date', 'end_date', 'title', 'text', meta_created_date,
                     meta_created_by)
     list_filter = ('start_or_primary_date', 'end_date')
     fields = ('title',  ('start_or_primary_date', 'end_date', 'approximate_date'), ('shows', 'artists'),

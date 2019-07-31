@@ -1,14 +1,16 @@
 from django.shortcuts import render
 
-from info.models import History
+from info.models import InfoPage, Directions, History
 
 
-def about(request):
-    return render(request, 'about.html', {})
+def show_about(request):
+    about = InfoPage.objects.filter(page_name="about")
+    return render(request, 'about.html', {'about': about})
 
 
-def directions(request):
-    return render(request, 'directions.html', {})
+def list_directions(request):
+    directions = Directions.objects.all()
+    return render(request, 'directions.html', {'directions': directions})
 
 
 def history_list(request):
@@ -21,5 +23,6 @@ def view_history(request, history_id):
     return render(request, 'view_history.html', {'history': history})
 
 
-def contact(request):
-    return render(request, 'contact.html', {})
+def list_contacts(request):
+    contacts = InfoPage.objects.filter(page_name="contact")
+    return render(request, 'contact.html', {'contacts': contacts})

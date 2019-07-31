@@ -4,6 +4,20 @@
 
 {% block content %}
     <div class="col-md-12">
-        <h1>This the directions page</h1>
+        <h1>Directions</h1>
     </div>
+    <ul class="list-group">
+        {% for direction in directions %}
+            <li class="list-group-item">
+                <div class="row text_block">
+                    <div class="col-md-6 col-xs-12">
+                        {{ direction.starting_point }}
+                    </div>
+                    <div class="col-md-6 col-xs-12">
+                        {{ direction.text }}
+                    </div>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
 {% endblock %}

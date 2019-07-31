@@ -4,6 +4,18 @@
 
 {% block content %}
     <div class="col-md-12">
-        <h1>This the about page</h1>
+        <h1>About</h1>
     </div>
+    {% for about_item in about %}
+            <div class="row text_block">
+                <div class="col-md-12">
+                    <h2>
+                        {{ about_item.title }}
+                    </h2>
+                </div>
+                <div class="col-md-12">
+                    {{ about_item.text }}
+                </div>
+            </div>
+    {% endfor %}
 {% endblock %}

@@ -11,8 +11,6 @@ from shows.models import Show
 
 class InfoPage(models.Model):
     page_name = models.TextField(choices=[("about", "About"), ("contact", "Contact")], default="about")
-    image = models.ImageField(blank=True, null=True)
-    image_caption = models.TextField(blank=True, null=True)
     title = models.TextField(default='')
     text = models.TextField(default='')
 

@@ -1,10 +1,10 @@
 from django.urls import path
-from .views import about, directions, history_list, contact, view_history
+from .views import show_about, list_directions, history_list, list_contacts, view_history
 
 urlpatterns = [
-    path('about', about),
-    path('directions', directions),
+    path('about', show_about),
+    path('directions', list_directions),
     path('history', history_list),
     path("history/<history_id>", view_history),
-    path('contact', contact),
+    path('contact', list_contacts),
 ]

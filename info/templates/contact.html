@@ -4,6 +4,20 @@
 
 {% block content %}
     <div class="col-md-12">
-        <h1>This the contact page</h1>
+        <h1>Contact Us</h1>
+        <ul class="list-group">
+            {% for contact in contacts %}
+                <li class="list-group-item">
+                    <div class="row text_block">
+                        <div class="col-md-6 col-xs-12">
+                            {{ contact.title }}
+                        </div>
+                        <div class="col-md-6 col-xs-12">
+                            {{ contact.text }}
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
     </div>
 {% endblock %}
