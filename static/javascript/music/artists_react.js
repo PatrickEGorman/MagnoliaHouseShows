@@ -5,13 +5,13 @@ import {FilterBar} from "../util/filter_bar";
 
 export class Artist extends React.Component{
     render() {
-        let genres = "";
+        let genres = [];
+        let divider = '';
         let genreDiv = "";
         for(const genreKey in this.props.data.genres){
-            if(genres.length>=1){
-                genres+=", ";
-            }
-            genres += this.props.data.genres[genreKey].name;
+            const genre = this.props.data.genres[genreKey];
+            genres.push(<span>{divider}<a href={'/music/genre/'+genre.id}>{genre.name}</a></span>);
+            divider=", ";
         }
         if(genres.length>=1){
             genreDiv =
@@ -101,13 +101,13 @@ export class Artist extends React.Component{
 
 class ListArtist extends React.Component{
     render() {
-        let genres = "";
+        let genres = [];
         let genreDiv = "";
+        let divider = '';
         for(const genreKey in this.props.data.genres){
-            if(genres.length>=1){
-                genres+=", ";
-            }
-            genres += this.props.data.genres[genreKey].name;
+            const genre = this.props.data.genres[genreKey];
+            genres.push(<span>{divider}<a href={'/music/genre/'+genre.id}>{genre.name}</a></span>);
+            divider=", ";
         }
         if(genres.length>=1){
             genreDiv =
