@@ -13,7 +13,7 @@ class FlierAdmin(ModelAdminWithMeta):
 class PhotoAdmin(ModelAdminWithMeta):
     list_display = ('image', 'priority', 'caption', 'artist', 'show', 'date', meta_created_date, meta_created_by)
     list_filter = ('date', 'priority', 'artist', 'show')
-    fields = ('artist', 'priority', 'image', 'caption', 'date')
+    fields = (('artist', 'show'), 'priority', 'image', 'caption', 'date')
 
 
 class YoutubeAdmin(ModelAdminWithMeta):
