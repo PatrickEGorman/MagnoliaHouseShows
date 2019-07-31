@@ -86,6 +86,7 @@ export class Show extends React.Component{
 class ListShow extends React.Component{
     render() {
         let artist_list = [];
+        let genre_list = [];
         let divider;
         for(const key in this.props.data.artists){
             if(this.props.data.artists.hasOwnProperty(key)) {
@@ -98,28 +99,31 @@ class ListShow extends React.Component{
                         </a>
                     </span>
                 );
+                for(const genre_key in artist.genres){
+                    const genre = artist.genres[genre_key];
+                    if(!(genre_list.includes(genre))){
+                        genre_list.push(genre)
+                    }
+                }
                 divider = " / ";
             }
         }
         let split_time = this.props.data.time.split(":");
         const hour = parseInt(split_time[0]);
         const minute = split_time[1];
-        let genres = "";
+        let genres = [];
         let genreDiv = "";
+        let genre_divider = '';
         let i = 0;
-        for(const genreKey in this.props.data.sorted_genres){
+        for(const genreKey in genre_list){
+            const genre = genre_list[genreKey];
             if(i > 5){
                 console.log("Show on "+this.props.data.date_string+"has more than 5 genres.  Terminating display")
                 break;
             }
-            else if(genres.length > 50){
-                console.log("Show on "+this.props.data.date_string+"has genre string of more than 50 letters.  Terminating display")
-                break;
-            }
-            else if(genres.length>=1){
-                genres+=", ";
-            }
-            genres += this.props.data.sorted_genres[genreKey];
+            genres.push(<span key={genreKey}>{genre_divider}<a href={'/music/genre/'+genre.id}>{genre.name}</a></span>);
+            i++;
+            genre_divider = ', '
         }
         if(genres.length>=1){
             genreDiv =

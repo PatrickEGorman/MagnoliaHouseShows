@@ -10,7 +10,7 @@ export class Artist extends React.Component{
         let genreDiv = "";
         for(const genreKey in this.props.data.genres){
             const genre = this.props.data.genres[genreKey];
-            genres.push(<span>{divider}<a href={'/music/genre/'+genre.id}>{genre.name}</a></span>);
+            genres.push(<span key={genreKey}>{divider}<a href={'/music/genre/'+genre.id}>{genre.name}</a></span>);
             divider=", ";
         }
         if(genres.length>=1){
@@ -106,7 +106,7 @@ class ListArtist extends React.Component{
         let divider = '';
         for(const genreKey in this.props.data.genres){
             const genre = this.props.data.genres[genreKey];
-            genres.push(<span>{divider}<a href={'/music/genre/'+genre.id}>{genre.name}</a></span>);
+            genres.push(<span key={genreKey}>{divider}<a href={'/music/genre/'+genre.id}>{genre.name}</a></span>);
             divider=", ";
         }
         if(genres.length>=1){
