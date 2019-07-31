@@ -6,11 +6,11 @@ from main.util import priority_choices, parse_date_string
 
 class Genre(models.Model):
     name = models.TextField(unique=True, blank=False, default="", max_length=20)
-
+    description = models.TextField(blank=True, default='')
     priority = models.IntegerField(choices=priority_choices, default=3)
 
     class Meta:
-        ordering = ["priority", "name"]
+        ordering = ["-priority", "name"]
 
     def __str__(self):
         return self.name

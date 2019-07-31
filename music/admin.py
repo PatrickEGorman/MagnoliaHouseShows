@@ -22,8 +22,8 @@ class ArtistAdmin(ModelAdminWithMeta):
 
 
 class GenreAdmin(ModelAdminWithMeta):
-    list_display = ['name', 'priority']
-    fields = ['name', 'priority']
+    list_display = ['name', 'description', 'priority']
+    fields = ['name', 'description', 'priority']
     ordering = ['name']
 
     def save_model(self, request, obj, form, change):

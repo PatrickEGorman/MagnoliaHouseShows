@@ -43,12 +43,14 @@ class GenreSerializer(serializers.ModelSerializer):
     name = serializers.CharField()
     metaData = MetaDataSerializer()
     artist_set = ArtistEmbedGenreSerializer(many=True)
+    description = serializers.CharField()
 
     class Meta:
         model = Genre
         fields = ('id',
                   'name',
                   'artist_set',
+                  'description',
                   'metaData')
 
 
