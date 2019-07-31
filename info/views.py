@@ -1,5 +1,7 @@
 from django.shortcuts import render
 
+from info.models import History
+
 
 def about(request):
     return render(request, 'about.html', {})
@@ -10,7 +12,8 @@ def directions(request):
 
 
 def history(request):
-    return render(request, 'history.html', {})
+    histories = History.objects.all()
+    return render(request, 'history.html', {'histories': histories})
 
 
 def contact(request):

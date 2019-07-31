@@ -79,8 +79,6 @@ html {
   color: white;
 }
 
-/* Twitter */
-.fa-twitter {
-  background: #55ACEE;
-  color: white;
+.text_block {
+    white-space: pre-line;
 }

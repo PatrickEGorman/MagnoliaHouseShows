@@ -124,6 +124,12 @@ class YoutubeVideo(models.Model):
     def date_string(self):
         return parse_date_string(self.date)
 
+    @property
+    def embed_url(self):
+        url_ender = self.youtube_url.split('/')[:-1]
+        url_ender = url_ender.split('=')[:-1]
+        return "https://www.youtube.com/embed/"+url_ender
+
     class Meta:
         ordering = ["priority", "date", "show", "artist"]
 

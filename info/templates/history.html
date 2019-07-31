@@ -4,6 +4,81 @@
 
 {% block content %}
     <div class="col-md-12">
-        <h1>This the history page</h1>
+        <h1>Stories of the History of Magnolia House</h1>
     </div>
+    {% for history in histories %}
+        {% if history.youtube_video %}
+            <div className={'col-md-12'}>
+                <div className="video-responsive">
+                    <iframe width="560" height="315" src=https://www.youtube.com/embed/+{{ embed_url }} frameBorder="0"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen>
+                    </iframe>
+                </div><br>
+                {{ history.photo.caption }}
+            </div>
+
+        {% elif history.photo and history.flier %}
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                    <img class="image" src={{ history.photo.image.url }}><br>
+                    {{ history.photo.caption }}
+                </div>
+                <div class="col-xs-12 col-md-6">
+                    <img class="image" src={{ history.flier.image.url }}><br>
+                    {{ history.flier.caption }}
+                </div>
+            </div>
+        {% elif history.photo %}
+            <img class="image" src={{ history.photo.image.url }}><br>
+            {{ history.photo.caption }}
+        {% elif history.flier %}
+            <img class="image" src={{ history.flier.url }}><br>
+            {{ history.flier.caption }}
+        {% endif %}
+        <div class="row">
+            <div class="col-md-8 col-xs-12"><h2>{{ history.title }}</h2></div>
+            <div class="col-md-4 col-xs-12">
+                {{ history.metaData.posted_string }}
+                {% if history.metaData.last_updated_on != history.metaData.posted_on or history.metaData.last_updated_by != history.metaData.posted_by %}
+                    <br>
+                    {{ history.metaData.updated_string }}
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                {{ history.start_date_string }}
+                {% if history.end_date %}
+                    to {{ history.end_date_string }}
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text_block">
+                {{ history.text }}
+            </div>
+        </div>
+        {% if history.youtube_video %}
+            {% if history.photo and history.flier %}
+                <div class="row">
+                    <div class="col-xs-12 col-md-6">
+                        <img class="image" src={{ history.photo.image.url }}><br>
+                        {{ history.photo.caption }}
+                    </div>
+                    <div class="col-xs-12 col-md-6">
+                        <img class="image" src={{ history.flier.image.url }}><br>
+                        {{ history.flier.caption }}
+                    </div>
+                </div>
+            {% elif history.photo %}
+                <img class="image" src={{ history.photo.image.url }}><br>
+                {{ history.photo.caption }}
+            {% elif history.flier %}
+                <img class="image" src={{ history.flier.url }}><br>
+                {{ history.flier.caption }}
+            {% endif %}
+            {% endif %}
+        <hr>
+    {% endfor %}
 {% endblock %}
