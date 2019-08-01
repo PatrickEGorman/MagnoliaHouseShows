@@ -9,7 +9,7 @@
         </div>
         <div class="col-md-4">
             {% if request.user.is_authenticated %}
-                <a href="/media/submit_video">Submit a Story From Magnolia House</a>
+                <a href="/info/submit_history">Submit a Story From Magnolia House</a>
             {% else %}
                 <a href="/accounts/login">Sign in</a> or <a href="/users/create_account">sign up</a> to add a story.
             {% endif %}
@@ -17,8 +17,8 @@
     </div>
     {% for history in histories %}
         {% if history.youtube_video %}
-            <div className={'col-md-12'}>
-                <div className="video-responsive">
+            <div class={'col-md-12'}>
+                <div class="video-responsive">
                     <iframe width="560" height="315" src=https://www.youtube.com/embed/+{{ embed_url }} frameBorder="0"
                             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                             allowFullScreen>

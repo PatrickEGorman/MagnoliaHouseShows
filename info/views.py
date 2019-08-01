@@ -1,5 +1,8 @@
 from django.shortcuts import render
+from django.urls import reverse_lazy
+from django.views import generic
 
+from info.forms import HistoryForm
 from info.models import InfoPage, Directions, History
 
 
@@ -26,3 +29,10 @@ def view_history(request, history_id):
 def list_contacts(request):
     contacts = InfoPage.objects.filter(page_name="contact")
     return render(request, 'contact.html', {'contacts': contacts})
+
+
+class CreateHistory(generic.CreateView):
+    form_class = HistoryForm
+    success_url = reverse_lazy('history')
+    template_name = 'history_form_page.html'
+

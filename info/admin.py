@@ -10,12 +10,12 @@ class InfoAdmin(ModelAdminWithMeta):
 
 
 class DirectionsAdmin(ModelAdminWithMeta):
-    list_display = ('starting_point', 'text', 'priority', meta_created_date, meta_created_by)
+    list_display = ('starting_point', 'priority', meta_created_date, meta_created_by)
     fields = ('starting_point', 'text', 'priority')
 
 
 class HistoryAdmin(ModelAdminWithMeta):
-    list_display = ('start_or_primary_date', 'end_date', 'title', 'text', meta_created_date,
+    list_display = ('start_or_primary_date', 'end_date', 'title', meta_created_date,
                     meta_created_by)
     list_filter = ('start_or_primary_date', 'end_date')
     fields = ('title',  ('start_or_primary_date', 'end_date', 'approximate_date'), ('shows', 'artists'),

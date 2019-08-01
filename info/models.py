@@ -11,7 +11,7 @@ from shows.models import Show
 
 class InfoPage(models.Model):
     page_name = models.TextField(choices=[("about", "About"), ("contact", "Contact")], default="about")
-    title = models.TextField(default='')
+    title = models.CharField(default='', max_length=100)
     text = models.TextField(default='')
 
     priority = models.IntegerField(choices=priority_choices, default=3)

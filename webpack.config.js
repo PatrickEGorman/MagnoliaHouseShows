@@ -5,7 +5,6 @@ const path = require('path')
 module.exports = {
     entry: {
         base: './static/javascript/base.js',
-        accounts: './static/javascript/accounts/accounts.js',
         home: './static/javascript/home/home.js',
         fliers: './static/javascript/media/fliers.js',
         photos: './static/javascript/media/photos.js',
@@ -15,7 +14,8 @@ module.exports = {
         music_page: './static/javascript/music/music_page.js',
         view_artist: './static/javascript/music/view_artist.js',
         past_shows: './static/javascript/shows/past_shows.js',
-        view_show: './static/javascript/shows/view_show.js'
+        view_show: './static/javascript/shows/view_show.js',
+        form_to_bootstrap: './static/javascript/util/form_to_bootstrap.js'
     },
     output: {
         path: path.join(__dirname,'static', 'dist'),

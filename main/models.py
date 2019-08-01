@@ -33,7 +33,10 @@ class MetaData(models.Model):
 
     @property
     def posted_string(self):
-        return "Posted by %s, on %s" % (self.posted_by.name, self.posted_date_string)
+        if(self.posted_by):
+            return "Posted by %s, on %s" % (self.posted_by.name, self.posted_date_string)
+        else:
+            return "Posted on %s" % self.posted_date_string
 
     @property
     def updated_date_string(self):
