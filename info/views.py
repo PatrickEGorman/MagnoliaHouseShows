@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
@@ -31,8 +32,12 @@ def list_contacts(request):
     return render(request, 'contact.html', {'contacts': contacts})
 
 
-class CreateHistory(generic.CreateView):
+class CreateHistory(LoginRequiredMixin, generic.CreateView):
     form_class = HistoryForm
     success_url = reverse_lazy('history')
     template_name = 'history_form_page.html'
+
+    def form_valid(self, form):
+        form.instance.metaData.posted_by = self.request.user
+        return super().form_valid(form)
 

@@ -1,7 +1,13 @@
 import datetime
 
+from django.urls import reverse_lazy
+
+from .forms import PhotoSubmitForm, VideoSubmitForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse
 from django.shortcuts import render
+from django.views import generic
+
 from .serializers import FlierSerializer, PhotoSerializer, YoutubeSerializer
 from .models import Flier, Photo, YoutubeVideo
 
@@ -54,3 +60,23 @@ def get_videos_list(request):
     video_list = video_list[:num_videos]
     serializer = YoutubeSerializer(video_list, many=True)
     return JsonResponse(serializer.data, safe=False)
+
+
+class SubmitPhoto(LoginRequiredMixin, generic.CreateView):
+    form_class = PhotoSubmitForm
+    success_url = reverse_lazy('photos')
+    template_name = 'photo_form_page.html'
+
+    def form_valid(self, form):
+        form.instance.metaData.posted_by = self.request.user
+        return super().form_valid(form)
+
+
+class SubmitVideo(LoginRequiredMixin, generic.CreateView):
+    form_class = VideoSubmitForm
+    success_url = reverse_lazy('videos')
+    template_name = 'video_form_page.html'
+
+    def form_valid(self, form):
+        form.instance.metaData.posted_by = self.request.user
+        return super().form_valid(form)

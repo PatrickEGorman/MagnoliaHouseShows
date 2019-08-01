@@ -59,7 +59,7 @@ class Flier(models.Model):
 class Photo(models.Model):
     image = models.ImageField()
     date = models.DateField(blank=True, null=True, default=None)
-    caption = models.TextField(default='', blank=True)
+    caption = models.CharField(default='', blank=True, max_length=250)
     artist = models.ForeignKey(Artist, null=True, blank=True, related_name="photos", on_delete=models.SET_NULL)
     show = models.ForeignKey(Show, null=True, blank=True, related_name="photos", on_delete=models.SET_NULL)
 

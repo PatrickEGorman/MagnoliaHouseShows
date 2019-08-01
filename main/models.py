@@ -46,7 +46,7 @@ class MetaData(models.Model):
 
     @property
     def updated_string(self):
-        if self.last_updated_on:
+        if self.last_updated_by:
             return "Last updated by %s, on %s" % (self.last_updated_by.name, self.updated_date_string)
         else:
-            return None
+            return ""
