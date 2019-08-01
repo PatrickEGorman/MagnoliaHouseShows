@@ -22,13 +22,6 @@ export class Show extends React.Component{
                     className = "fa fa-instagram" >
                 </a>
         }
-        let links=[];
-        if(this.props.data.facebook){
-            links.push(<a href={this.props.data.facebook} className={'btn bg-dark text-light'} key={1}>Facebook Event</a>);
-        }
-        if(this.props.data.instagram){
-            links.push(<a href={this.props.data.instagram} className={'btn bg-dark text-light'} key={2}>Instagram Event</a>);
-        }
 
         let donationMax;
         if(this.props.data.suggested_donation_max > this.props.data.suggested_donation){
@@ -50,7 +43,7 @@ export class Show extends React.Component{
                             <ArtistList artistData={this.props.data.artists}/>
                             <br/>
                             <h3>${this.props.data.suggested_donation}{donationMax} Suggested Donation</h3>
-                            {links}
+                            {facebook}{instagram}
                             <hr/>
                             <br/>
                             {this.props.data.description}
@@ -132,7 +125,7 @@ class ListShow extends React.Component{
                 console.log("Show on "+this.props.data.date_string+"has more than 5 genres.  Terminating display")
                 break;
             }
-            genres.push(<span key={genreKey}>{genre_divider}<a href={'/music/genre/'+genre.id}>{genre.name}</a></span>);
+            genres.push(<span key={genreKey}>{genre_divider}<a key={genreKey} href={'/music/genre/'+genre.id}>{genre.name}</a></span>);
             i++;
             genre_divider = ', '
         }
@@ -150,6 +143,16 @@ class ListShow extends React.Component{
             donationMax = "-"+this.props.data.suggested_donation_max;
         }
 
+        let facebook;
+        if(this.props.data.facebook){
+            facebook = <a href={this.props.data.facebook} target="_blank" className="fa fa-facebook"> </a>;
+        }
+
+        let instagram;
+        if(this.props.data.instagram){
+            instagram = <a href={this.props.data.instagram} target="_blank" className="fa fa-instagram"> </a>;
+        }
+
         return(
             <div className={'row mt-3'}>
                 <h2>
@@ -160,11 +163,12 @@ class ListShow extends React.Component{
                     <div className={"col-md-12"}>
                         <div className={ 'ml-4'}>
                             {hour}:{minute}<small> PM </small>
-                            ${this.props.data.suggested_donation}{donationMax} <small>suggested donation  </small>
+                            ${this.props.data.suggested_donation}{donationMax} <small>suggested donation </small>
                             <br/>
-                            <a href={'/shows/view_show/'+this.props.data.id}>
+                            <a href={'/shows/view_show/'+this.props.data.id} className={'mr-5'}>
                                 More Info
                             </a>
+                            <small>{facebook} {instagram}</small>
                         </div>
                     </div>
                 </h2>

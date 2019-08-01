@@ -8,10 +8,12 @@ export class Artist extends React.Component{
         let genres = [];
         let divider = '';
         let genreDiv = "";
+        let i = 0;
         for(const genreKey in this.props.data.genres){
             const genre = this.props.data.genres[genreKey];
-            genres.push(<span key={genreKey}>{divider}<a href={'/music/genre/'+genre.id}>{genre.name}</a></span>);
+            genres.push(<span key={i}>{divider}<a key={i} href={'/music/genre/'+genre.id}>{genre.name}</a></span>);
             divider=", ";
+            i++;
         }
         if(genres.length>=1){
             genreDiv =
@@ -22,7 +24,6 @@ export class Artist extends React.Component{
 
         let embed = [];
         let links = [];
-        let i = 0;
         if(this.props.data.bandcamp_embed_code)
         {
             const htmlCode = {__html: this.props.data.bandcamp_embed_code};
@@ -43,27 +44,30 @@ export class Artist extends React.Component{
             i++;
         }
         if(this.props.data.bandcamp){
-            links.push(<a href={this.props.data.bandcamp} key={i} className={'btn bg-dark text-light'}>Bandcamp</a>)
+            links.push(<a href={this.props.data.bandcamp} key={i} className={'fa fa-bandcamp'}> </a>);
+            i++;
         }
         if(this.props.data.facebook){
-            links.push(<a href={this.props.data.facebook} key={i} className={'btn bg-dark text-light'}>Facebook</a>)
+            links.push(<a href={this.props.data.facebook} key={i} target="_blank" className="fa fa-facebook"> </a>);
+            i++;
         }
         if(this.props.data.soundcloud){
-            links.push(<a href={this.props.data.soundcloud} key={i} className={'btn bg-dark text-light'}>Soundcloud</a>)
+            links.push(<a href={this.props.data.soundcloud} key={i} className={'fa fa-soundcloud'}> </a>);
+            i++;
         }
         if(this.props.data.youtube){
-            links.push(<a href={this.props.data.youtube} key={i} className={'btn bg-dark text-light'}>Youtube</a>)
+            links.push(<a href={this.props.data.youtube} key={i} className={'fa fa-youtube'}> </a>);
+            i++;
         }
         let showList = [];
         if(this.props.data.show_set){
-            let i = 0;
-            showList.push(<div className={"col-md-12 mt-4"}><h4>Shows</h4></div> );
+            showList.push(<div key={i} className={"col-md-12 mt-4"}><h4>Shows</h4></div> );
             i++;
             for(const key in this.props.data.show_set){
                 const show = this.props.data.show_set[key];
                 showList.push(
                     <div key={i} className={"col-md-12"}>
-                        <a href={"/shows/view_show/"+show.id}>
+                        <a key={i} href={"/shows/view_show/"+show.id}>
                             {show.name}
                         </a>
                     </div>
@@ -104,7 +108,6 @@ class ListArtist extends React.Component{
         let genres = [];
         let genreDiv = "";
         let divider = '';
-        console.log(this.props.data.genres);
         for(const genreKey in this.props.data.genres){
             const genre = this.props.data.genres[genreKey];
             genres.push(<span key={genreKey}>{divider}<a href={'/music/genre/'+genre.id}>{genre.name}</a></span>);
@@ -118,7 +121,8 @@ class ListArtist extends React.Component{
         }
 
         let embed;
-        let link;
+        let links = [];
+        let i = 0;
         if(this.props.data.bandcamp_embed_code)
         {
             const htmlCode = {__html: this.props.data.bandcamp_embed_code};
@@ -135,14 +139,21 @@ class ListArtist extends React.Component{
             embed = <div className="col-md-6"><div className="video-responsive"
                                                    dangerouslySetInnerHTML={htmlCode}/></div>
         }
-        else if(this.props.data.bandcamp){
-            link=<a href={this.props.data.bandcamp} className={'btn bg-dark text-light'}>Bandcamp</a>;
+        if(this.props.data.bandcamp){
+            links.push(<a key={i} href={this.props.data.bandcamp} className={'fa fa-bandcamp'}> </a>);
+            i++;
         }
-        else if(this.props.data.soundcloud){
-            link=<a href={this.props.data.soundcloud} className={'btn bg-dark text-light'}>Soundcloud</a>;
+        if(this.props.data.facebook){
+            links.push(<a href={this.props.data.facebook} key={i} target="_blank" className="fa fa-facebook"> </a>);
+            i++;
         }
-        else if(this.props.data.youtube){
-            link=<a href={this.props.data.youtube} className={'btn bg-dark text-light'}>Youtube</a>;
+        if(this.props.data.soundcloud){
+            links.push(<a key={i} href={this.props.data.soundcloud} className={'fa fa-soundcloud'}> </a>);
+            i++;
+        }
+        if(this.props.data.youtube){
+            links.push(<a key={i} href={this.props.data.youtube} className={'fa fa-youtube'}> </a>);
+            i++;
         }
         return (
             <div className="row">
@@ -159,7 +170,7 @@ class ListArtist extends React.Component{
                     </h4>
                 </div>
                 <div className={'col-md-4'}>
-                    {link}
+                    {links}
                 </div>
                 <div className={'col-md-12'}>
                     {this.props.data.description}

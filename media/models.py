@@ -1,4 +1,6 @@
+from django.core.exceptions import ValidationError
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 from main.models import MetaData
 from main.util import priority_choices, parse_date_string
@@ -107,8 +109,16 @@ class Photo(models.Model):
         super(Photo, self).save(*args, **kwargs)
 
 
+def validate_youtube_url(url):
+    if "youtu" not in url:
+        raise ValidationError(
+            _("%(url)s is not a valid youtube url"),
+            params={'url': url}
+        )
+
+
 class YoutubeVideo(models.Model):
-    youtube_url = models.URLField()
+    youtube_url = models.URLField(validators=[validate_youtube_url])
     date = models.DateField(blank=True, null=True, default=None)
     caption = models.TextField(default='', blank=True)
     artist = models.ForeignKey(Artist, null=True, related_name='videos', on_delete=models.SET_NULL, blank=True)
@@ -131,7 +141,7 @@ class YoutubeVideo(models.Model):
         return "https://www.youtube.com/embed/"+url_ender
 
     class Meta:
-        ordering = ["priority", "date", "show", "artist"]
+        ordering = ["priority", "-metaData__posted_on", "show", "artist"]
 
     def __str__(self):
         if self.artist:

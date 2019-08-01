@@ -19,7 +19,6 @@ function get_show_list() {
     if(filter){
         url += "?"+filter;
     }
-    console.log(url);
     $.get(url, function (data) {
         if(!filter) {
             ReactDOM.render(<ShowFilters data={data}

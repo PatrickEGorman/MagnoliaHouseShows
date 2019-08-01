@@ -54,7 +54,7 @@ html {
 .fa {
   padding: 20px;
   font-size: 30px;
-  width: 50px;
+  width: 60px;
   text-align: center;
   text-decoration: none;
   border-radius: 50%;
@@ -70,6 +70,21 @@ html {
 /* Facebook */
 .fa-facebook {
   background: #3B5998;
+  color: white;
+}
+
+.fa-soundcloud {
+  background: #ff7c00;
+  color: white;
+}
+
+.fa-bandcamp {
+  background: #0086ad;
+  color: white;
+}
+
+.fa-youtube {
+  background: #ff000a;
   color: white;
 }
 
