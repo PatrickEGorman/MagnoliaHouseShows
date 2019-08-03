@@ -9,18 +9,11 @@ def parse_date_string(date, year_month=False):
     if not date:
         return None
     split_date = date.__str__().split('-')
-    now = datetime.datetime.now()
-    this_year = now.year
-
     month = months[int(split_date[1])]
     day = int(split_date[2])
     year = int(split_date[0])
     if year_month:
         return [year, int(split_date[1])]
-
-    if year == this_year:
-        return "%s %d" % (month, day)
-
     else:
         return "%s %d, %d" % (month, day, year)
 
