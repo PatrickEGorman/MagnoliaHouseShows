@@ -12,7 +12,14 @@ export class Genre extends React.Component{
             const artist = this.props.data.artist_set[key];
             for (const show_key in artist.show_set) {
                 const show = artist.show_set[show_key];
-                if (!(show_list.includes(show))) {
+                let included = false;
+                for(const list_show_key in show_list){
+                    const list_show = show_list[list_show_key];
+                    if(show.id === list_show.id){
+                        included=true;
+                    }
+                }
+                if(!included){
                     show_list.push(show);
                 }
             }

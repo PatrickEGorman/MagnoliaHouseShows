@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 import datetime
 
-from shows.serializers import ShowSerializer
+from shows.serializers import ShowSerializer, ListShowSerializer
 from .models import Show
 
 
@@ -43,5 +43,5 @@ def get_shows_list(request):
     if request.GET.get('Hometown'):
         show_list = show_list.filter(artists__hometown=request.GET.get('Hometown'))
     show_list = show_list.distinct()
-    serializer = ShowSerializer(show_list, many=True)
+    serializer = ListShowSerializer(show_list, many=True)
     return JsonResponse(serializer.data, safe=False)
