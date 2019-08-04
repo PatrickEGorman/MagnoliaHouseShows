@@ -3,27 +3,148 @@
 {% block title %}Directions{% endblock %}
 
 {% block content %}
-    <div class="col-md-12">
+
+    <div class="row">
+        <h3>Page Contents</h3>
+    </div>
+    <ul class="list-group">
+
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-md-12">
+                    <a href="#Address">Address</a>
+                </div>
+            </div>
+        </li>
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-md-12">
+                    <a href="#Map">Google Map</a>
+                </div>
+            </div>
+        </li>
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-md-6 col-xs-12">
+                    <a href="#Directions">Directions</a>
+                </div>
+                <div class="col-md-6 col-xs-12 text_block"><a href="#Richmond">Richmond</a>
+                    <a href="#Harrisonburg">Harrisonburg</a>
+                    <a href="#DC">DC</a>
+                </div>
+            </div>
+        </li>
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-md-6 col-xs-12">
+                    <a href="#Parking">Directions</a>
+                </div>
+                <div class="col-md-6 col-xs-12 text_block"><a href="#Musicians">Touring Musicians</a>
+                    <a href="#Goers">Concert Goers</a>
+                </div>
+            </div>
+        </li>
+    </ul>
+
+    <div class="row" id="Address">
+        <h1>Address</h1> <br>
+        <div class="col-md-12 col-xs-12">507 10th street NW Charlottesville, Virginia 22903</div>
+    </div>
+
+    <div class="row mt-4" id="Map">
+        <h1>Google Map</h1>
+    </div>
+    <div class="row">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3142.3519787503146!2d-78.49401204875186!3d38.03888420459271!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89b386314e8c3b29%3A0x7b3bc7d8d7f938c2!2sMagnolia+House!5e0!3m2!1sen!2sus!4v1564942145780!5m2!1sen!2sus"
+                width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+    </div>
+    <div class="row" id="Directions">
         <h1>Directions</h1>
     </div>
     <ul class="list-group">
+
         <li class="list-group-item">
             <div class="row">
-                <div class="col-md-6 col-xs-12">Address</div>
-                <div class="col-md-6 col-xs-12">507 10th street NW Charlottesville, Virginia 22903</div>
+                <div class="col-md-6 col-xs-12" id="Richmond">
+                    Richmond <br>
+                    {% load staticfiles %}
+                    <img class="image" src='{% static 'images/directions_Richmond.png' %}' alt="Richmond Directions">
+                </div>
+                <div class="col-md-6 col-xs-12 text_block">1. Get onto I-64 West to Charlottesville
+                    2. Take exit 124 for US-250 toward Charlottesville/Shadwell
+                    3. Exit onto Rugby Ave
+                    4. Turn left onto Rose Hill Drive
+                    5. Turn right onto Preston Ave
+                    6. Turn left onto Grady Ave, find street parking and walk the rest of the way
+                </div>
             </div>
         </li>
-        {% for direction in directions %}
-            <li class="list-group-item">
-                <div class="row text_block">
-                    <div class="col-md-6 col-xs-12">
-                        {{ direction.starting_point }}
-                    </div>
-                    <div class="col-md-6 col-xs-12">
-                        {{ direction.text }}
-                    </div>
+        <li class="list-group-item">
+            <div class="row" id="Harrisonburg">
+                <div class="col-md-6 col-xs-12">
+                    Harrisonburg  <br>
+                    <img class="image" src='{% static 'images/directions_Harrisonburg.png' %}' alt="Harrisonburg Directions">
                 </div>
-            </li>
-        {% endfor %}
+                <div class="col-md-6 col-xs-12 text_block">1. Get onto I-81 South
+                    2. Exit onto I-64 East when you reach Staunton
+                    3. Exit onto Route 29 North when you reach Charlottesville
+                    4. Continue onto route 250 East
+                    5. Exit onto Rugby Rd
+                    6. Turn right at the stop sign to continue on Rugby Rd
+                    7. Turn left at the stop light to continue on Rugby Rd
+                    8. Continue onto Preston Ave
+                    9. Turn right onto 10th St NW
+                    10. Turn right onto grady Ave, find street parking and walk the rest of the way
+                </div>
+            </div>
+        </li>
+        <li class="list-group-item">
+            <div class="row" id="DC">
+                <div class="col-md-6 col-xs-12">
+                    DC <br>
+                    <img class="image" src='{% static 'images/directions_DC.png' %}' alt="DC Directions">
+                </div>
+                <div class="col-md-6 col-xs-12 text_block">1. Get onto Route 29 South
+                    2. Continue onto Emmet St N / 29 Business South when you reach Charlottesville
+                    3. Turn left onto Barracks Rd
+                    4. Continue onto Rugby Rd
+                    5. Continue onto Preston Ave
+                    6. Turn right onto 10th St NW
+                    7. Turn right onto grady Ave, find street parking and walk the rest of the way
+                </div>
+            </div>
+        </li>
     </ul>
+
+    <div class="row" id="Parking">
+        <h1>Parking</h1>
+    </div>
+    <ul class="list-group">
+
+        <li class="list-group-item" id="Musicians">
+            <div class="row text_block">
+                <div class="col-md-6 col-xs-12">
+                    For Touring Musicians
+                    <img class="image" src='{% static 'images/musician_parking.png' %}' alt="Musician Parking">
+                </div>
+                <div class="col-md-6 col-xs-12 text_block">There is an alley connecting 10th ST NW and 10 1/2 ST NW running right next to Magnolia House.
+                    There are a few parallel spots right next to the house there ideal for musicieans who have to lug gear.
+                    Musicians can also park in any of the concert goer parking
+                </div>
+            </div>
+        </li>
+        <li class="list-group-item" id="Goers">
+            <div class="row">
+                <div class="col-md-6 col-xs-12">
+                    For Concert Goers
+                    <img class="image" src='{% static 'images/concert_goers_parking.png' %}' alt="Concert Goer Parking">
+                </div>
+                <div class="col-md-6 col-xs-12 text_block">CB Holt House closes at 5 and there are usually spots in the lot outside of there.
+                    10 1/2 St NW has parellel parking available.
+                    There are other spots around!  These are just a couple suggestions
+                </div>
+            </div>
+        </li>
+    </ul>
+    <div class="row"><div class="col-md-6"></div><div class="col-md-6"></div></div>
 {% endblock %}

@@ -71,17 +71,3 @@ class History(InfoPage):
     def has_end(self):
         if self.end_date:
             return True
-
-
-class Directions(InfoPage):
-    starting_point = models.TextField(default='', blank=True)
-
-    def __init__(self, *args, **kwargs):
-        super(Directions, self).__init__(*args, **kwargs)
-        self.page_name = "Directions"
-
-    def __str__(self):
-        if self.starting_point:
-            return "Directions from %s" % self.starting_point
-        else:
-            return super(Directions, self).__str__()

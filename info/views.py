@@ -2,9 +2,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
-
 from info.forms import HistoryForm
-from info.models import InfoPage, Directions, History
+from info.models import InfoPage, History
 
 
 def show_about(request):
@@ -13,8 +12,7 @@ def show_about(request):
 
 
 def list_directions(request):
-    directions = Directions.objects.all()
-    return render(request, 'directions.html', {'directions': directions})
+    return render(request, 'directions.html', {})
 
 
 def history_list(request):

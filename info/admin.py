@@ -1,17 +1,12 @@
 from django.contrib import admin
 
 from main.admin import meta_created_date, meta_created_by, ModelAdminWithMeta
-from .models import InfoPage, Directions, History
+from .models import InfoPage, History
 
 
 class InfoAdmin(ModelAdminWithMeta):
     list_display = ('page_name', 'title', 'text', meta_created_date, meta_created_by)
     fields = ('page_name', 'title', 'text', 'priority')
-
-
-class DirectionsAdmin(ModelAdminWithMeta):
-    list_display = ('starting_point', 'priority', meta_created_date, meta_created_by)
-    fields = ('starting_point', 'text', 'priority')
 
 
 class HistoryAdmin(ModelAdminWithMeta):
@@ -23,5 +18,4 @@ class HistoryAdmin(ModelAdminWithMeta):
 
 
 admin.site.register(InfoPage, InfoAdmin)
-admin.site.register(Directions, DirectionsAdmin)
 admin.site.register(History, HistoryAdmin)
