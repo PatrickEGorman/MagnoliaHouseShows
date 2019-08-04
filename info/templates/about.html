@@ -3,19 +3,22 @@
 {% block title %}About{% endblock %}
 
 {% block content %}
-    <div class="col-md-12">
+    <div class="row">
         <h1>About</h1>
     </div>
-    {% for about_item in about %}
-            <div class="row text_block">
-                <div class="col-md-12">
-                    <h2>
-                        {{ about_item.title }}
-                    </h2>
-                </div>
-                <div class="col-md-12">
-                    {{ about_item.text }}
-                </div>
-            </div>
-    {% endfor %}
+    <div class="row">
+        {% load staticfiles %}
+        <div class="col-md-6 col-xs-12">
+            <img class="image" src="{% static 'images/about_page.jpg' %}" alt="Nag live at Magnolia House">
+        </div>
+        <div class="col-md-12">Nag Live at Magnolia House</div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-md-12">
+            Magnolia House is a live music venue established in 2012.  We host all kinds of music from Hip-Hop to
+            Indie electronic.  However we specialize in Punk rock and specifically hardcore Punk.  We have become an
+            icon in the Virginia punk community and in the Charlottesville DIY scene.  Feel free and explore this
+            website to find more information about shows, artists, genres, and the history related to Magnolia House.
+        </div>
+    </div>
 {% endblock %}
