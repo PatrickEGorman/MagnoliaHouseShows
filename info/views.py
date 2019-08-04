@@ -3,12 +3,11 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 from info.forms import HistoryForm
-from info.models import InfoPage, History
+from info.models import History
 
 
 def show_about(request):
-    about = InfoPage.objects.filter(page_name="about")
-    return render(request, 'about.html', {'about': about})
+    return render(request, 'about.html', {})
 
 
 def list_directions(request):
@@ -26,8 +25,7 @@ def view_history(request, history_id):
 
 
 def list_contacts(request):
-    contacts = InfoPage.objects.filter(page_name="contact")
-    return render(request, 'contact.html', {'contacts': contacts})
+    return render(request, 'contact.html', {})
 
 
 class CreateHistory(LoginRequiredMixin, generic.CreateView):

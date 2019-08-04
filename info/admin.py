@@ -1,12 +1,7 @@
 from django.contrib import admin
 
 from main.admin import meta_created_date, meta_created_by, ModelAdminWithMeta
-from .models import InfoPage, History
-
-
-class InfoAdmin(ModelAdminWithMeta):
-    list_display = ('page_name', 'title', 'text', meta_created_date, meta_created_by)
-    fields = ('page_name', 'title', 'text', 'priority')
+from .models import History
 
 
 class HistoryAdmin(ModelAdminWithMeta):
@@ -17,5 +12,4 @@ class HistoryAdmin(ModelAdminWithMeta):
               ('photo', 'flier', 'youtube_video'), 'text', 'priority')
 
 
-admin.site.register(InfoPage, InfoAdmin)
 admin.site.register(History, HistoryAdmin)
