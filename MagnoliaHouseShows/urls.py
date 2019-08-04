@@ -21,12 +21,18 @@ from django.views.generic import RedirectView
 
 from main.views import home
 
-favicon_view = RedirectView.as_view(url='/static/images/favicon/<file_name>.<file_format>', permanent=True)
+
+class FaviconView(RedirectView):
+
+    def get_redirect_url(self, *args, **kwargs):
+        self.url = '/static/images/favicon/%s.%s' % (kwargs['file_name'], kwargs['file_format'])
+        self.permanent = True
+        return super().get_redirect_url(*args, **kwargs)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home),
-    path(r'^<file_name>\.<file_format>', favicon_view),
+    path('<file_name>.<file_format>', FaviconView.as_view()),
     path('shows/', include('shows.urls')),
     path('music/', include('music.urls')),
     path('info/', include('info.urls')),
