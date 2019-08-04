@@ -78,7 +78,7 @@ class Show(models.Model):
     def name(self):
         display = self.date.__str__() + ":"
         for artist in Artist.objects.filter(show__id=self.id):
-            display += artist.__str__() + "/"
+            display += artist.__str__() + " / "
         return display[:-1]
 
     def __str__(self):
