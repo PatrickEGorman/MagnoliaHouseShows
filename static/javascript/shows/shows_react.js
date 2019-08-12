@@ -73,7 +73,7 @@ export class Show extends React.Component{
                         </div>
                         <div className={'col-xs-12 col-sm-4'}>
                             <h3>${this.props.data.suggested_donation}{donationMax} Suggested Donation</h3>
-                            {links}
+                            {facebook}{instagram}
                             <hr/>
                             <br/>
                             {this.props.data.description}
