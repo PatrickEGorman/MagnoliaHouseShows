@@ -58,7 +58,7 @@ export class Show extends React.Component{
                     </div>
                      <div className={'row'}>
                         <div className={'col-md-12 mr-auto'}>
-                            {this.props.data.metadata.posted_string}
+                            {this.props.data.metaData.posted_string}
                         </div>
                     </div>
                 </div>
@@ -88,8 +88,8 @@ export class Show extends React.Component{
                         </div>
                     </div>
                     <div className={'row'}>
-                        <div className={'col-md-12 mr-auto'}>
-                            {this.props.data.metadata.posted_string}
+                        <div className={'col-md-12 text-right'}>
+                            {this.props.data.metaData.posted_string}
                         </div>
                     </div>
                 </div>
