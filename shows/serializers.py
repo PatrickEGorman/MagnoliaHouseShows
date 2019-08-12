@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from main.serializers import MetaDataSerializer
-from media.serializers import FlierSerializer
+from media.serializers import FlierSerializer, PhotoSerializer, YoutubeSerializer
 from music.models import Artist, Genre
 
 from .models import Show
@@ -19,8 +19,10 @@ class ShowSerializer(serializers.ModelSerializer):
     description = serializers.CharField()
     year_month = serializers.ListField()
     date_string = serializers.CharField()
-    fliers = FlierSerializer(many=True)
+    flier = FlierSerializer()
     artists = ArtistSerializer(many=True)
+    photos = PhotoSerializer(many=True)
+    videos = YoutubeSerializer(many=True)
     genres = serializers.DictField()
     sorted_genres = serializers.ListField()
     name = serializers.CharField()
@@ -39,9 +41,11 @@ class ShowSerializer(serializers.ModelSerializer):
                   'year_month',
                   'date_string',
                   'artists',
+                  'photos',
+                  'videos',
                   'genres',
                   'sorted_genres',
-                  'fliers',
+                  'flier',
                   "name",
                   'metaData',
                   'cancelled')
@@ -95,6 +99,5 @@ class ListShowSerializer(serializers.ModelSerializer):
                   'artists',
                   'genres',
                   'sorted_genres',
-                  'fliers',
                   "name",
                   'cancelled')

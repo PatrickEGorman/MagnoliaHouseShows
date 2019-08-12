@@ -326,7 +326,7 @@ export class ArtistList extends React.Component{
         let view_more;
         for(const val in this.props.artistData){
             if(parseInt(val) >= this.props.num_artists){
-                view_more = <ViewMore callback={this.props.callback}/>;
+                view_more = <ViewMore callback={this.props.callback}  name={"Artists"}/>;
                 break;
             }
             else {

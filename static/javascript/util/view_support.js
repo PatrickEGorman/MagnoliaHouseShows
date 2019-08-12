@@ -10,7 +10,7 @@ export class ViewMore extends  React.Component{
     render(){
         return(
             <div className={'col-md-12'}>
-                <a className={'btn bg-dark text-light'} onClick={this.onClickCallback}>View More</a>
+                <a className={'btn bg-dark text-light'} onClick={this.onClickCallback}>View More {this.props.name}</a>
             </div>
         )
     }

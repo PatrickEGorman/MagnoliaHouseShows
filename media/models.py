@@ -12,7 +12,7 @@ class Flier(models.Model):
     image = models.ImageField()
     date = models.DateField(default=None)
     caption = models.TextField(default='', blank=True)
-    show = models.ForeignKey(Show, null=True, blank=True, related_name="fliers", on_delete=models.SET_NULL)
+    show = models.OneToOneField(Show, null=True, blank=True, related_name="flier", on_delete=models.SET_NULL)
 
     priority = models.IntegerField(choices=priority_choices, default=3)
 

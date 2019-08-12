@@ -3,9 +3,18 @@ import {ArtistList} from '../music/artists_react'
 import {ViewMore} from "../util/view_support";
 import {FilterBar} from "../util/filter_bar";
 import {months} from "../util/date";
+import {Flier, PhotoList, VideoList} from "../media/media_react";
 
 
 export class Show extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            num_photos: 3,
+            num_videos: 1
+        }
+    }
+
     render() {
         let split_time = this.props.data.time.split(":");
         const hour = parseInt(split_time[0]);
@@ -31,74 +40,79 @@ export class Show extends React.Component{
         if(this.props.data.suggested_donation_max > this.props.data.suggested_donation){
             donationMax = "-"+this.props.data.suggested_donation_max;
         }
-
-        if(this.props.data.fliers[0]){
-            return(
-                <div className={"container"}>
-                    <div className={'row mb-3'}>
-                        <div className={"col"}>
-                            {cancelled}<h2>{this.props.data.date_string} {hour}:{minute}PM</h2> {facebook} {instagram}
-                        </div>
+        let description;
+        if(this.props.data.description){
+            description = <div><br/>{this.props.data.description}<hr/></div>
+        }
+        let flier;
+        if(this.props.data.flier){
+            flier = <div className={"col-md-12 mb-3"}>
+                        <Flier data={this.props.data.flier} embed={"show"}/>
+                        <hr/>
                     </div>
-                    <div className={'row mb-5'}>
-                        <div className={'col-xs-12 col-sm-8'}>
+        }
+        let i = 0;
+        let videos = [];
+        if(this.props.data.videos.length>=1){
+            videos[0] = <h2 key={i}>Videos</h2>;
+            i++;
+            videos.push(<VideoList data={this.props.data.videos} num_videos={this.state.num_videos} embed={"show"}
+                                   callback={()=>{
+                                       this.state.num_videos+=5;
+                                       this.setState(this.state);
+                                   }} key={i}/>);
+            i++;
+            videos.push(<hr key={i}/>);
+            i++;
+        }
 
+        let photos = [];
+        if(this.props.data.photos.length>=1) {
+            photos[0] = <h2 key={i}>Photos</h2>;
+            i++;
+            photos.push(<PhotoList data={this.props.data.photos} num_photos={this.state.num_photos} embed={"show"}
+                                   callback={()=>{
+                                       this.state.num_photos+=5;
+                                       this.setState(this.state);
+                                   }} key={i}/>);
+            i++;
+            photos.push(<hr key={i}/>);
+        }
 
-                            <ArtistList artistData={this.props.data.artists}/>
-                            <br/>
-                            <h3>${this.props.data.suggested_donation}{donationMax} Suggested Donation</h3>
-                            {facebook}{instagram}
-                            <hr/>
-                            <br/>
-                            {this.props.data.description}
-                            <hr/>
-                        </div>
-                        <div className={"col-xs-6 col-sm-4 mb-3"}>
-                            <img src={this.props.data.fliers[0].image} className={"image"} alt={this.props.data.fliers[0].caption}/>
-                            <br/>
-                            {this.props.data.fliers[0].caption}
-                            <hr/>
-                        </div>
-                    </div>
-                     <div className={'row'}>
-                        <div className={'col-md-12 mr-auto'}>
-                            {this.props.data.metaData.posted_string}
-                        </div>
+        return (
+            <div className={"container"}>
+                <div className={'row mb-3'}>
+                    <div className={"col-md-12"}>
+                        {cancelled}<h2>{this.props.data.date_string} {hour}:{minute}PM</h2>
                     </div>
                 </div>
-            )
-        }
-        else {
-            return (
-                <div className={"container"}>
-                    <div className={'row mb-3'}>
-                        <div className={"col-md-12"}>
-                            {cancelled}<h2>{this.props.data.date_string} {hour}:{minute}PM</h2>
-                        </div>
-                    </div>
-                    <div className={'row'}>
-                        <div className={'col-md-12'}>
-                            <h3>${this.props.data.suggested_donation}{donationMax} Suggested Donation</h3>
-                            {facebook}{instagram}
-                            <hr/>
-                            <br/>
-                            {this.props.data.description}
-                            <hr/>
-                        </div>
-                    </div>
-                    <div className={'row'}>
-                        <div className={'col-md-12'}>
-                            <ArtistList artistData={this.props.data.artists}/>
-                        </div>
-                    </div>
-                    <div className={'row'}>
-                        <div className={'col-md-12 text-right'}>
-                            {this.props.data.metaData.posted_string}
-                        </div>
+                <div className={'row'}>
+                    <div className={'col-md-12'}>
+                        <h3>${this.props.data.suggested_donation}{donationMax} Suggested Donation</h3>
+                        {facebook}{instagram}
+                        <hr/>
+                        {flier}
+                        {description}
                     </div>
                 </div>
-            )
-        }
+                <div className={'row'}>
+                    <div className={'col-md-12'}>
+                        <ArtistList artistData={this.props.data.artists}/>
+                    </div>
+                </div>
+                <div className={'row'}>
+                    {videos}
+                </div>
+                <div className={'row'}>
+                    {photos}
+                </div>
+                <div className={'row'}>
+                    <div className={'col-md-12 text-right'}>
+                        {this.props.data.metaData.posted_string}
+                    </div>
+                </div>
+            </div>
+        )
     }
 }
 
@@ -185,6 +199,10 @@ class ListShow extends React.Component{
         if(this.props.data.instagram){
             instagram = <a href={this.props.data.instagram} target="_blank" className="fa fa-instagram"> </a>;
         }
+        let description;
+        if(this.props.data.description){
+            description = <div class="col-md-12"><div className={'ml-4'}> {this.props.data.description}</div></div>
+        }
 
         return(
             <div className={'row mt-3'}>
@@ -193,7 +211,8 @@ class ListShow extends React.Component{
                     <div className={"col-md-12"}>
                        {this.props.data.date_string} : <small>{artist_list}</small>
                     </div>
-                        {genreDiv}
+                    {description}
+                    {genreDiv}
                     <div className={"col-md-12"}>
                         <div className={ 'ml-4'}>
                             {hour}:{minute}<small> PM </small>
@@ -335,7 +354,7 @@ export class ShowList extends React.Component{
         let view_more;
         for(const val in this.props.data){
             if(parseInt(val) >= this.props.num_shows){
-                view_more = <ViewMore callback={this.props.callback}/>;
+                view_more = <ViewMore callback={this.props.callback} name={"Shows"}/>;
                 break;
             }
             else {
