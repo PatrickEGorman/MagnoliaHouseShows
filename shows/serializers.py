@@ -54,7 +54,8 @@ class ArtistEmbedListShowSerializer(serializers.ModelSerializer):
     class Meta:
         model = Artist
         fields = ('id',
-                  'name')
+                  'name',
+                  'hometown')
 
 
 class ListShowSerializer(serializers.ModelSerializer):
