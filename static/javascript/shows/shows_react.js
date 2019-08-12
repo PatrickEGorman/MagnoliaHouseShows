@@ -125,8 +125,20 @@ class ListShow extends React.Component{
                 );
                 for(const genre_key in artist.genres){
                     const genre = artist.genres[genre_key];
-                    if(!(genre_list.includes(genre))){
-                        genre_list.push(genre)
+                    let included = false;
+                    for(const genre_list_key in genre_list){
+                        const list_genre = genre_list[genre_list_key];
+                        if(list_genre.id === genre.id){
+                            genre_list[genre_list_key].count++;
+                            included = true;
+                        }
+                    }
+                    if(!included){
+                        genre_list.push({
+                            name: genre.name,
+                            id: genre.id,
+                            count: 1
+                        })
                     }
                 }
                 divider = " / ";
@@ -139,10 +151,11 @@ class ListShow extends React.Component{
         let genreDiv = "";
         let genre_divider = '';
         let i = 0;
+        genre_list.sort(function(a, b){return b.count-a.count});
         for(const genreKey in genre_list){
             const genre = genre_list[genreKey];
             if(i > 5){
-                console.log("Show on "+this.props.data.date_string+"has more than 5 genres.  Terminating display")
+                console.log("Show on "+this.props.data.date_string+"has more than 5 genres.  Terminating display");
                 break;
             }
             genres.push(<span key={genreKey}>{genre_divider}<a key={genreKey} href={'/music/genre/'+genre.id}>{genre.name}</a></span>);

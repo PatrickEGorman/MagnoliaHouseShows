@@ -2,10 +2,10 @@ from rest_framework import serializers
 
 from main.serializers import MetaDataSerializer
 from media.serializers import FlierSerializer
-from music.models import Artist
+from music.models import Artist, Genre
 
 from .models import Show
-from music.serializers import ArtistSerializer, ArtistEmbedGenreSerializer
+from music.serializers import ArtistSerializer
 
 
 class ShowSerializer(serializers.ModelSerializer):
@@ -47,15 +47,23 @@ class ShowSerializer(serializers.ModelSerializer):
                   'cancelled')
 
 
+class GenreEmbedListShowSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Genre
+        fields = ('id',
+                  'name')
+
+
 class ArtistEmbedListShowSerializer(serializers.ModelSerializer):
-    id = serializers.IntegerField()
-    name = serializers.CharField()
+    genres = GenreEmbedListShowSerializer(many=True)
 
     class Meta:
         model = Artist
         fields = ('id',
                   'name',
-                  'hometown')
+                  'hometown',
+                  'genres')
 
 
 class ListShowSerializer(serializers.ModelSerializer):
