@@ -63,15 +63,12 @@ export class Show extends React.Component{
             return (
                 <div className={"container"}>
                     <div className={'row mb-3'}>
-                        <div className={"col"}>
+                        <div className={"col-md-12"}>
                             <h2>{this.props.data.date_string} {hour}:{minute}PM</h2>
                         </div>
                     </div>
-                    <div className={'row mb-5'}>
-                        <div className={'col-xs-12 col-sm-8'}>
-                            <ArtistList artistData={this.props.data.artists}/>
-                        </div>
-                        <div className={'col-xs-12 col-sm-4'}>
+                    <div className={'row'}>
+                        <div className={'col-md-12'}>
                             <h3>${this.props.data.suggested_donation}{donationMax} Suggested Donation</h3>
                             {facebook}{instagram}
                             <hr/>
@@ -79,6 +76,9 @@ export class Show extends React.Component{
                             {this.props.data.description}
                             <hr/>
                         </div>
+                    </div>
+                    <div className={'col-md-12'}>
+                        <ArtistList artistData={this.props.data.artists}/>
                     </div>
                 </div>
             )
