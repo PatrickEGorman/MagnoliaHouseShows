@@ -56,6 +56,11 @@ export class Show extends React.Component{
                             <hr/>
                         </div>
                     </div>
+                     <div className={'row'}>
+                        <div className={'col-md-12 mr-auto'}>
+                            {this.props.data.metadata.posted_string}
+                        </div>
+                    </div>
                 </div>
             )
         }
@@ -77,8 +82,15 @@ export class Show extends React.Component{
                             <hr/>
                         </div>
                     </div>
-                    <div className={'col-md-12'}>
-                        <ArtistList artistData={this.props.data.artists}/>
+                    <div className={'row'}>
+                        <div className={'col-md-12'}>
+                            <ArtistList artistData={this.props.data.artists}/>
+                        </div>
+                    </div>
+                    <div className={'row'}>
+                        <div className={'col-md-12 mr-auto'}>
+                            {this.props.data.metadata.posted_string}
+                        </div>
                     </div>
                 </div>
             )
