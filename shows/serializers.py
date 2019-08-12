@@ -5,7 +5,7 @@ from media.serializers import FlierSerializer, PhotoSerializer, YoutubeSerialize
 from music.models import Artist, Genre
 
 from .models import Show
-from music.serializers import ArtistSerializer
+from music.serializers import ArtistSerializer, EmbedGenreSerializer
 
 
 class ShowSerializer(serializers.ModelSerializer):
@@ -38,16 +38,8 @@ class ShowSerializer(serializers.ModelSerializer):
                   'cancelled')
 
 
-class GenreEmbedListShowSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Genre
-        fields = ('id',
-                  'name')
-
-
 class ArtistEmbedListShowSerializer(serializers.ModelSerializer):
-    genres = GenreEmbedListShowSerializer(many=True)
+    genres = EmbedGenreSerializer(many=True)
 
     class Meta:
         model = Artist

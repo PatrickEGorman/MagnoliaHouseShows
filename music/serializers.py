@@ -5,7 +5,17 @@ from shows.models import Show
 from .models import Album, Artist, Genre
 
 
+class EmbedGenreSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Genre
+        fields = ('id',
+                  'name')
+
+
 class EmbedArtistSerializer(serializers.ModelSerializer):
+
+    genres = EmbedGenreSerializer(many=True)
 
     class Meta:
         model = Artist
@@ -14,7 +24,7 @@ class EmbedArtistSerializer(serializers.ModelSerializer):
                   'name')
 
 
-class ShowEmbedSerializer(serializers.ModelSerializer):
+class ShowEmbedMusicSerializer(serializers.ModelSerializer):
 
     artists = EmbedArtistSerializer(many=True)
 
@@ -32,7 +42,7 @@ class ShowEmbedSerializer(serializers.ModelSerializer):
 
 class ArtistEmbedGenreSerializer(serializers.ModelSerializer):
 
-    show_set = ShowEmbedSerializer(many=True)
+    show_set = ShowEmbedMusicSerializer(many=True)
 
     class Meta:
         model = Artist
@@ -79,7 +89,7 @@ class GenreListSerializer(serializers.ModelSerializer):
 class ArtistSerializer(serializers.ModelSerializer):
 
     genres = GenreSerializer(many=True)
-    show_set = ShowEmbedSerializer(many=True)
+    show_set = ShowEmbedMusicSerializer(many=True)
     metaData = MetaDataSerializer()
 
     class Meta:
