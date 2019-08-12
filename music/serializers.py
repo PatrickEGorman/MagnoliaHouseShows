@@ -15,14 +15,8 @@ class EmbedArtistSerializer(serializers.ModelSerializer):
 
 
 class ShowEmbedSerializer(serializers.ModelSerializer):
-    id = serializers.IntegerField()
-    date = serializers.DateField()
-    date_string = serializers.CharField()
+
     artists = EmbedArtistSerializer(many=True)
-    name = serializers.CharField()
-    time = serializers.TimeField()
-    suggested_donation = serializers.IntegerField()
-    suggested_donation_max = serializers.IntegerField()
 
     class Meta:
         model = Show
@@ -37,17 +31,8 @@ class ShowEmbedSerializer(serializers.ModelSerializer):
 
 
 class ArtistEmbedGenreSerializer(serializers.ModelSerializer):
-    id = serializers.IntegerField()
-    name = serializers.CharField()
+
     show_set = ShowEmbedSerializer(many=True)
-    hometown = serializers.CharField()
-    bandcamp_embed_code = serializers.CharField()
-    soundcloud_embed_code = serializers.CharField()
-    youtube_embed_code = serializers.CharField()
-    bandcamp = serializers.URLField()
-    facebook = serializers.URLField()
-    soundcloud = serializers.URLField()
-    youtube = serializers.URLField()
 
     class Meta:
         model = Artist
@@ -66,11 +51,9 @@ class ArtistEmbedGenreSerializer(serializers.ModelSerializer):
 
 
 class GenreSerializer(serializers.ModelSerializer):
-    id = serializers.IntegerField()
-    name = serializers.CharField()
-    metaData = MetaDataSerializer()
+
     artist_set = ArtistEmbedGenreSerializer(many=True)
-    description = serializers.CharField()
+    metaData = MetaDataSerializer()
 
     class Meta:
         model = Genre
@@ -82,10 +65,8 @@ class GenreSerializer(serializers.ModelSerializer):
 
 
 class GenreListSerializer(serializers.ModelSerializer):
-    id = serializers.IntegerField()
-    name = serializers.CharField()
+
     artist_set = ArtistEmbedGenreSerializer(many=True)
-    description = serializers.CharField()
 
     class Meta:
         model = Genre
@@ -96,20 +77,9 @@ class GenreListSerializer(serializers.ModelSerializer):
 
 
 class ArtistSerializer(serializers.ModelSerializer):
-    id = serializers.IntegerField()
-    name = serializers.CharField()
-    hometown = serializers.CharField()
-    genres = GenreSerializer(many=True)
-    bandcamp_embed_code = serializers.CharField()
-    soundcloud_embed_code = serializers.CharField()
-    youtube_embed_code = serializers.CharField()
-    bandcamp = serializers.URLField()
-    facebook = serializers.URLField()
-    soundcloud = serializers.URLField()
-    youtube = serializers.URLField()
-    show_set = ShowEmbedSerializer(many=True)
-    description = serializers.CharField()
 
+    genres = GenreSerializer(many=True)
+    show_set = ShowEmbedSerializer(many=True)
     metaData = MetaDataSerializer()
 
     class Meta:
@@ -131,17 +101,9 @@ class ArtistSerializer(serializers.ModelSerializer):
 
 
 class AlbumSerializer(serializers.ModelSerializer):
-    id = serializers.IntegerField()
-    name = serializers.CharField()
+
     genres = GenreSerializer(many=True)
-    release_date = serializers.DateField()
-    bandcamp = serializers.URLField()
-    youtube = serializers.URLField()
     artist = ArtistSerializer()
-    cover_image = serializers.ImageField()
-    description = serializers.CharField()
-    bandcamp_embed_code = serializers.CharField()
-    youtube_embed_code = serializers.CharField()
     metaData = MetaDataSerializer()
 
     class Meta:

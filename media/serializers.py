@@ -6,14 +6,7 @@ from shows.models import Show
 from .models import Flier, Photo, YoutubeVideo
 
 
-class ShowEmbedSerializer(serializers.ModelSerializer):
-    id = serializers.IntegerField()
-    date = serializers.DateField()
-    date_string = serializers.CharField()
-    genres = serializers.DictField()
-    name = serializers.CharField()
-    time = serializers.TimeField()
-    metaData = MetaDataSerializer()
+class ShowEmbedMediaSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Show
@@ -22,18 +15,12 @@ class ShowEmbedSerializer(serializers.ModelSerializer):
                   'date_string',
                   'genres',
                   "name",
-                  "time",
-                  'metaData')
+                  "time")
 
 
 class FlierSerializer(serializers.ModelSerializer):
-    id = serializers.IntegerField()
-    image = serializers.ImageField()
-    date = serializers.DateField()
-    caption = serializers.CharField()
-    year_month = serializers.ListField()
-    date_string = serializers.CharField()
-    show = ShowEmbedSerializer()
+
+    show = ShowEmbedMediaSerializer()
     metaData = MetaDataSerializer()
 
     class Meta:
@@ -49,14 +36,9 @@ class FlierSerializer(serializers.ModelSerializer):
 
 
 class PhotoSerializer(serializers.ModelSerializer):
-    id = serializers.IntegerField()
-    image = serializers.ImageField()
-    date = serializers.DateField()
-    caption = serializers.CharField()
-    year_month = serializers.ListField()
-    date_string = serializers.CharField()
+
     artist = ArtistSerializer()
-    show = ShowEmbedSerializer()
+    show = ShowEmbedMediaSerializer()
     metaData = MetaDataSerializer()
 
     class Meta:
@@ -73,14 +55,9 @@ class PhotoSerializer(serializers.ModelSerializer):
 
 
 class YoutubeSerializer(serializers.ModelSerializer):
-    id = serializers.IntegerField()
-    date = serializers.DateField()
-    youtube_url = serializers.URLField()
-    caption = serializers.CharField()
-    year_month = serializers.ListField()
-    date_string = serializers.CharField()
+
     artist = ArtistSerializer()
-    show = ShowEmbedSerializer()
+    show = ShowEmbedMediaSerializer()
     metaData = MetaDataSerializer()
 
     class Meta:

@@ -9,23 +9,10 @@ from music.serializers import ArtistSerializer
 
 
 class ShowSerializer(serializers.ModelSerializer):
-    id = serializers.IntegerField()
-    date = serializers.DateField()
-    time = serializers.TimeField()
-    suggested_donation = serializers.IntegerField()
-    suggested_donation_max = serializers.IntegerField()
-    facebook = serializers.URLField()
-    instagram = serializers.URLField()
-    description = serializers.CharField()
-    year_month = serializers.ListField()
-    date_string = serializers.CharField()
     flier = FlierSerializer()
     artists = ArtistSerializer(many=True)
     photos = PhotoSerializer(many=True)
     videos = YoutubeSerializer(many=True)
-    genres = serializers.DictField()
-    sorted_genres = serializers.ListField()
-    name = serializers.CharField()
     metaData = MetaDataSerializer()
 
     class Meta:
@@ -71,18 +58,8 @@ class ArtistEmbedListShowSerializer(serializers.ModelSerializer):
 
 
 class ListShowSerializer(serializers.ModelSerializer):
-    id = serializers.IntegerField()
-    time = serializers.TimeField()
-    suggested_donation = serializers.IntegerField()
-    suggested_donation_max = serializers.IntegerField()
-    facebook = serializers.URLField()
-    instagram = serializers.URLField()
-    year_month = serializers.ListField()
-    date_string = serializers.CharField()
+
     artists = ArtistEmbedListShowSerializer(many=True)
-    genres = serializers.DictField()
-    sorted_genres = serializers.ListField()
-    name = serializers.CharField()
 
     class Meta:
         model = Show
