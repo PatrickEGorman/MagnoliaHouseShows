@@ -12,6 +12,10 @@ export class Show extends React.Component{
         const minute = split_time[1];
         let facebook;
         let instagram;
+        let cancelled;
+        if(this.props.data.cancelled){
+            cancelled = "Cancelled: "
+        }
         if(this.props.data.facebook) {
             facebook = <a href="this.props.data.facebook" target="_blank" className="fa fa-facebook"> </a>;
         }
@@ -33,7 +37,7 @@ export class Show extends React.Component{
                 <div className={"container"}>
                     <div className={'row mb-3'}>
                         <div className={"col"}>
-                            <h2>{this.props.data.date_string} {hour}:{minute}PM</h2> {facebook} {instagram}
+                            <h2>{cancelled}{this.props.data.date_string} {hour}:{minute}PM</h2> {facebook} {instagram}
                         </div>
                     </div>
                     <div className={'row mb-5'}>
@@ -69,7 +73,7 @@ export class Show extends React.Component{
                 <div className={"container"}>
                     <div className={'row mb-3'}>
                         <div className={"col-md-12"}>
-                            <h2>{this.props.data.date_string} {hour}:{minute}PM</h2>
+                            <h2>{cancelled}{this.props.data.date_string} {hour}:{minute}PM</h2>
                         </div>
                     </div>
                     <div className={'row'}>
@@ -104,6 +108,10 @@ class ListShow extends React.Component{
         let artist_list = [];
         let genre_list = [];
         let divider;
+        let cancelled;
+        if(this.props.data.cancelled){
+            cancelled = "Cancelled: "
+        }
         for(const key in this.props.data.artists){
             if(this.props.data.artists.hasOwnProperty(key)) {
                 let artist = this.props.data.artists[key];
@@ -169,7 +177,7 @@ class ListShow extends React.Component{
             <div className={'row mt-3'}>
                 <h2>
                     <div className={"col-md-12"}>
-                        {this.props.data.date_string} : <small>{artist_list}</small>
+                        {cancelled}{this.props.data.date_string} : <small>{artist_list}</small>
                     </div>
                         {genreDiv}
                     <div className={"col-md-12"}>

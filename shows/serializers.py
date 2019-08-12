@@ -43,7 +43,8 @@ class ShowSerializer(serializers.ModelSerializer):
                   'sorted_genres',
                   'fliers',
                   "name",
-                  'metaData')
+                  'metaData',
+                  'cancelled')
 
 
 class ArtistEmbedListShowSerializer(serializers.ModelSerializer):
@@ -86,4 +87,5 @@ class ListShowSerializer(serializers.ModelSerializer):
                   'genres',
                   'sorted_genres',
                   'fliers',
-                  "name")
+                  "name",
+                  'cancelled')

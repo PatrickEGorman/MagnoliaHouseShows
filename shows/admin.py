@@ -9,7 +9,7 @@ class ShowAdmin(ModelAdminWithMeta):
                     meta_created_by, meta_updated_by, meta_updated_date)
     list_filter = ['date', 'priority', 'artists']
     fields = [('date', 'time'), 'artists', 'priority', 'description', ('suggested_donation', 'suggested_donation_max'),
-              ('facebook', 'instagram')]
+              ('facebook', 'instagram'), 'cancelled']
     ordering = ['-date']
 
 

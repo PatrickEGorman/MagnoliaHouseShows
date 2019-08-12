@@ -17,6 +17,7 @@ class Show(models.Model):
     instagram = models.URLField(default='', blank=True)
 
     description = models.TextField(default='', blank=True)
+    cancelled = models.BooleanField(default=False)
 
     priority = models.IntegerField(choices=priority_choices, default=3)
 
@@ -79,7 +80,10 @@ class Show(models.Model):
         display = self.date.__str__() + ":"
         for artist in Artist.objects.filter(show__id=self.id):
             display += artist.__str__() + " / "
-        return display[:-3]
+        if not self.cancelled:
+            return display[:-3]
+        else:
+            return "Cancelled: %s" % display
 
     def __str__(self):
         return self.name
