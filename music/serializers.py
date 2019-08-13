@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from main.serializers import MetaDataSerializer
+from media.models import Photo, YoutubeVideo, Flier
 from shows.models import Show
 from .models import Album, Artist, Genre
 
@@ -24,9 +25,19 @@ class EmbedArtistSerializer(serializers.ModelSerializer):
                   'name')
 
 
+class FlierEmbedMusicSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Flier
+        fields = ('id',
+                  'image',
+                  'caption')
+
+
 class ShowEmbedMusicSerializer(serializers.ModelSerializer):
 
     artists = EmbedArtistSerializer(many=True)
+    flier = FlierEmbedMusicSerializer()
 
     class Meta:
         model = Show
@@ -37,7 +48,8 @@ class ShowEmbedMusicSerializer(serializers.ModelSerializer):
                   "time",
                   "artists",
                   "suggested_donation",
-                  "suggested_donation_max")
+                  "suggested_donation_max",
+                  'flier')
 
 
 class ArtistEmbedGenreSerializer(serializers.ModelSerializer):
@@ -86,9 +98,37 @@ class GenreListSerializer(serializers.ModelSerializer):
                   'description')
 
 
+class PhotoEmbedArtistSerializer(serializers.ModelSerializer):
+
+    show = ShowEmbedMusicSerializer()
+
+    class Meta:
+        model = Photo
+        fields = ('id',
+                  'image',
+                  'caption',
+                  'date',
+                  'show')
+
+
+class VideoEmbedArtistSerializer(serializers.ModelSerializer):
+
+    show = ShowEmbedMusicSerializer()
+
+    class Meta:
+        model = YoutubeVideo
+        fields = ('id',
+                  'youtube_url',
+                  'caption',
+                  'date',
+                  'show')
+
+
 class ArtistSerializer(serializers.ModelSerializer):
 
-    genres = GenreSerializer(many=True)
+    photos = PhotoEmbedArtistSerializer(many=True)
+    videos = VideoEmbedArtistSerializer(many=True)
+    genres = EmbedGenreSerializer(many=True)
     show_set = ShowEmbedMusicSerializer(many=True)
     metaData = MetaDataSerializer()
 
@@ -107,7 +147,9 @@ class ArtistSerializer(serializers.ModelSerializer):
                   'youtube_embed_code',
                   'bandcamp_embed_code',
                   'show_set',
-                  'metaData')
+                  'metaData',
+                  'photos',
+                  'videos')
 
 
 class AlbumSerializer(serializers.ModelSerializer):

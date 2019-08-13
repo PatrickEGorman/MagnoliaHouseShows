@@ -1,9 +1,19 @@
 import React from 'react'
 import {ViewMore} from "../util/view_support";
 import {FilterBar} from "../util/filter_bar";
+import {FlierList, PhotoList, VideoList} from "../media/media_react";
 
 
 export class Artist extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            num_photos: 3,
+            num_videos: 2,
+            num_fliers: 3
+        }
+    }
+
     render() {
         let genres = [];
         let divider = '';
@@ -60,11 +70,17 @@ export class Artist extends React.Component{
             i++;
         }
         let showList = [];
+        let flierList = [];
         if(this.props.data.show_set){
             showList.push(<div key={i} className={"col-md-12 mt-4"}><h4>Shows</h4></div> );
             i++;
             for(const key in this.props.data.show_set){
                 const show = this.props.data.show_set[key];
+                if(show.flier){
+                    let flier = show.flier;
+                    flier.show = show;
+                    flierList.push(flier);
+                }
                 showList.push(
                     <div key={i} className={"col-md-12"}>
                         <a key={i} href={"/shows/view_show/"+show.id}>
@@ -74,6 +90,46 @@ export class Artist extends React.Component{
                 );
                 i++;
             }
+        }
+        let videos = [];
+        if(this.props.data.videos.length>=1){
+            videos[0] = <h2 key={i}>Videos</h2>;
+            i++;
+            videos.push(<VideoList data={this.props.data.videos} num_videos={this.state.num_videos} embed={"artist"}
+                                   callback={()=>{
+                                       this.state.num_videos+=5;
+                                       this.setState(this.state);
+                                   }} key={i}/>);
+            i++;
+            videos.push(<hr key={i}/>);
+            i++;
+        }
+
+        let photos = [];
+        if(this.props.data.photos.length>=1) {
+            photos[0] = <h2 key={i}>Photos</h2>;
+            i++;
+            photos.push(<PhotoList data={this.props.data.photos} num_photos={this.state.num_photos} embed={"artist"}
+                                   callback={()=>{
+                                       this.state.num_photos+=5;
+                                       this.setState(this.state);
+                                   }} key={i}/>);
+            i++;
+            photos.push(<hr key={i}/>);
+            i++;
+        }
+
+        let fliers = [];
+        if(flierList.length>=1) {
+            fliers[0] = <h2 key={i}>Fliers</h2>;
+            i++;
+            fliers.push(<FlierList data={flierList} num_photos={this.state.num_fliers}
+                                   callback={()=>{
+                                       this.state.num_fliers+=5;
+                                       this.setState(this.state);
+                                   }} embed={'artist'} key={i}/>);
+            i++;
+            fliers.push(<hr key={i}/>);
         }
         return (
             <div className="row">
@@ -97,6 +153,9 @@ export class Artist extends React.Component{
                     {links}
                 </div>
                 {showList}
+                {videos}
+                {photos}
+                {fliers}
             </div>
         )
     }

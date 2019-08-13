@@ -136,7 +136,7 @@ export class Flier extends React.Component{
     render() {
         let date;
         let show;
-        if(!this.props.embed === "show"){
+        if(!(this.props.embed === "show")){
              date = <div className={'col-md-12'}>
                     {this.props.data.date_string}
                 </div>;
@@ -168,11 +168,18 @@ export class FlierList extends React.Component{
         let contents = [];
         let view_more;
         let past_show_link;
-        if(this.props.past_shows){
-            past_show_link = "Show Future Shows Fliers";
+        if(this.props.embed === 'artist'){}
+        else if(this.props.past_shows){
+            past_show_link =
+                <div className={'row-md-12 mb-4'}>
+                    <a className={'btn bg-dark text-light'} href="#" onClick={this.props.togglePast}>Show Future Shows Fliers</a>
+                </div>;
         }
         else{
-            past_show_link = "Show Past Shows Fliers";
+            past_show_link =
+                <div className={'row-md-12 mb-4'}>
+                    <a className={'btn bg-dark text-light'} href="#" onClick={this.props.togglePast}>Show Past Shows Fliers</a>
+                </div>;
         }
         for(const val in this.props.data){
             if(parseInt(val) === this.props.num_fliers-1){
@@ -186,9 +193,7 @@ export class FlierList extends React.Component{
         }
         return(
             <div className='container'>
-                <div className={'row-md-12 mb-4'}>
-                    <a className={'btn bg-dark text-light'} href="#" onClick={this.props.togglePast}>{past_show_link}</a>
-                </div>
+                {past_show_link}
                 {contents}
                 {view_more}
             </div>
