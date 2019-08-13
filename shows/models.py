@@ -83,7 +83,7 @@ class Show(models.Model):
         if not self.cancelled:
             return display[:-3]
         else:
-            return "Cancelled: %s" % display
+            return "Cancelled: %s" % display[:-3]
 
     def __str__(self):
         return self.name

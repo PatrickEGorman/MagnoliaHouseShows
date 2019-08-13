@@ -48,7 +48,6 @@ export class Show extends React.Component{
         if(this.props.data.flier){
             flier = <div className={"col-md-12 mb-3"}>
                         <Flier data={this.props.data.flier} embed={"show"}/>
-                        <hr/>
                     </div>
         }
         let i = 0;
